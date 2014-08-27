@@ -1,0 +1,135 @@
+<!-- content templates -->
+
+<template name="loading">
+	<p>Please wait&hellip;</p>
+</template>
+
+<template name="stories">
+	<ul class="stories-list">
+		{{#each stories}}
+			{{> storyListItem}}
+		{{/each}}
+	</ul>
+</template>
+
+<template name="storyListItem">
+	<li>
+		<h3>{{name}}</h3>
+		<p><a href="{{pathFor 'story'}}">Permalink</a></p>
+	</li>
+</template>
+
+<template name="story">
+	<h2>{{name}}'s Story:</h2>
+	<div>{{#markdown}}{{story}}{{/markdown}}</div>
+</template>
+
+<template name="add">
+	<form>
+		<label for="name">Name</label>
+		<input id="name" type="text" />
+		<p><button class="random">Choose random name</button></p>
+		<label for="story">Story</label>
+		<textarea id="story"></textarea>
+		<input type="text" style="display: none" aria-hidden="true" id="check" value="" />
+		<button type="submit">Share</button>
+	</form>
+</template>
+
+<template name="thanks">
+	<li>
+		<h2>Thanks!</h2>
+		<p>Thank you for posting a story to inspire people. We'll just check it then publish it in the app.</p>
+	</li>
+</template>
+
+<template name="manage">
+	<ul class="manager-list" aria-label="all stories">
+		{{#each stories}}
+			{{> managerListItem}}
+		{{/each}}
+	</ul>
+</template>
+
+<template name="managerListItem">
+	<li class="{{#if published}}published{{/if}}">
+		<h2>{{name}}</h2>
+		<p>
+			<a href="{{ pathFor 'manageitem' }}">edit</a>
+		</p>
+	</li>
+</template>
+
+<template name="manageitem">
+	<form>
+		<label for="name">Name</label>
+		<input id="name" type="text" value="{{story.name}}" />
+		<label for="story">Story</label>
+		<textarea id="story">{{story.story}}</textarea>
+		<label for="theme">Theme</label>
+		<select id="theme">
+			<option disabled>Please choose</option>
+			{{#each themes}}
+				<option {{selected ..}}>{{this.themeName}}</option>
+			{{/each}}
+		</select>
+		<label><input type="checkbox" value="true" {{checked}}> Published</label>
+		<button type="submit">Save</button>
+	</form>
+</template>
+
+<template name="me">
+		<p>Personal data here</p>
+</template>
+
+<template name="theme">
+	<h2>{{name}}</h2>
+	{{#if empty}}
+		<p class="message">There are no stories for this theme so far :-(</p>
+	{{/if}}
+	<ul>
+		{{#each stories}}
+			{{> storyListItem}}
+		{{/each}}
+	</ul>
+</template>
+
+<template name="themes">
+	<h2>Themes</h2>
+	<ul>
+		{{#each themes}}
+			<li><a href="{{ pathFor 'theme' }}">{{this.themeName}}</a></li>
+		{{/each}}
+	</ul>
+</template>
+
+<template name="loginForm">
+	<form action="action" id="login">
+		<label for="email">Email</label>
+        <input type="email" id="email" />
+        <label for="password">Password</label>
+        <input type="password" id="password" />
+        <button type="submit">Log in</button>
+        <p><a href="{{pathFor 'register'}}">Need an account?</a></p>
+   </form> 
+</template>
+
+<template name="login">
+	<h2>Log in</h2>
+	{{> loginForm}}
+</template>
+
+<template name="registerForm">
+	<form action="action" id="register">
+		<label for="email">Email</label>
+        <input type="email" id="email" />
+        <label for="password">Password</label>
+        <input type="password" id="password" />
+        <button type="submit">Register</button>
+   </form> 
+</template>
+
+<template name="register">
+	<h2>Make an account</h2>
+	{{> registerForm}}
+</template>

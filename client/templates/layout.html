@@ -1,0 +1,26 @@
+<!-- main layout -->
+
+<template name="layout">
+	<div>
+		<header role="banner">
+			<div>
+				{{> header}}
+			</div>
+		</header>
+		<main role="main" id="main">
+			<div>
+				{{> yield}}
+			</div>
+		</main>
+		<aside role="complementary">
+			<div>
+				{{> aside}}
+			</div>
+		</aside>
+		<footer role="contentinfo">
+			<div>
+				{{> footer}}
+			</div>
+		</footer>
+	</div>
+</template>
