@@ -63,6 +63,7 @@
 <template name="manageitem">
 	<form>
 		<label for="name">Name</label>
+		{{keywords}}
 		<input id="name" type="text" value="{{story.name}}" />
 		<label for="story">Story</label>
 		<textarea id="story">{{story.story}}</textarea>
@@ -73,9 +74,15 @@
 				<option {{selected ..}}>{{this.themeName}}</option>
 			{{/each}}
 		</select>
-		<label><input type="checkbox" value="true" {{checked}}> Published</label>
+		<label><input type="checkbox" id="published" value="true" {{checked}}> Published</label>
+		<input type="text" style="display: none" aria-hidden="true" id="check" value="" />
 		<button type="submit">Save</button>
 	</form>
+</template>
+
+<template name="edited">
+		<h2>Story saved</h2>
+		<p>The story has been saved. Return to <a href="{{ pathFor 'manage' }}">the manager screen</a>.</p>
 </template>
 
 <template name="me">

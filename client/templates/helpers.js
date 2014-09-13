@@ -10,16 +10,15 @@ Template.manage.helpers({
 	}
 });
 
-Template.manageitem.currentTheme = function() {
-	return this.theme;
-}
-
 Template.manageitem.helpers({
 	themes: function() {
 		return Themes.find();
 	},
+	keywords: function() {
+		console.log(Themes.find({themeName: 'Health'}, {fields: {keywords: 1}}));
+	},
 	currentTheme: function() {
-		return this.story.themes;
+		return this.story.theme;
 	},
 	checked: function() {
 		return this.story.published ? 'checked': '';
@@ -43,6 +42,20 @@ Template.theme.helpers({
 	}
 });
 
+Template.header.helpers({
+	loggedIn: function() {
+		return Meteor.user() ? true : false;
+	}
+});
+
+Template.header.events({
+	'click .logout': function() {
+		Meteor.logout(function() {
+			Router.go('/');
+		});
+	}
+});
+
 // handle adding a story
 
 Template.add.events({
@@ -60,7 +73,7 @@ Template.add.events({
 		} else {
 			Meteor.call('submit', story, function(error, data) {
 				if (data.error) {
-					return alert(data.error);
+					return alert(data.errors);
 				}
 				Router.go('thanks', {_id: data.id});
 			});
@@ -90,6 +103,37 @@ Template.add.events({
 
 		var name = names[_.random(0, names.length) -1];
 		$('#name').val(name);
+	}
+});
+
+Template.manageitem.events({
+	'ready' : function() {
+		console.log('ready');
+	},
+	'submit form': function(e) {
+		e.preventDefault();
+		
+		var isPublished = $('#published').is(':checked') ? true : false;
+
+		var story = {
+			id: this.story._id,
+			name: $('#name').val(),
+			story: $('#story').val(),
+			theme: $('#theme').val(),
+			published: isPublished
+		}
+
+		// honeypot to fool spam bots
+		if ($('#check').val() !== '') {
+			return;
+		} else {
+			Meteor.call('edit', story, function(error, data) {
+				if (data.errors.length) {
+					return alert(data.errors);
+				}
+				Router.go('edited');
+			});
+		}
 	}
 });
 
