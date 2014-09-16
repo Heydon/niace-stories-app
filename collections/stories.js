@@ -32,20 +32,19 @@ Meteor.methods({
 			errors: []
 		};
 
-		if (!story.name || story.name === '') {
+		if (!story.name) {
 			output.errors.push("Please choose a name");
 		}
 
-		if (!story.story || story.story === '') {
+		if (!story.story) {
 			output.errors.push("Please write a story");
 		}
 
-		if (!story.theme || story.theme === '') {
+		if (!story.theme) {
 			output.errors.push("Please choose a theme");
 		}
 
 		if (!output.errors.length) {
-			console.log(story.id);
 			Stories.update(story.id, {$set: story});
 		}
 
@@ -53,8 +52,6 @@ Meteor.methods({
 
 	}
 });
-
-
 
 Stories.allow({
 	update: function() {

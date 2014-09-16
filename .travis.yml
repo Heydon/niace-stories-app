@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+- '0.10'
+deploy:
+provider: heroku
+api_key:
+secure: PpyYtZ7jPH3G/8quB9zUU2PJThgDW6rTqqc90YyIq39kAiQMv9x2hz5UGQ1KwSmGaJezJ0le8Q8XqKMzioB/nhnbDDArNyl7xizjDnz5MaxzZfIHHFdUcm5KqZ/MHKTshUvJV6+RI7ucl7IGcRGyjqyBq6MDNKYyFzvlJ4fU8kw=
+app:
+master: gbptm-ui
+develop: gbptm-ui
