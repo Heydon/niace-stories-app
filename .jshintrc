@@ -6,6 +6,12 @@
 	"globals": {
 		"Meteor": true,
 		"Stories": true,
-		"Themes": true
+		"Themes": true,
+		"_": true,
+		"require": true,
+		"suite": true,
+		"test": true,
+		"server": true,
+		"emit": true
 	}
 }

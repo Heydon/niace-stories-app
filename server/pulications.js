@@ -34,6 +34,6 @@ if( Themes.find().count() === 0 ) {
 	Themes.insert({
 		'themeName' : 'Health',
 		'slug'		: 'health',
-		'keywords'	: ['mental health', 'diet', 'exercise', 'appointments'],
+		'keywords'	: ['mental health', 'diet', 'exercise', 'appointments']
 	});
 }

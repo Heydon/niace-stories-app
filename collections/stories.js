@@ -1,3 +1,5 @@
+'use strict';
+
 Stories = new Meteor.Collection('stories');
 
 Meteor.methods({
@@ -7,11 +9,11 @@ Meteor.methods({
 		};
 
 		if (!story.name) {
-			output.errors.push("Please choose a name");
+			output.errors.push('Please choose a name');
 		}
 
 		if (!story.story) {
-			output.errors.push("Please write a story");
+			output.errors.push('Please write a story');
 		}
 
 		if (!output.errors.length) {
@@ -33,15 +35,15 @@ Meteor.methods({
 		};
 
 		if (!story.name) {
-			output.errors.push("Please choose a name");
+			output.errors.push('Please choose a name');
 		}
 
 		if (!story.story) {
-			output.errors.push("Please write a story");
+			output.errors.push('Please write a story');
 		}
 
 		if (!story.theme) {
-			output.errors.push("Please choose a theme");
+			output.errors.push('Please choose a theme');
 		}
 
 		if (!output.errors.length) {
