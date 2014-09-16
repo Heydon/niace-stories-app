@@ -25,8 +25,8 @@ Meteor.methods({
 		}
 
 		return output;
-
 	},
+	
 	edit: function(story) {
 		var output = {
 			errors: []

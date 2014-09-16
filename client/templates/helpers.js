@@ -65,7 +65,7 @@ Template.add.events({
 		var story = {
 			name: $('#name').val(),
 			story: $('#story').val()
-		}
+		};
 
 		// honeypot to fool spam bots
 		if ($('#check').val() !== '') {
@@ -121,7 +121,7 @@ Template.manageitem.events({
 			story: $('#story').val(),
 			theme: $('#theme').val(),
 			published: isPublished
-		}
+		};
 
 		// honeypot to fool spam bots
 		if ($('#check').val() !== '') {

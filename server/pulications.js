@@ -10,28 +10,28 @@ Meteor.publish('themes', function() {
 
 if (Themes.find().count() === 0) {
 	Themes.insert({
-		"themeName" : "Money",
-		"slug"		: "money",
-		"keywords"	: ["budgeting", "banking", "student loans"] 
+		'themeName' : 'Money',
+		'slug'		: 'money',
+		'keywords'	: ['budgeting', 'banking', 'student loans']
 	});
 	Themes.insert({
-		"themeName" : "Identity",
-		"slug"		: "identity",
-		"keywords"	: ["background", "values"] 
+		'themeName' : 'Identity',
+		'slug'		: 'identity',
+		'keywords'	: ['background', 'values']
 	});
 	Themes.insert({
-		"themeName" : "Learning",
-		"slug"		: "learning",
-		"keywords"	: ["courses", "school", "volunteering", "apprenticeships"] 
+		'themeName' : 'Learning',
+		'slug'		: 'learning',
+		'keywords'	: ['courses', 'school', 'volunteering', 'apprenticeships']
 	});
 	Themes.insert({
-		"themeName" : "Relationships",
-		"slug"		: "relationships",
-		"keywords"	: ["friends", "family", "key workers"] 
+		'themeName' : 'Relationships',
+		'slug'		: 'relationships',
+		'keywords'	: ['friends', 'family', 'key workers']
 	});
 	Themes.insert({
-		"themeName" : "Health",
-		"slug"		: "health",
-		"keywords"	: ["mental health", "diet", "exercise", "appointments"] 
+		'themeName' : 'Health',
+		'slug'		: 'health',
+		'keywords'	: ['mental health', 'diet', 'exercise', 'appointments']
 	});
 }
