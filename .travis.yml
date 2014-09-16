@@ -4,8 +4,8 @@ node_js:
 env:
 - NODE_ENV=development
 branches:
-	only:
-	- master
+  only:
+  - master
 before_install:
 - curl https://install.meteor.com/ | sh
 install:
@@ -17,9 +17,9 @@ script:
 after_success:
 - meteor deploy inspire-me.meteor.com
 notifications:
-	email:
-		recipients:
-		- rob@neontribe.co.uk
-		- heydon@neontribe.co.uk
-		on_sucess: always
-		on_failure: always
+  email:
+    recipients:
+    - rob@neontribe.co.uk
+    - heydon@neontribe.co.uk
+    on_sucess: always
+    on_failure: always
