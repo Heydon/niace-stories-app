@@ -61,7 +61,6 @@ Template.header.events({
 Template.add.events({
 	'submit form': function(e) {
 		e.preventDefault();
-		
 		var story = {
 			name: $('#name').val(),
 			story: $('#story').val()

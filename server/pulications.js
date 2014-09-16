@@ -1,5 +1,5 @@
 Meteor.publish('stories', function() {
-	return Stories.find();
+	return Stories.find({published: true});
 });
 
 Meteor.publish('themes', function() {
@@ -8,7 +8,7 @@ Meteor.publish('themes', function() {
 
 // Fixture for themes if database empty
 
-if (Themes.find().count() === 0) {
+if( Themes.find().count() === 0 ) {
 	Themes.insert({
 		'themeName' : 'Money',
 		'slug'		: 'money',
