@@ -1,7 +1,7 @@
 Stories = new Meteor.Collection('stories');
 
 Meteor.methods({
-	submit: function(story) {
+	submit: function( story ) {
 		var output = {
 			errors: []
 		};
@@ -15,7 +15,7 @@ Meteor.methods({
 		}
 
 		if (!output.errors.length) {
-			var story = _.extend(_.pick(story, 'name', 'story'), {
+			story = _.extend(_.pick(story, 'name', 'story'), {
 				published: false,
 				submitted: new Date().getTime()
 			});
@@ -25,9 +25,9 @@ Meteor.methods({
 		}
 
 		return output;
-
 	},
-	edit: function(story) {
+
+	edit: function( story ) {
 		var output = {
 			errors: []
 		};

@@ -1,0 +1,11 @@
+{
+	"quotmark": "single",
+	"curly": true,
+	"eqeqeq": true,
+	"globalstrict": true,
+	"globals": {
+		"Meteor": true,
+		"Stories": true,
+		"Themes": true
+	}
+}
