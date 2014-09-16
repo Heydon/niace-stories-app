@@ -1,5 +1,4 @@
-'use strict';
-
+//tests/themes.js
 var assert = require('assert');
 
 suite('Themes', function() {

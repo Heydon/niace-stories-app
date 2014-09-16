@@ -1,5 +1,3 @@
-'use strict';
-
 Stories = new Meteor.Collection('stories');
 
 Meteor.methods({

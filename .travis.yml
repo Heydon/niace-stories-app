@@ -15,8 +15,7 @@ install:
 - npm install -g laika phantomjs jshint
 script:
 - echo "Running tests and hinting"
-- jshint
-- laika
+- jshint ./
 after_success:
 - meteor deploy inspire-me.meteor.com
 notifications:

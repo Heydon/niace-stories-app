@@ -3,6 +3,7 @@
 	"curly": true,
 	"eqeqeq": true,
 	"globalstrict": true,
+	"strict": false,
 	"globals": {
 		"Meteor": true,
 		"Stories": true,
