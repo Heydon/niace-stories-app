@@ -1,10 +1,25 @@
 language: node_js
 node_js:
 - '0.10'
-deploy:
-provider: heroku
-api_key:
-secure: PpyYtZ7jPH3G/8quB9zUU2PJThgDW6rTqqc90YyIq39kAiQMv9x2hz5UGQ1KwSmGaJezJ0le8Q8XqKMzioB/nhnbDDArNyl7xizjDnz5MaxzZfIHHFdUcm5KqZ/MHKTshUvJV6+RI7ucl7IGcRGyjqyBq6MDNKYyFzvlJ4fU8kw=
-app:
-master: gbptm-ui
-develop: gbptm-ui
+env:
+- NODE_ENV=development
+branches:
+	only:
+	- master
+before_install:
+- curl https://install.meteor.com/ | sh
+install:
+- npm install -g laika phantomjs jshint
+script:
+- echo "Running tests and hinting"
+- jshint
+- laika
+after_success:
+- meteor deploy inspire-me.meteor.com
+notifications:
+	email:
+		recipients:
+		- rob@neontribe.co.uk
+		- heydon@neontribe.co.uk
+		on_sucess: always
+		on_failure: always
