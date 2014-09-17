@@ -14,6 +14,9 @@ The alpha application for NIACE, running on Meteor.
 
 curl https://install.meteor.com/ | sh
 npm install
-
+npm run jshint
+npm run test
+cd app
+meteor
 
 ```
