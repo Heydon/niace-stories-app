@@ -23,6 +23,7 @@ before_deploy:
 - rm -rf test
 - cd deploy/bundle/programs/server
 - npm install
+- cd ../../../../
 deploy:
   provider: heroku
   app: inspire-me-dev
