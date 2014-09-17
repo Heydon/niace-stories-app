@@ -19,8 +19,8 @@ after_success:
 - meteor build --directory ../deploy
 - cd ../
 before_deploy:
-- rm -r app
-- rm -r node_modules
+- rm -rf app
+- rm -rf node_modules
 deploy:
   provider: heroku
   app: inspire-me-dev
