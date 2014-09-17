@@ -24,7 +24,7 @@ Template.manageitem.helpers({
 		return this.story.published ? 'checked': '';
 	},
 	selected: function(parentContext) {
-			return this.themeName === parentContext.story.theme ? "selected" : '';
+			return this.themeName === parentContext.story.theme ? 'selected' : '';
 	}
 });
 
@@ -81,23 +81,23 @@ Template.add.events({
 	'click .random': function(e) {
 		e.preventDefault();
 		var names = [
-			"Ali", 
-			"Albi", 
-			"Alex", 
-			"George", 
-			"Fan",
-			"Freddie", 
-			"Frankie", 
-			"Narin", 
-			"Jordan", 
-			"Sasha", 
-			"Robin", 
-			"Ronnie", 
-			"Sam", 
-			"Charlie",
-			"Reese",
-			"Taylor",
-			"Sid"
+			'Ali', 
+			'Albi', 
+			'Alex', 
+			'George', 
+			'Fan',
+			'Freddie', 
+			'Frankie', 
+			'Narin', 
+			'Jordan', 
+			'Sasha', 
+			'Robin', 
+			'Ronnie', 
+			'Sam', 
+			'Charlie',
+			'Reese',
+			'Taylor',
+			'Sid'
 		];
 
 		var name = names[_.random(0, names.length) -1];
@@ -149,7 +149,7 @@ Template.loginForm.events({
 		Meteor.loginWithPassword(email, password, function(error) {
 
 			if (error) {
-				alert("Error: " + error.reason);
+				alert('Error: ' + error.reason);
 			} else {
 				Router.go('manage');
 			}
@@ -169,7 +169,7 @@ Template.registerForm.events({
 		Accounts.createUser({email: email, password : password}, function(error) {
 
 			if (error) {
-				alert("Error: " + error.reason);
+				alert('Error: ' + error.reason);
 			} else {
 				return;
 			}

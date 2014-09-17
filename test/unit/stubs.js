@@ -1,0 +1,11 @@
+Template.stub('stories');
+Template.stub('manage');
+Template.stub('manageitem');
+Template.stub('themes');
+Template.stub('theme');
+Template.stub('header');
+Template.stub('header');
+Template.stub('add');
+Template.stub('manageitem');
+Template.stub('loginForm');
+Template.stub('registerForm');

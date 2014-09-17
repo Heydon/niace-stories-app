@@ -10,9 +10,17 @@
 		"Themes": true,
 		"_": true,
 		"require": true,
-		"suite": true,
-		"test": true,
-		"server": true,
-		"emit": true
+		"describe": true,
+		"expect": true,
+		"it": true,
+		"module": true,
+		"Template": true,
+		"$": true,
+		"console": true,
+		"alert": true,
+		"Router": true,
+		"Accounts": true,
+		"process": true,
+		"Accounts": true
 	}
 }
