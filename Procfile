@@ -1,1 +1,1 @@
-web: node deploy/bundle/main.js
+web: export MONGO_URL=$MONGOHQ_URL; node deploy/bundle/main.js

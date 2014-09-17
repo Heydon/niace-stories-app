@@ -1,14 +1,13 @@
 language: node_js
 node_js:
 - '0.10'
-env: 
 branches:
   only:
   - master
 before_install:
 - curl https://install.meteor.com/ | sh
 install:
-- npm install
+- npm install --development
 script:
 - echo Running tests and hinting
 - npm run jshint
@@ -21,6 +20,9 @@ after_success:
 before_deploy:
 - rm -rf app
 - rm -rf node_modules
+- rm -rf test
+- cd deploy/bundle/programs/server
+- npm install
 deploy:
   provider: heroku
   app: inspire-me-dev
