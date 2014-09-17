@@ -16,7 +16,17 @@ script:
 - npm run test
 after_success:
 - cd app/
-- meteor deploy inspire-me.meteor.com
+- meteor build --directory ../deploy
+before_deploy:
+- rm -r app
+- rm -r node_modules
+deploy:
+  provider: heroku
+  app: inspire-me-dev
+  strategy: anvil
+  skip_cleanup: true
+  api_key:
+    secure: vMSuLcI2rzDVWBxsb7FcsVYBtIO13iLhnn7rWIG09Rd5dRG0hFJljpmi8FPKrL1ynF9RNn7vVEBIb1LZb+e/+Dn93gaeceIgXb9FbTQHALJju0lzyQ/FgsgKf8CU3tEnWiAu9rHKc+idR7pH7As/A+zQeoxiC2WuE8br+a36NTw=
 notifications:
   email:
     recipients:
@@ -24,8 +34,3 @@ notifications:
     - heydon@neontribe.co.uk
     on_sucess: always
     on_failure: always
-deploy:
-  provider: heroku
-  app: inspire-me-dev
-  api_key:
-    secure: vMSuLcI2rzDVWBxsb7FcsVYBtIO13iLhnn7rWIG09Rd5dRG0hFJljpmi8FPKrL1ynF9RNn7vVEBIb1LZb+e/+Dn93gaeceIgXb9FbTQHALJju0lzyQ/FgsgKf8CU3tEnWiAu9rHKc+idR7pH7As/A+zQeoxiC2WuE8br+a36NTw=

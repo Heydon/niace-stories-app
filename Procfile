@@ -1,1 +1,1 @@
-web: cd app && meteor
+web: node deploy/bundle/main.js
