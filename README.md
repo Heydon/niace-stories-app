@@ -3,6 +3,13 @@ niace-stories-app
 
 The alpha application for NIACE, running on Meteor.
 
+# Dev site
+
+http://inspire-me-dev.herokuapp.com/
+
+# Travis Status
+![Travis status](https://travis-ci.org/Heydon/niace-stories-app.svg)
+
 ### Setup
 
 - Clone Repo
