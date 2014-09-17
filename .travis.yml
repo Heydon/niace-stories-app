@@ -11,9 +11,10 @@ before_install:
 install:
 - npm install
 script:
-- echo "Running tests and hinting"
-- npm run jshint
-- npm run test
+- echo Running tests and hinting
+- "npm run jshint"
+- "chmod +x./makeRTDTestsWorkInTravis.sh && ./makeRTDTestsWorkInTravis.sh"
+- "npm run test"
 after_success:
 - meteor deploy inspire-me.meteor.com
 notifications:
