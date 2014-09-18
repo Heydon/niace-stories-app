@@ -6,7 +6,7 @@ branches:
   - master
 before_install:
 - curl https://install.meteor.com/ | sh
-- apt-get install openjdk-7-jre-headless
+- sudo apt-get install openjdk-7-jre-headless
 install:
 - npm install --development
 script:
