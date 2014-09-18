@@ -47,7 +47,7 @@ Template.add.events({
 });
 
 Template.manageitem.events({
-	'ready' : function() {
+	'ready': function() {
 		console.log('ready');
 	},
 	'submit form': function(e) {
@@ -79,7 +79,7 @@ Template.manageitem.events({
 
 Template.loginForm.events({
 
-    'submit #login' : function(e) {
+    'submit #login': function(e) {
 
 		e.preventDefault();
 
@@ -101,7 +101,7 @@ Template.loginForm.events({
 });
 
 Template.registerForm.events({
-    'submit #register' : function(e) {
+    'submit #register': function(e) {
 
 		e.preventDefault();
 
