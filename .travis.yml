@@ -24,6 +24,7 @@ before_deploy:
 - cd deploy/bundle/programs/server
 - npm install
 - cd ../../../../
+- npm install --production
 deploy:
   provider: heroku
   app: inspire-me-dev
