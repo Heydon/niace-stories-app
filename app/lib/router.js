@@ -7,7 +7,7 @@ Router.configure({
 });
 
 Router.map(function() {  
-	this.route('stories', {path: '/'});
+	this.route('themes', {path: '/'});
 	this.route('me', {path: '/me'});
 	this.route('story', {
 		path: '/story/:_id',

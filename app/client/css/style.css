@@ -1,0 +1,948 @@
+/*!
+ * Anatomy
+ * An accessible web interface kit
+ * http://anatomy.heydonworks.com
+ * @author Heydon Pickering
+ * @version 0.0.1
+ * Copyright 2014. GNU licensed.
+ */
+
+/**************************************************************
+
+NORMALIZATION
+Including selected rules from git.io/normalize to normalize browser defaults
+
+***************************************************************/
+html {
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+  display: block;
+}
+
+audio,
+canvas,
+progress,
+video {
+  display: inline-block;
+  vertical-align: baseline;
+}
+
+[hidden],
+template {
+  display: none;
+}
+
+a {
+  background: transparent;
+}
+
+a:active,
+a:hover {
+  outline: 0;
+}
+
+:focus {
+  outline: thin dotted;
+}
+
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+
+mark {
+  background: #ff0;
+  color: #000;
+}
+
+sub,
+sup {
+  font-size: 0.75em;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -0.5em;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+img {
+  border: 0;
+}
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0;
+}
+
+pre {
+  overflow: auto;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  color: inherit;
+  font: inherit;
+}
+
+button {
+  overflow: visible;
+}
+
+button,
+select {
+  text-transform: none;
+}
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+input[type="search"] {
+  -webkit-appearance: textfield;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+textarea {
+  overflow: auto;
+}
+
+optgroup {
+  font-weight: bold;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+td,
+th {
+  padding: 0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: inherit;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'Playtime';
+  src: url("playtime-webfont.eot");
+  src: url("playtime-webfont.eot?#iefix") format("embedded-opentype"), url("playtime-webfont.woff") format("woff"), url("playtime-webfont.ttf") format("truetype"), url("playtime-webfont.svg#playtimewithhottoddiesobliqRg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Playtime';
+  src: url("PlaytimeOblique-webfont.eot");
+  src: url("PlaytimeOblique-webfont.eot?#iefix") format("embedded-opentype"), url("PlaytimeOblique-webfont.woff") format("woff"), url("PlaytimeOblique-webfont.ttf") format("truetype"), url("PlaytimeOblique-webfont.svg#playtimewithhottoddiesobliqRg") format("svg");
+  font-weight: normal;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Playtime3D';
+  src: url("PlaytimeWithHotToddies3D-webfont.eot");
+  src: url("PlaytimeWithHotToddies3D-webfont.eot?#iefix") format("embedded-opentype"), url("PlaytimeWithHotToddies3D-webfont.woff") format("woff"), url("PlaytimeWithHotToddies3D-webfont.ttf") format("truetype"), url("PlaytimeWithHotToddies3D-webfont.svg#playtimewithhottoddies3dRg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+/**************************************************************
+
+DOCUMENT
+Basic styles defined at the top of the cascade, on the document 
+itself
+
+***************************************************************/
+html {
+  height: 100%;
+  font-size: 20px;
+}
+
+body {
+  min-height: 100%;
+  font-family: Playtime, sans-serif;
+  overflow-x: hidden;
+  margin: 0 auto;
+  max-width: 30em;
+  color: #444;
+  line-height: 1.5;
+  padding: 2em 1.5em;
+}
+
+/**************************************************************
+
+FLOW
+Rules to help govern the document's flow content (successive 
+block level elements).
+
+***************************************************************/
+p {
+  line-height: 1.5;
+}
+
+* + * {
+  margin-top: 1.5em;
+}
+
+li, dt, dd {
+  margin-top: 0;
+}
+
+p + p {
+  margin-top: 0.75em;
+}
+
+p + * {
+  display: block;
+}
+
+* + figure, * + hr, * + canvas, p + div, p + img {
+  margin: 2.25em 0;
+}
+* + figure:last-child, * + hr:last-child, * + canvas:last-child, p + div:last-child, p + img:last-child {
+  margin-bottom: 0;
+}
+
+h1 + p {
+  font-size: 1.25em;
+}
+
+/* markdown-friendly blockquote styles */
+blockquote > * {
+  font-size: 0.85em;
+  margin-left: 2em;
+}
+
+blockquote p {
+  font-style: italic;
+}
+
+/**************************************************************
+
+PHRASING
+Styling of inline "phrasing" content
+
+***************************************************************/
+p * {
+  margin: 0;
+  line-height: 1;
+}
+
+em, i, q, cite {
+  font-style: italic;
+}
+
+b, strong, abbr {
+  font-weight: bold;
+}
+
+abbr {
+  cursor: help;
+  letter-spacing: 2px;
+}
+
+small {
+  color: #777;
+  font-size: 0.85em;
+}
+
+code {
+  font-family: monospace;
+  font-size: 0.85em;
+}
+
+/*
+
+kbd eg.
+
+<kbd>
+	<kbd>shift</kbd> + 
+	<kbd>tab</kbd>
+</kbd>
+
+*/
+kbd kbd {
+  background: #777;
+  color: #fff;
+  padding: 0.25em 0.5em;
+  font-size: 0.85em;
+  font-weight: bold;
+}
+
+/**************************************************************
+
+LINKS
+Hyperlink styles according to state and context
+
+***************************************************************/
+a {
+  text-decoration: none;
+  color: #480;
+}
+
+p a, *:not(nav) li a, figcaption a, dd a {
+  border-bottom: 1px solid;
+}
+p a:hover, p a:focus, *:not(nav) li a:hover, *:not(nav) li a:focus, figcaption a:hover, figcaption a:focus, dd a:hover, dd a:focus {
+  border-width: 3px;
+}
+
+a:not([href]) {
+  cursor: default;
+}
+
+/* Skip link. Place this directly within <body> at the top of the page */
+[href="#main"] {
+  position: absolute;
+  top: -200px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  background: #fff;
+}
+
+[href="#main"]:focus {
+  top: 0;
+}
+
+[href="#main"] + * {
+  margin-top: 0;
+}
+
+/**************************************************************
+
+HEADINGS
+h1 - h5 styles
+
+***************************************************************/
+* + h1, * + h2, * + h3, * + h4, * + h5 {
+  margin-top: 20px;
+  margin-top: 1.5rem;
+}
+
+h1 {
+  text-align: center;
+}
+
+h1, h2 {
+  font-weight: 400;
+  line-height: 1.125;
+}
+
+h3, h4, h5 {
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 2.5em;
+}
+
+h2 {
+  font-size: 2em;
+}
+
+h3 {
+  font-size: 1.5em;
+}
+
+h4 {
+  font-size: 1.25em;
+}
+
+h5 {
+  font-size: 1em;
+}
+
+/**************************************************************
+
+LISTS
+Basic list styles (for content, not navigation blocks etc.)
+
+***************************************************************/
+li {
+  list-style: disc inside;
+}
+
+li li {
+  list-style-type: circle;
+}
+
+/* 1, 2, 3... */
+ol li {
+  list-style-type: decimal;
+}
+
+/* i, ii, iii... */
+ol li li {
+  list-style-type: lower-roman;
+}
+
+dt {
+  font-weight: bold;
+}
+
+dd {
+  font-style: italic;
+}
+
+ul ul, ol ol, ul ol, ol ul {
+  margin-left: 1em;
+}
+
+dd + dt {
+  margin-top: 0.75em;
+}
+
+/**************************************************************
+
+GRAPHICS
+Responsive image and figure styles
+
+***************************************************************/
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+figure img {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+figcaption {
+  font-style: italic;
+  text-align: center;
+}
+
+/**************************************************************
+
+NAVIGATION
+Navigation blocks using ARIA role="navigation"
+
+aria-label eg.
+
+<nav role="navigation" aria-label="main menu">
+	<ul>
+		<li><a href="[URL]">[LINK TEXT]</a></li>
+		<li><a href="[URL]">[LINK TEXT]</a></li>
+		<li><a href="[URL]">[LINK TEXT]</a></li>
+	</ul>
+</nav>
+
+heading eg.
+
+<nav role="navigation">
+	<h2>Main Menu</h2>
+	<ul>
+		<li><a href="[URL]">[LINK TEXT]</a></li>
+		<li><a href="[URL]">[LINK TEXT]</a></li>
+		<li><a href="[URL]">[LINK TEXT]</a></li>
+	</ul>
+</nav>
+
+***************************************************************/
+[role="navigation"] ul {
+  font-size: 0;
+}
+
+[role="navigation"] li {
+  list-style: none;
+  display: inline-block;
+  font-size: 25px;
+  /* smelly IE8 */
+  font-size: 1rem;
+}
+
+[role="navigation"] a {
+  display: block;
+  border: 0;
+}
+
+[role="navigation"] li {
+  display: block;
+}
+
+[role="navigation"] a {
+  background: #480;
+  color: #fff;
+  padding: 0.5em 1em;
+}
+[role="navigation"] a:hover, [role="navigation"] a:focus {
+  background: #444;
+}
+
+[role="navigation"] li + li {
+  margin-top: 0.25em;
+}
+
+/**************************************************************
+
+BUTTONS
+It is important to use <button> elements in most cases that the
+action is not to hyperlink to a new page or section
+
+Basic, accessible buttons are defined below, as well as buttons
+in certain ARIA states.
+
+***************************************************************/
+button {
+  font-family: Playtime, sans-serif;
+  padding: 0.25em 1em;
+  background: #fff;
+  color: #480;
+  border: 3px solid #444;
+  display: inline-block;
+  margin-right: 0.25em;
+  cursor: pointer;
+  position: relative;
+  top: 0;
+  text-transform: capitalize;
+  font-size: 1.125em;
+  border-radius: 0.125em;
+  line-height: 1;
+}
+
+button:focus {
+  outline: 1px dotted #444;
+  outline-offset: 0.25em;
+}
+
+button {
+  box-shadow: 0 0.33em 0 #444;
+}
+
+button:active, button[aria-pressed="true"], button[aria-selected] {
+  top: 0.25em;
+  box-shadow: 0 0.125em 0 #444;
+  background: #fff;
+  color: #444;
+}
+
+button[disabled]:active, button[disabled][aria-pressed="true"], button[aria-selected] {
+  top: 0;
+  box-shadow: 0 0.33em 0 #444;
+  background: #ff2a2a;
+}
+
+button[disabled] {
+  background: #fff;
+  color: #777;
+  border-color: #777;
+  cursor: default;
+}
+
+button:active {
+  outline: none;
+}
+
+/* Enlarge independent buttons. They stand alone, so are important */
+button:only-of-type {
+  font-size: 1.25em;
+}
+
+button[type="submit"] {
+  background: #480;
+  color: #fff;
+  width: 100%;
+}
+
+/**************************************************************
+
+FORMS
+Basic form styling
+
+***************************************************************/
+
+form {
+  padding: 1.5em;
+  background: #eee;
+  padding-bottom: 1.75em;
+}
+
+form:before {
+  content: '\25b2';
+  text-align: center;
+  display: block;
+  font-size: 2em;
+  position: relative;
+  text-align: center;
+  top: -1.8em;
+  height: 0;
+  color: #eee;
+}
+
+input, textarea, select {
+  padding: 0.25em;
+  display: block;
+  width: 100%;
+  border: 3px solid #444;
+  border-radius: 0.125em;
+  background: #fff;
+}
+
+input, textarea {
+  box-shadow: inset 0.2em 0.2em 0 #ddd;
+}
+
+select {
+  box-shadow: 0 0.33em 1em 0 #ddd inset,  0 0 0.25em 0.25em #ddd inset;
+}
+
+input, select {
+  height: 2em;
+  line-height: 2em;
+}
+
+textarea {
+  resize: none;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+}
+
+label + * {
+  margin-top: 0;
+}
+
+option {
+  margin-top: 0;
+}
+
+label > * {
+  display: inline-block;
+  width: auto;
+  height: auto;
+  margin-top: 0;
+  cursor: pointer;
+}
+
+* + [type="submit"] {
+  margin-top: 1.5em;
+}
+
+[role="tooltip"] {
+  background: #d4ff2a;
+  padding: 0;
+  max-height: 0;
+  overflow: hidden;
+  margin-top: 0.5em;
+}
+
+[role="tooltip"] + * {
+  margin-top: 0.75em;
+}
+
+*:focus + [role="tooltip"] {
+  background: #d4ff2a;
+  padding: 0.75em;
+  max-height: 1000px;
+  overflow: hidden;
+}
+
+/**************************************************************
+
+THEMABLE RADIO BUTTON PATTERN
+
+Markup:
+
+<label>
+	<input type="radio" value="[value]" class="vh" /> <span>[label text]</span>
+</label>
+
+***************************************************************/
+label [type="radio"] + span {
+  display: block;
+  cursor: pointer;
+}
+
+label [type="radio"] + span:before {
+  content: '';
+  background: #fff;
+  border: 0.125em solid #fff;
+  border-radius: 20px;
+  box-shadow: 0 0 0 0.125em #444;
+  display: inline-block;
+  height: 0.9em;
+  vertical-align: -0.125em;
+  width: 0.9em;
+}
+
+label [type="radio"] + span:before {
+  content: '';
+  background: #fff;
+  border: 0.125em solid #fff;
+  border-radius: 20px;
+  box-shadow: 0 0 0 0.125em #444;
+  display: inline-block;
+  margin-right: 0.5em;
+  width: 0.66em;
+  height: 0.66em;
+  vertical-align: -0.125em;
+}
+
+label [type="radio"]:checked + span:before {
+  background: #444;
+  box-shadow: 0 0 0 0.125em #480;
+}
+
+label [type="radio"]:focus + span:before {
+  outline: 1px dotted #444;
+  outline-offset: 0.25em;
+}
+
+/**************************************************************
+
+THEMABLE CHECKBOX PATTERN
+
+Markup:
+
+<label>
+	<input type="checkbox" value="[value]" class="vh" /> <span>[label text]</span>
+</label>
+
+***************************************************************/
+label [type="checkbox"] + span {
+  display: block;
+  cursor: pointer;
+}
+
+label [type="checkbox"] + span:before {
+  content: '';
+  background: #fff;
+  border: 0.125em solid #fff;
+  box-shadow: 0 0 0 0.125em #444, inset 5px 5px 0 #ddd;
+  display: inline-block;
+  height: 0.9em;
+  vertical-align: -0.125em;
+  width: 0.9em;
+}
+
+label [type="checkbox"] + span:before {
+  content: '';
+  background: #fff;
+  border: 0.125em solid #fff;
+  box-shadow: 0 0 0 0.125em #444;
+  display: inline-block;
+  margin-right: 0.5em;
+  width: 0.66em;
+  height: 0.66em;
+  vertical-align: -0.125em;
+}
+
+label [type="checkbox"]:checked + span:before {
+  content: '\2714';
+  line-height: 0.9;
+  box-shadow: 0 0 0 0.125em #480;
+}
+
+label [type="checkbox"]:focus + span:before {
+  outline: 1px dotted #444;
+  outline-offset: 0.25em;
+}
+
+/**************************************************************
+
+GRIDS
+Here, we generate flexible and self-correcting grids based on a 
+list of column variants
+
+Example markup (a three column grid):
+
+<div class="grid-3-columns">
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div> <!-- will be corrected to fill space -->
+</div>
+
+***************************************************************/
+[class^="grid-"] {
+  margin-top: 37.5px;
+  margin-top: 1.5rem;
+  font-size: 0;
+  /* just has to be a big, px based number */
+}
+
+[class^="grid-"] > * {
+  font-size: 25px;
+  font-size: 1rem;
+  text-align: left;
+  display: inline-block;
+  margin-top: 0;
+  vertical-align: top;
+  padding: 0 0.75em;
+}
+[class^="grid-"] > *:last-child {
+  padding-right: 0;
+}
+
+.grid-2-columns > * {
+  width: 50%;
+}
+
+.grid-2-columns > *:nth-child(2n + 1):nth-last-child(1) {
+  width: 100%;
+}
+.grid-2-columns > *:nth-child(2n + 1):nth-last-child(1) ~ * {
+  width: 100%;
+}
+
+.grid-2-columns > *:nth-child(2n + 1):nth-last-child(2) {
+  width: 50%;
+}
+.grid-2-columns > *:nth-child(2n + 1):nth-last-child(2) ~ * {
+  width: 50%;
+}
+
+.grid-2-columns > *:nth-child(2n + 1) {
+  padding-left: 0;
+}
+
+.grid-2-columns > *:nth-child(2n + 2) {
+  padding-right: 0;
+}
+
+.grid-2-columns > *:nth-child(2n + 2) ~ * {
+  margin-top: 1.5em;
+}
+
+.grid-3-columns > * {
+  width: 33.33333%;
+}
+
+.grid-3-columns > *:nth-child(3n + 1):nth-last-child(1) {
+  width: 100%;
+}
+.grid-3-columns > *:nth-child(3n + 1):nth-last-child(1) ~ * {
+  width: 100%;
+}
+
+.grid-3-columns > *:nth-child(3n + 1):nth-last-child(2) {
+  width: 50%;
+}
+.grid-3-columns > *:nth-child(3n + 1):nth-last-child(2) ~ * {
+  width: 50%;
+}
+
+.grid-3-columns > *:nth-child(3n + 1):nth-last-child(3) {
+  width: 33.33333%;
+}
+.grid-3-columns > *:nth-child(3n + 1):nth-last-child(3) ~ * {
+  width: 33.33333%;
+}
+
+.grid-3-columns > *:nth-child(3n + 1) {
+  padding-left: 0;
+}
+
+.grid-3-columns > *:nth-child(3n + 3) {
+  padding-right: 0;
+}
+
+.grid-3-columns > *:nth-child(3n + 3) ~ * {
+  margin-top: 1.5em;
+}
+
+[class^="grid-"]:after {
+  content: '\0020';
+  display: block;
+  height: 0;
+  clear: both;
+}
+
+.middle > * {
+  vertical-align: middle;
+}
+
+/*# sourceMappingURL=anatomy.css.map */
+
+/**************************************************************
+
+UTILITIES
+
+Helper classes
+
+***************************************************************/
+
+.vh { /* ie. visually hidden */
+  border: 0; 
+  clip: rect(0 0 0 0); 
+  height: 1px; 
+  margin: -1px; 
+  overflow: hidden; 
+  padding: 0; 
+  position: 
+  absolute; 
+  width: 1px;
+}
+
+/**************************************************************
+
+LANDMARKS
+
+***************************************************************/
+
+[role="contentinfo"] {
+  margin-top: 3em;
+  padding-top: 1.5em;
+  border-top: 2px dashed #444;
+}
+
+[role="main"] {
+  margin-top: 0.75em;
+}

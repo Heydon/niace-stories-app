@@ -1,7 +1,7 @@
 'use strict';
 
 Meteor.publish('stories', function() {
-	return Stories.find({published: true});
+	return Stories.find();
 });
 
 Meteor.publish('themes', function() {
