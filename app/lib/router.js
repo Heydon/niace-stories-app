@@ -8,20 +8,20 @@ Router.configure({
 
 Router.map(function() {  
 	this.route('stories', {path: '/'});
+
 	this.route('me', {path: '/me'});
+
 	this.route('story', {
 		path: '/story/:_id',
 		data: function() {
 			return Stories.findOne(this.params._id);
 		}
 	});
-	this.route('add', {
-		path: '/add'  
-	});
-	this.route('thanks', {path: '/thanks'});
-	this.route('manage', {
-		path: '/manage'
-	});
+
+	this.route('add', { path: '/add' });
+	this.route('thanks', { path: '/thanks' });
+	this.route('manage', { path: '/manage' });
+
 	this.route('manageitem', {
 		path: '/manageitem/:_id',
 		data: function() {
@@ -30,6 +30,7 @@ Router.map(function() {
 			};
 		}
 	});
+
 	this.route('edited', {
 		path: '/edited'
 	});

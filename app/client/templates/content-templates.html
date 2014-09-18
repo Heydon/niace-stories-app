@@ -46,12 +46,12 @@
 <template name="manage">
 	<ul class="manager-list" aria-label="all stories">
 		{{#each stories}}
-			{{> managerListItem}}
+			{{> manageListItem}}
 		{{/each}}
 	</ul>
 </template>
 
-<template name="managerListItem">
+<template name="manageListItem">
 	<li class="{{#if published}}published{{/if}}">
 		<h2>{{name}}</h2>
 		<p>
