@@ -22,6 +22,8 @@ http://inspire-me-dev.herokuapp.com/
 curl https://install.meteor.com/ | sh
 npm install
 npm run jshint
+# java is required for the tests
+# sudo apt-get install openjdk-7-jre-headless
 npm run test
 cd app
 meteor
