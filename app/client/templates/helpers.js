@@ -25,6 +25,13 @@ Template.manageitem.helpers({
 	},
 	selected: function(parentContext) {
 		return this.themeName === parentContext.story.theme ? 'selected' : '';
+	},
+	themeValue: function() {
+		return this.story.theme;
+	},
+	hasTheme: function() {
+		debugger;
+		return _.indexOf(this.story.keywords || [], this);
 	}
 });
 

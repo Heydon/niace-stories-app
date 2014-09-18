@@ -50,6 +50,9 @@ Template.manageitem.events({
 	'ready': function() {
 		console.log('ready');
 	},
+	'change #theme': function( evt ) {
+		
+	},
 	'submit form': function(e) {
 		e.preventDefault();
 		
@@ -65,11 +68,11 @@ Template.manageitem.events({
 		};
 
 		// honeypot to fool spam bots
-		if ($('#check').val() !== '') {
+		if( $('#check').val() !== '' ) {
 			return;
 		} else {
 			Meteor.call('edit', story, function(error, data) {
-				if (data.errors.length) {
+				if( data.errors.length ) {
 					return alert(data.errors);
 				}
 				Router.go('edited');
@@ -89,13 +92,11 @@ Template.loginForm.events({
 		email.trim();
 
 		Meteor.loginWithPassword(email, password, function(error) {
-
-			if (error) {
+			if( error ) {
 				alert('Error: ' + error.reason);
 			} else {
 				Router.go('manage');
 			}
-
 		});
     }
 
@@ -110,7 +111,7 @@ Template.registerForm.events({
 		var password = $('#password').val();
 		Accounts.createUser({email: email, password : password}, function(error) {
 
-			if (error) {
+			if( error ) {
 				alert('Error: ' + error.reason);
 			} else {
 				return;
