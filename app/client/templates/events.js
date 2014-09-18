@@ -60,7 +60,8 @@ Template.manageitem.events({
 			name: $('#name').val(),
 			story: $('#story').val(),
 			theme: $('#theme').val(),
-			published: isPublished
+			published: isPublished,
+			keywords: []
 		};
 
 		// honeypot to fool spam bots

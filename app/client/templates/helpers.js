@@ -14,8 +14,8 @@ Template.manageitem.helpers({
 	themes: function() {
 		return Themes.find();
 	},
-	keywords: function() {
-		console.log(Themes.find({themeName: 'Health'}, {fields: {keywords: 1}}));
+	keywords: function( themeName ) {
+		return Themes.find({ themeName: themeName }, {fields: {keywords: 1}});
 	},
 	currentTheme: function() {
 		return this.story.theme;
