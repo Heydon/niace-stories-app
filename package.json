@@ -18,6 +18,9 @@
     "url": "https://github.com/Heydon/niace-stories-app/issues"
   },
   "homepage": "https://github.com/Heydon/niace-stories-app",
+  "dependencies": {
+    "connect": "1.9.2"
+  },
   "devDependencies": {
     "jshint": "^2.5.5",
     "karma": "^0.10.10",
