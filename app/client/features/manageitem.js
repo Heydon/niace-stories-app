@@ -59,7 +59,7 @@ Template.manageitem.helpers({
 		if( parentContext.story.theme === selectedTheme ) {
 			return _.indexOf(parentContext.story.keywords || [], keyword) > -1 ? 'checked' : '';
 		}
-		return false;
+		return '';
 	},
 	selectedTheme: function() {
 		return Template.instance().selectedTheme.get();
