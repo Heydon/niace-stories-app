@@ -542,8 +542,39 @@ heading eg.
   font-size: 1.5em;
 }
 
+/**************************************************************
 
+ANIMATIONS
 
+***************************************************************/
+
+@-webkit-keyframes wibble {
+  0%   { transform: rotate(3deg); }
+  50%  { transform: rotate(-3deg); }
+  100% { transform: rotate(0); }
+}
+@-moz-keyframes wibble {
+  0%   { transform: rotate(3deg); }
+  50%  { transform: rotate(-3deg); }
+  100% { transform: rotate(0); }
+}
+@-o-keyframes wibble {
+  0%   { transform: rotate(3deg); }
+  50%  { transform: rotate(-3deg); }
+  100% { transform: rotate(0); }
+}
+@keyframes wibble {
+  0%   { transform: rotate(3deg); }
+  50%  { transform: rotate(-3deg); }
+  100% { transform: rotate(0); }
+}
+
+.loaded {
+  -webkit-animation: wibble 0.2s 2; /* Safari 4+ */
+  -moz-animation:    wibble 0.2s 2; /* Fx 5+ */
+  -o-animation:      wibble 0.2s 2; /* Opera 12+ */
+  animation:         wibble 0.2s 2;
+}
 
 /**************************************************************
 
