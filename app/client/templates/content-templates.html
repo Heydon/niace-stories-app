@@ -1,7 +1,9 @@
 <!-- content templates -->
 
 <template name="loading">
-	<p>Please wait&hellip;</p>
+	<div style="min-height: 1000px">
+		<!-- keep blank -->
+	</div>
 </template>
 
 <template name="stories">
@@ -20,8 +22,27 @@
 </template>
 
 <template name="story">
-	<h1>{{name}}'s Story:</h1>
-	<div>{{#markdown}}{{story}}{{/markdown}}</div>
+	<h1>{{name}}'s Story</h1>
+	<div class="story-body">
+		{{#markdown}}{{story}}{{/markdown}}
+	</div>
+	<form action="">
+		<h2>Did this story inspire you?</h2>
+		<label><input type="radio" value="Yes" class="vh" name="inspiring"> <span>Yes! Save it in <strong>"Inspiring Me"</strong> to read again later</span></label>
+		<label><input type="radio" value="No" class="vh" name="inspiring" checked> <span>No, I'll keep looking for more stories</span></label>
+	</form>
+</template>
+
+<template name="random">
+	<h1>{{this.name}}'s Story</h1>
+	<div class="story-body">
+		{{#markdown}}{{this.story}}{{/markdown}}
+	</div>
+	<form action="">
+		<h2>Did this story inspire you?</h2>
+		<label><input type="radio" value="Yes" class="vh" name="inspiring"> <span>Yes! Save it in <strong>"Inspiring Me"</strong> to read again later</span></label>
+		<label><input type="radio" value="No" class="vh" name="inspiring" checked> <span>No, I'll keep looking for more stories</span></label>
+	</form>
 </template>
 
 <template name="add">
@@ -31,24 +52,22 @@
 		<textarea id="story" cols="8" rows="5"></textarea>
 		<div class="grid-2-columns middle">
 			<div>
+				<label for="name">Name</label>
 				<p>Use the "generate a name" button to put a name to your story. It should be a true story, but your identity should be secret <span aria-hidden>&#x2192;</span></p>
 			</div>
 			<div>
 				<button class="random" aria-controls="name">Generate a name</button>
 			</div>
 		</div>
-		<label for="name">Name</label>
-		<input id="name" type="text" readonly aria-live="polite" role="status" placeholder="Hit the generate button" />
+		<input id="name" type="text" readonly aria-live="polite" role="status" placeholder="Hit the generate button until you get a name you like" />
 		<input type="text" style="display: none" aria-hidden="true" id="check" value="" />
 		<button type="submit">Share your story!</button>
 	</form>
 </template>
 
 <template name="thanks">
-	<li>
 		<h1>Thanks!</h1>
-		<p>Thank you for posting a story to inspire people. We'll just check it then publish it in the app.</p>
-	</li>
+		<p>Thank you for posting a story to inspire people. We'll just check it then publish it in the app. Do you have <a href="/add">another story</a> to tell?</p>
 </template>
 
 <template name="manage">
@@ -118,10 +137,13 @@
 </template>
 
 <template name="themes">
-	<h1>Themes</h1>
-	<ul>
+	<h1>Find an inspiring story&hellip;</h1>
+	<ul class="theme-list">
 		{{#each themes}}
-			<li><a href="{{ pathFor 'theme' }}">{{this.themeName}}</a></li>
+			<li>
+				<h2>Stories about <a href="{{ pathFor 'theme' }}">{{this.themeName}} <span aria-hidden>&#x2192;</span></a></h2>
+				<p>{{this.description}}</p>
+			</li>
 		{{/each}}
 	</ul>
 </template>
