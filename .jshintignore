@@ -1,3 +1,4 @@
 app/packages/*
 test/*
 node_modules/*
+app/client/polyfills/*
