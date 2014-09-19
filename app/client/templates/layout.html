@@ -1,6 +1,9 @@
 <!-- main layout -->
 
 <template name="layout">
+	<nav role="navigation">
+		{{> navigation}}
+	</nav>
 	<div>
 		<header role="banner">
 			<div>
@@ -12,11 +15,6 @@
 				{{> yield}}
 			</div>
 		</main>
-		<aside role="complementary">
-			<div>
-				{{> aside}}
-			</div>
-		</aside>
 		<footer role="contentinfo">
 			<div>
 				{{> footer}}
