@@ -14,8 +14,9 @@ Template.manageitem.helpers({
 	themes: function() {
 		return Themes.find();
 	},
-	keywords: function( themeName ) {
-		return Themes.find({ themeName: themeName }, {fields: {keywords: 1}});
+	keywords: function( themeId ) {
+		var search = Themes.findOne( themeId );
+		return search ? search.keywords : [];
 	},
 	currentTheme: function() {
 		return this.story.theme;
@@ -29,9 +30,8 @@ Template.manageitem.helpers({
 	themeValue: function() {
 		return this.story.theme;
 	},
-	hasTheme: function() {
-		debugger;
-		return _.indexOf(this.story.keywords || [], this);
+	hasThemeKeyword: function( parentContext ) {
+		return _.indexOf(parentContext.story.keywords || [], this) > -1 ? 'checked' : '';
 	}
 });
 

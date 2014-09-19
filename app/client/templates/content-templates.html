@@ -83,7 +83,7 @@
 		</select>
 		<div class="keywords">
 			{{#each keywords themeValue}}
-				<label><input type="checkbox" id="{{ this }}" value="true" {{#if hasTheme}}checked="checked"{{/if}}> {{this}}</label>
+				<label><input type="checkbox" id="{{ this }}" value="true" {{hasThemeKeyword ..}}> {{this}}</label>
 			{{/each}}
 		</div>
 
