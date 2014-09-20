@@ -4,4 +4,5 @@ iron:router
 showdown
 accounts-base
 accounts-password
+reactive-var
 

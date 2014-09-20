@@ -73,12 +73,12 @@
 <template name="manage">
 	<ul class="manager-list" aria-label="all stories">
 		{{#each stories}}
-			{{> managerListItem}}
+			{{> manageListItem}}
 		{{/each}}
 	</ul>
 </template>
 
-<template name="managerListItem">
+<template name="manageListItem">
 	<li class="{{#if published}}published{{/if}}">
 		<h1>{{name}}</h1>
 		<p>
@@ -90,17 +90,25 @@
 <template name="manageitem">
 	<form>
 		<label for="name">Name</label>
-		{{keywords}}
 		<input id="name" type="text" value="{{story.name}}" />
 		<label for="story">Story</label>
 		<textarea id="story">{{story.story}}</textarea>
 		<label for="theme">Theme</label>
 		<select id="theme">
-			<option disabled>Please choose</option>
+			<option disabled selected>Please choose</option>
 			{{#each themes}}
-				<option {{selected ..}}>{{this.themeName}}</option>
+				<option value="{{this._id}}" {{selected ..}}>{{this.themeName}}</option>
 			{{/each}}
 		</select>
+		<div class="keywords">
+			{{#each keywords selectedTheme}}
+				<label for="keyword_{{ this }}">
+					<input type="checkbox" id="keyword_{{ this }}" value="{{this}}" {{hasThemeKeyword .. selectedTheme}}>
+					{{this}}
+				</label>
+			{{/each}}
+		</div>
+
 		<label><input type="checkbox" id="published" value="true" {{checked}}> Published</label>
 		<input type="text" style="display: none" aria-hidden="true" id="check" value="" />
 		<button type="submit">Save</button>

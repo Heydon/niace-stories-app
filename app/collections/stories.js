@@ -2,19 +2,23 @@ Stories = new Meteor.Collection('stories');
 
 Meteor.methods({
 	submit: function( story ) {
-		var output = {
-			errors: []
-		};
+		var output = {};
 
-		if (!story.name) {
-			output.errors.push('Please choose a name');
+		var errors = [];
+
+		if( !story.name ) {
+			errors.push('Please choose a name');
 		}
 
-		if (!story.story) {
-			output.errors.push('Please write a story');
+		if( !story.story ) {
+			errors.push('Please write a story');
 		}
 
-		if (!output.errors.length) {
+		if( !story.theme ) {
+			errors.push('Please choose a theme');
+		}
+
+		if( !errors.length ) {
 			story = _.extend(_.pick(story, 'name', 'story'), {
 				published: false,
 				submitted: new Date().getTime()
@@ -22,34 +26,33 @@ Meteor.methods({
 
 			var storyId = Stories.insert(story);
 			output.id = storyId;
-		}
 
-		return output;
+			return output;
+		} else {
+			throw new Meteor.Error( 403, 'Error: \n' + errors.join('\n') );
+		}
 	},
 
-	edit: function( story ) {
-		var output = {
-			errors: []
-		};
+	update: function( id, story ) {
+		var output = {};
+		var errors = [];
 
-		if (!story.name) {
-			output.errors.push('Please choose a name');
+		id = id && id._id;
+
+		if( !id || !story ) {
+			errors.push('Please supply both an ID and a story with data');
 		}
 
-		if (!story.story) {
-			output.errors.push('Please write a story');
+		if( story._id ) {
+			story = _.without( story, '_id' );
 		}
 
-		if (!story.theme) {
-			output.errors.push('Please choose a theme');
+		if( !errors.length ) {
+			Stories.update( id , {$set: story});
+			return output;
+		} else {
+			throw new Meteor.Error( 403, 'Error: \n' + errors.join('\n') );
 		}
-
-		if (!output.errors.length) {
-			Stories.update(story.id, {$set: story});
-		}
-
-		return output;
-
 	}
 });
 

@@ -21,6 +21,8 @@
 		"Router": true,
 		"Accounts": true,
 		"process": true,
-		"Accounts": true
+		"Accounts": true,
+		"Session": true,
+		"ReactiveVar": true
 	}
 }
