@@ -1050,7 +1050,7 @@ NOTIFICATIONS
 
 ***************************************************************/
 
-[role="alert"] {
+[role="alert"] > div {
   background: #f55;
   color: #fff;
   padding: 1em;
@@ -1062,4 +1062,8 @@ NOTIFICATIONS
 
 [role="alert"] li:before {
   content: '\2716\0020';
+}
+
+*:empty + * {
+  margin-top: 0;
 }
