@@ -1043,3 +1043,23 @@ STORY BODY
 .story-body * + p {
   margin-top: 1.5em;
 }
+
+/**************************************************************
+
+NOTIFICATIONS
+
+***************************************************************/
+
+[role="alert"] {
+  background: #f55;
+  color: #fff;
+  padding: 1em;
+}
+
+[role="alert"] li {
+  list-style: none;
+}
+
+[role="alert"] li:before {
+  content: '\2716\0020';
+}

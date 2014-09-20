@@ -47,7 +47,16 @@
 
 <template name="add">
 	<h1>Add your story</h1>
-	<form>
+	<form id="add" tabindex="-1">
+		{{#if errors}}
+			<div role="alert">
+				<ul>
+					{{#each errors}}
+						{{ > error}}
+					{{/each}}
+				</ul>
+			</div>
+		{{/if}}
 		<label for="story">Your inspiring story</label>
 		<textarea id="story" cols="8" rows="5"></textarea>
 		<div class="grid-2-columns middle">
@@ -63,6 +72,10 @@
 		<input type="text" style="display: none" aria-hidden="true" id="check" value="" />
 		<button type="submit">Share your story!</button>
 	</form>
+</template>
+
+<template name="error">
+	<li>{{this}}</li>
 </template>
 
 <template name="thanks">

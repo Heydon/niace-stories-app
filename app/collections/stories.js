@@ -1,21 +1,17 @@
 Stories = new Meteor.Collection('stories');
 
 Meteor.methods({
-	submit: function( story ) {
+	share: function( story ) {
 		var output = {};
 
 		var errors = [];
 
-		if( !story.name ) {
+		if( !story.name || story.name === '' ) {
 			errors.push('Please choose a name');
 		}
 
-		if( !story.story ) {
+		if( !story.story || story.story === '' ) {
 			errors.push('Please write a story');
-		}
-
-		if( !story.theme ) {
-			errors.push('Please choose a theme');
 		}
 
 		if( !errors.length ) {
@@ -26,11 +22,12 @@ Meteor.methods({
 
 			var storyId = Stories.insert(story);
 			output.id = storyId;
-
-			return output;
 		} else {
-			throw new Meteor.Error( 403, 'Error: \n' + errors.join('\n') );
+			output.errors = errors;
 		}
+		
+		return output;
+
 	},
 
 	update: function( id, story ) {
