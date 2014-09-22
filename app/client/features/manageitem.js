@@ -29,7 +29,7 @@ Template.manageitem.events({
 		} else {
 			Meteor.call('modifyStory', {_id: this.story._id}, story, function( error ) {
 				if( error ) {
-					return alert( error.reason );
+					return alert( error.reason && error.reason.join('\n') );
 				}
 				Router.go('edited');
 			});

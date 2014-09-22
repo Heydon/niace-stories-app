@@ -13,7 +13,7 @@ Template.add.events({
 		} else {
 			// call the share method for stories
 			Meteor.call('share', story, function(errors, data) {
-				if( data.errors ) {
+				if( data.errors && data.errors.length ) {
 					// set the errors session variable with the method errors array
 					Session.set('errors', data.errors);
 				} else {
