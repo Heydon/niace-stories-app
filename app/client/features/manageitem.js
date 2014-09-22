@@ -27,7 +27,7 @@ Template.manageitem.events({
 		if( $('#check').val() !== '' ) {
 			return;
 		} else {
-			Meteor.call('update', {_id: this.story._id}, story, function( error ) {
+			Meteor.call('modifyStory', {_id: this.story._id}, story, function( error ) {
 				if( error ) {
 					return alert( error.reason );
 				}

@@ -12,7 +12,7 @@ Router.configure({
 	}  
 });
 
-Router.map(function() {  
+Router.map(function() {
 	this.route('themes', {path: '/'});
 	this.route('me', {path: '/me'});
 
