@@ -16,8 +16,6 @@ Template.add.events({
 				if( data.errors ) {
 					// set the errors session variable with the method errors array
 					Session.set('errors', data.errors);
-					// take user to start of form, which may be obscured, to read errors
-					$('#add').focus();
 				} else {
 					// nullify the residual errors from previous attempts
 					Session.set('errors', null);

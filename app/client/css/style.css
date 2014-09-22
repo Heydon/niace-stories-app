@@ -214,6 +214,7 @@ body {
   min-height: 100%;
   font-family: Playtime, sans-serif;
   overflow-x: hidden;
+  overflow-y: scroll;
   margin: 0 auto;
   color: #444;
   line-height: 1.5;
@@ -1044,6 +1045,10 @@ STORY BODY
   margin-top: 1.5em;
 }
 
+.story-body + form {
+  margin-top: 0.5em;
+}
+
 /**************************************************************
 
 NOTIFICATIONS
@@ -1062,8 +1067,4 @@ NOTIFICATIONS
 
 [role="alert"] li:before {
   content: '\2716\0020';
-}
-
-*:empty + * {
-  margin-top: 0;
 }
