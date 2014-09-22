@@ -1,9 +1,4 @@
-var stories = new Meteor.Collection('stories');
-
-if( Meteor.isClient ) {
-	// make stories globally available
-	window.stories = stories;
-}
+stories = new Meteor.Collection('stories');
 
 Meteor.methods({
 	share: function( story ) {
@@ -76,6 +71,10 @@ Meteor.methods({
 			// http://en.wikipedia.org/wiki/List_of_HTTP_status_codes#400
 			throw new Meteor.Error( 400, errors );
 		}
+	},
+
+	exportStories: function() {
+		
 	}
 });
 

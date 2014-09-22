@@ -8,9 +8,9 @@ Meteor.publish('themes', function() {
 	return themes.find();
 });
 
-Meteor.AppCache.config({
-	onlineOnly: ['/add', '/manage', '/thanks', '/login']
-});
+// Meteor.AppCache.config({
+// 	onlineOnly: ['/add', '/manage', '/thanks', '/login']
+// });
 
 // Fixture for themes if database empty
 
