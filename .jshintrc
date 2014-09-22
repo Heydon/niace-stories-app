@@ -6,8 +6,8 @@
 	"strict": false,
 	"globals": {
 		"Meteor": true,
-		"Stories": true,
-		"Themes": true,
+		"stories": true,
+		"themes": true,
 		"_": true,
 		"require": true,
 		"describe": true,

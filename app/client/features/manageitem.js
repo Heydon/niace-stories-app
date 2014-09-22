@@ -39,10 +39,10 @@ Template.manageitem.events({
 
 Template.manageitem.helpers({
 	themes: function() {
-		return Themes.find();
+		return themes.find();
 	},
 	keywords: function( themeId ) {
-		var search = Themes.findOne( themeId );
+		var search = themes.findOne( themeId );
 		return search ? search.keywords : [];
 	},
 	currentTheme: function() {

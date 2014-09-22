@@ -1,4 +1,9 @@
-Stories = new Meteor.Collection('stories');
+var stories = new Meteor.Collection('stories');
+
+if( Meteor.isClient ) {
+	// make stories globally available
+	window.stories = stories;
+}
 
 Meteor.methods({
 	share: function( story ) {
@@ -20,7 +25,7 @@ Meteor.methods({
 				submitted: new Date().getTime()
 			});
 
-			var storyId = Stories.insert(story);
+			var storyId = stories.insert(story);
 			output.id = storyId;
 		} else {
 			// throw 403: user error
@@ -46,7 +51,7 @@ Meteor.methods({
 		}
 
 		if( !errors.length ) {
-			Stories.update( id , {$set: story});
+			stories.update( id , {$set: story});
 			return output;
 		} else {
 			throw new Meteor.Error( 403, 'Error: \n' + errors.join('\n') );
@@ -54,7 +59,7 @@ Meteor.methods({
 	}
 });
 
-Stories.allow({
+stories.allow({
 	update: function() {
 		return true;
 	},
