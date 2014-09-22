@@ -63,4 +63,4 @@ Template.add.helpers({
 // when returning to the page
 Template.add.destroyed = function(){
   Session.set('errors', null);
-}
+};
