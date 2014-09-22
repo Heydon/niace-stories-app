@@ -23,14 +23,15 @@ Meteor.methods({
 			var storyId = Stories.insert(story);
 			output.id = storyId;
 		} else {
-			output.errors = errors;
+			// throw 403: user error
+			throw new Meteor.Error( 403, errors );
 		}
 		
 		return output;
 
 	},
 
-	update: function( id, story ) {
+	modifyStory: function( id, story ) {
 		var output = {};
 		var errors = [];
 
