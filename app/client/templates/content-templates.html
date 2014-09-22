@@ -33,33 +33,9 @@
 	</form>
 </template>
 
-<template name="random">
-	<h1>{{this.name}}'s Story</h1>
-	<div class="story-body">
-		{{#markdown}}{{this.story}}{{/markdown}}
-	</div>
-	<form action="">
-		<h2>Did this story inspire you?</h2>
-		<label><input type="radio" value="Yes" class="vh" name="inspiring"> <span>Yes! Save it in <strong>"Inspiring Me"</strong> to read again later</span></label>
-		<label><input type="radio" value="No" class="vh" name="inspiring" checked> <span>No, I'll keep looking for more stories</span></label>
-	</form>
-</template>
-
 <template name="add">
 	<h1>Add your story</h1>
 	<form id="add" tabindex="-1">
-		<div role="alert">
-			{{#if errors}}
-				<div>
-					<ul>
-						{{#each errors}}
-							<li>{{this}}</li>
-						{{/each}}
-					</ul>
-				</div>
-			{{/if}}
-		</div>
-		
 		<label for="story">Your inspiring story</label>
 		<textarea id="story" cols="8" rows="5"></textarea>
 		<div class="grid-2-columns middle">
@@ -73,6 +49,17 @@
 		</div>
 		<input id="name" type="text" readonly aria-live="polite" role="status" placeholder="Hit the generate button until you get a name you like" />
 		<input type="text" style="display: none" aria-hidden="true" id="check" value="" />
+		<div role="alert">
+			{{#if errors}}
+				<div>
+					<ul>
+						{{#each errors}}
+							<li>{{this}}</li>
+						{{/each}}
+					</ul>
+				</div>
+			{{/if}}
+		</div>
 		<button type="submit">Share your story!</button>
 	</form>
 </template>

@@ -1,5 +1,5 @@
 Template.add.events({
-	'submit form': function( e ) {
+	'submit form': function(e) {
 		e.preventDefault();
 		// create candidate story object
 		var story = {
@@ -12,12 +12,10 @@ Template.add.events({
 			return;
 		} else {
 			// call the share method for stories
-			Meteor.call('share', story, function( errors, data ) {
-				if( errors ) {
+			Meteor.call('share', story, function(errors, data) {
+				if( data.errors && data.errors.length ) {
 					// set the errors session variable with the method errors array
-					Session.set('errors', errors.reason);
-					// take user to start of form, which may be obscured, to read errors
-					$('#add').focus();
+					Session.set('errors', data.errors);
 				} else {
 					// nullify the residual errors from previous attempts
 					Session.set('errors', null);
