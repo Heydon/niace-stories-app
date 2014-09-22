@@ -8,8 +8,13 @@ Meteor.publish('themes', function() {
 	return Themes.find();
 });
 
-// Fixture for themes if database empty
+// Perhaps look to remove these fixture blocks when releasing?..
+if( Stories.find().count() === 0 ) {
+	var stories = JSON.parse( Assets.getText('stories/stories.json') );
+	_.each( stories, Stories.insert );
+}
 
+// Fixture for themes if database empty
 if( Themes.find().count() === 0 ) {
 	Themes.insert({
 		'themeName' : 'Money',

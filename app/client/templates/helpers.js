@@ -30,13 +30,3 @@ Template.theme.helpers({
 	}
 });
 /***************************/
-
-/**
- * header helpers
- */
-Template.header.helpers({
-	loggedIn: function() {
-		return Meteor.user();
-	}
-});
-/***************************/
