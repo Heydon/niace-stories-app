@@ -9,3 +9,4 @@ Template.stub('add');
 Template.stub('manageitem');
 Template.stub('loginForm');
 Template.stub('registerForm');
+Template.stub('errors');
