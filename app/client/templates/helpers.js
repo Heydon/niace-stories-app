@@ -31,17 +31,6 @@ Template.theme.helpers({
 });
 /***************************/
 
-/**
- * header helpers
- */
-Template.header.helpers({
-	loggedIn: function() {
-		return Meteor.user();
-	}
-});
-/***************************/
-
-
 // helper to display the errors from the session
 Template.errors.helpers({
 	errors: function() {
