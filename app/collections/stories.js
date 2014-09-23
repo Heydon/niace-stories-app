@@ -5,17 +5,17 @@ Meteor.methods({
 
 		var output = {};
 
-		output.errors = [];
+		var errors = [];
 
 		if( !story.name ) {
-			output.errors.push('Please choose a name');
+			errors.push('Please choose a name');
 		}
 
 		if( !story.story ) {
-			output.errors.push('Please write a story');
+			errors.push('Please write a story');
 		}
 
-		if( !output.errors.length ) {
+		if( !errors.length ) {
 			story = _.extend(_.pick(story, 'name', 'story'), {
 				published: false,
 				submitted: new Date().getTime()
@@ -23,13 +23,12 @@ Meteor.methods({
 
 			var storyId = Stories.insert(story);
 			output.id = storyId;
+		} else {
+			// throw an error to populate the error variable on the method callback
+			// throw a 400 error so that the server-client communication meets http response code standards
+			// http://en.wikipedia.org/wiki/List_of_HTTP_status_codes#400
+			throw new Meteor.Error( 400, errors );
 		}
-		// } else {
-		// 	// throw an error to populate the error variable on the method callback
-		// 	// throw a 400 error so that the server-client communication meets http response code standards
-		// 	// http://en.wikipedia.org/wiki/List_of_HTTP_status_codes#400
-		// 	throw new Meteor.Error( 400, errors );
-		// }
 		
 		return output;
 
