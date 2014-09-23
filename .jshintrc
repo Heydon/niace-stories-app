@@ -23,6 +23,7 @@
 		"process": true,
 		"Accounts": true,
 		"Session": true,
-		"ReactiveVar": true
+		"ReactiveVar": true,
+		"Assets": true
 	}
 }
