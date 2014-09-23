@@ -5,13 +5,13 @@
 
 Template.stories.helpers({
 	stories: function() {
-		return Stories.find({}, {sort: {submitted: -1}});
+		return stories.find({}, {sort: {submitted: -1}});
 	}
 });
 
 Template.manage.helpers({
 	stories: function() {
-		return Stories.find();
+		return stories.find();
 	}
 });
 
@@ -20,7 +20,7 @@ Template.manage.helpers({
  */
 Template.themes.helpers({
 	themes: function() {
-		return Themes.find();
+		return themes.find();
 	}
 });
 

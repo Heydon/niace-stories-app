@@ -1,1 +1,1 @@
-Themes = new Meteor.Collection('themes');
+themes = new Meteor.Collection('themes');

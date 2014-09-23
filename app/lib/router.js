@@ -29,13 +29,13 @@ Router.map(function() {
 	this.route('story', {
 		path: '/story/:_id',
 		data: function() {
-			return Stories.findOne(this.params._id);
+			return stories.findOne(this.params._id);
 		}
 	});
 	this.route('random', {
 		path: '/random',
 		action: function() {
-			var random = _.sample(Stories.find().fetch());
+			var random = _.sample(stories.find().fetch());
     		Router.go('story', {_id: random._id});
 		}
 	});
@@ -43,7 +43,7 @@ Router.map(function() {
 		path: '/manageitem/:_id',
 		data: function() {
 			return {
-				story: Stories.findOne( this.params._id )
+				story: stories.findOne( this.params._id )
 			};
 		}
 	});
@@ -53,7 +53,7 @@ Router.map(function() {
 		data: function() {
 			return {
 				name: this.params.themeName,
-				stories: Stories.find({theme: this.params.themeName})
+				stories: stories.find({theme: this.params.themeName})
 			};
 		}
 	});

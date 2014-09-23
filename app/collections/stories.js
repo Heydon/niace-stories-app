@@ -1,4 +1,4 @@
-Stories = new Meteor.Collection('stories');
+stories = new Meteor.Collection('stories');
 
 Meteor.methods({
 	share: function( story ) {
@@ -21,7 +21,7 @@ Meteor.methods({
 				submitted: new Date().getTime()
 			});
 
-			var storyId = Stories.insert(story);
+			var storyId = stories.insert(story);
 			output.id = storyId;
 		} else {
 			// throw an error to populate the error variable on the method callback
@@ -62,7 +62,7 @@ Meteor.methods({
 		}
 
 		if( !errors.length ) {
-			Stories.update( id , {$set: story});
+			stories.update( id , {$set: story});
 			return output;
 		} else {
 			// throw an error to populate the error variable on the method callback
@@ -70,10 +70,14 @@ Meteor.methods({
 			// http://en.wikipedia.org/wiki/List_of_HTTP_status_codes#400
 			throw new Meteor.Error( 400, errors );
 		}
+	},
+
+	exportStories: function() {
+		
 	}
 });
 
-Stories.allow({
+stories.allow({
 	update: function() {
 		return true;
 	},
