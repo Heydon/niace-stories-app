@@ -43,3 +43,13 @@ Template.errors.helpers({
 Template.errors.destroyed = function(){
   Session.set('errors', null);
 };
+
+Template.message.helpers({
+	message: function() {
+		return Session.get('message');
+	}
+});
+
+Template.message.destroyed = function(){
+  Session.set('message', null);
+};

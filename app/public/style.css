@@ -1055,10 +1055,16 @@ NOTIFICATIONS
 
 ***************************************************************/
 
-[role="alert"] > div {
+[role="alert"] > div, [role="status"] > div {
   background: #f55;
   color: #fff;
   padding: 1em;
+  font-size: 1em;
+}
+
+[role="status"] > div {
+  background: #d4ff2a;
+  color: #444;
 }
 
 [role="alert"] li {
