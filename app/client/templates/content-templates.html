@@ -49,17 +49,7 @@
 		</div>
 		<input id="name" type="text" readonly aria-live="polite" role="status" placeholder="Hit the generate button until you get a name you like" />
 		<input type="text" style="display: none" aria-hidden="true" id="check" value="" />
-		<div role="alert">
-			{{#if errors}}
-				<div>
-					<ul>
-						{{#each errors}}
-							<li>{{this}}</li>
-						{{/each}}
-					</ul>
-				</div>
-			{{/if}}
-		</div>
+		{{> errors}}
 		<button type="submit">Share your story!</button>
 	</form>
 </template>

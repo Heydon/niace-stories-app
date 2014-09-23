@@ -13,9 +13,9 @@ Template.add.events({
 		} else {
 			// call the share method for stories
 			Meteor.call('share', story, function(errors, data) {
-				if( data.errors && data.errors.length ) {
+				if( errors ) {
 					// set the errors session variable with the method errors array
-					Session.set('errors', data.errors);
+					Session.set( 'errors', errors.reason );
 				} else {
 					// nullify the residual errors from previous attempts
 					Session.set('errors', null);
@@ -51,16 +51,3 @@ Template.add.events({
 		$('#name').val(name);
 	}
 });
-
-// helper to display the errors from the session
-Template.add.helpers({
-	errors: function() {
-		return Session.get('errors');
-	}
-});
-
-// the destroy method clears errors so they are not there 
-// when returning to the page
-Template.add.destroyed = function(){
-  Session.set('errors', null);
-};
