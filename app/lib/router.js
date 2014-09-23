@@ -49,14 +49,17 @@ Router.map(function() {
 	});
 
 	this.route('theme', {
-		path: '/theme/:themeName',
+		path: '/theme/:theme',
 		data: function() {
+			var theme = Themes.find({themeName: this.params.theme}).fetch()[0];
+			var id = theme && theme._id;
 			return {
 				name: this.params.themeName,
-				stories: Stories.find({theme: this.params.themeName})
+				stories: Stories.find({theme: id})
 			};
 		}
 	});
+
 });
 
 Router.onBeforeAction('loading');

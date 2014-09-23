@@ -10,8 +10,12 @@ Meteor.publish('themes', function() {
 
 // Perhaps look to remove these fixture blocks when releasing?..
 if( Stories.find().count() === 0 ) {
-	var stories = JSON.parse( Assets.getText('stories/stories.json') );
-	_.each( stories, Stories.insert.bind( Stories ) );
+	try { // 
+		var stories = JSON.parse( Assets.getText('stories/stories.json') );
+		_.each( stories, Stories.insert.bind( Stories ) );		
+	} catch(e) {
+		console.log( 'couldn\'t load private/stories/stories.json' );
+	}
 }
 
 // Fixture for themes if database empty
