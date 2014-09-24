@@ -1,36 +1,34 @@
 #!/usr/bin/env node
 
+/**
+ * Crazy fixture generating script
+ */
+
 var http = require('http');
 
 var args = process.argv.slice(2);
-
-var url = 'http://jaspervdj.be/lorem-markdownum/markdown.txt?';
 
 args.forEach(function( a ) {
 	a = a.toLowerCase();
 	if( a === '--help' || a === '-h' ) {
 		console.log(
-			'\nUsage: ./fillout.js [number of stories ( optional )] [theme ids...]\n\n' +
+			'\nUsage: ./fillout.js [number of stories ( optional )]\n\n' +
 			'\tExample usage:\n' + 
-			'\t./fillout.js 100 TPPQTibMF7ZNR849B MzcwEDpZZfMYdSmj2 wgjDY2vkyJyJLNyeM m4crZw4YaKXLqtBC3 XqN8fApvwyp7cCciq\n\n' +
+			'\t./fillout.js 100\n\n' +
 			'\tBest to probably pipe the contents of this execution to the stories.json file\n' + 
-			'\t( > app/private/stories/stories.json )'
+			'\t( > app/private/stories/stories.json )\n' +
+			'\tIt is also possible to pipe the contents of the themes to this script to populate\n' +
+			'\tthe stories with themes and keywords for example:\n' +
+			'\tmongo 127.0.0.1:3001/meteor --quiet --eval "printjson(db.themes.find().toArray())" | ./fillout.js 150'
 		);
 		process.exit(1);
 	}
 });
 
-var thisMany = parseInt( args[0], 10 );
-var themeIds;
-if( !isNaN( thisMany ) ) {
-	themeIds = args.slice(1);
-} else {
-	thisMany = 25;
-	// copy array
-	themeIds = args.slice();
-}
+var thisMany = parseInt( args[0], 10 ) || 25;
 
-var options = {
+var urlToFetchStories = 'http://jaspervdj.be/lorem-markdownum/markdown.txt?';
+var urlQueryOptions = {
 	'no-headers': ['', 'on'],
 	'no-code': ['on'],
 	'no-quotes': ['', 'on'],
@@ -69,6 +67,22 @@ function rand( min, max ) {
     return min + Math.floor(Math.random() * (max - min + 1));
 }
 
+function randomArray( arrayOfOptions, len ) {
+	var res = [];
+	var i = 0;
+	var added = [];
+	var pos;
+	len = len || arrayOfOptions.length;
+	for( ; i < len; i++ ) {
+		pos = rand( 0, arrayOfOptions.length - 1 );
+		if( added.indexOf( pos ) === -1 ) {
+			res.push( arrayOfOptions[ pos ] );
+			added.push( pos );
+		}
+	}
+	return res;
+}
+
 function randomObjectValue( obj ) {
 	var key;
 	var result = {};
@@ -91,14 +105,12 @@ function stringify( obj ) {
 	return result.join('&');
 }
 
-var startFetching = (function( count ) {
+function fetchThese( count, url, opts, cb ) {
 	var i = 0;
 	var datas = [];
-	var cb;
-	return function next( callback ) {
-		cb = cb || callback;
+	return function next() {
 		if( i++ < count ) {
-			var joinedURL = url + stringify( randomObjectValue( options ) );
+			var joinedURL = url + stringify( randomObjectValue( opts ) );
 			http.get( joinedURL, function( res ) {
 				var chunked = '';
 				res.on('data', function( chunk ) {
@@ -116,17 +128,40 @@ var startFetching = (function( count ) {
 			datas = [];
 		}
 	};
-})( thisMany );
-
-function compileStories( storyArray ) {
-	console.log( JSON.stringify( storyArray.map(function( story ) {
-		return extend({
-			story: story.replace(/"/g, '\\"'),
-			submitted: Date.now() + rand( -60000, 0 ),
-			keywords: [''],
-			theme: themeIds[ rand( 0, themeIds.length - 1 ) ]
-		}, randomObjectValue( baseStory ) );
-	})) );
 }
 
-startFetching( compileStories );
+function compileStoriesWithThemes( themes ) {
+	themes = themes || [];
+	return function compileStories( storyArray ) {
+		console.log( JSON.stringify( storyArray.map(function( story ) {
+			var theme = themes[ rand( 0, themes.length - 1 ) ];
+			// get a unique array of keywords for this theme
+			var keywords = theme && randomArray( theme.keywords );
+			return extend({
+				story: story,
+				submitted: Date.now() + rand( -60000, 0 ),
+				keywords: keywords || [],
+				theme: theme ? theme._id : ''
+			}, randomObjectValue( baseStory ) );
+		})) );
+	};
+}
+
+// if we aren't reading any themes in
+if( process.stdin.isTTY ) {
+	// set up our callbacks and start
+	var start = fetchThese( thisMany, urlToFetchStories, urlQueryOptions, compileStoriesWithThemes() );
+	start();
+} else {
+	var themesString = '';
+	process.stdin.on('data', function( data ) {
+		themesString += data.toString();
+	});
+	process.stdin.on('end', function() {
+		// create our compile stories function
+		var compileStories = compileStoriesWithThemes( JSON.parse(themesString) );
+		var start = fetchThese( thisMany, urlToFetchStories, urlQueryOptions, compileStories );
+
+		start();
+	});
+}

@@ -49,13 +49,11 @@ Router.map(function() {
 	});
 
 	this.route('theme', {
-		path: '/theme/:theme',
+		path: '/theme/:_id',
 		data: function() {
-			var theme = Themes.find({themeName: this.params.theme}).fetch()[0];
-			var id = theme && theme._id;
 			return {
 				name: this.params.themeName,
-				stories: Stories.find({theme: id})
+				stories: Stories.find({theme: this.params._id})
 			};
 		}
 	});

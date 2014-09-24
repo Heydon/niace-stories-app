@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "rtd runOnce; TESTRESULT=$?; rtd bgShell:killAll; exit $TESTRESULT",
-    "jshint": "jshint ./"
+    "jshint": "jshint ./",
+    "genStoryFixtures": "mongo 127.0.0.1:3001/meteor --quiet --eval \"printjson(db.themes.find().toArray())\" | ./fillout.js 150 > app/private/stories/stories.json"
   },
   "repository": {
     "type": "git",
