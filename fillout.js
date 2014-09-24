@@ -136,7 +136,7 @@ function compileStoriesWithThemes( themes ) {
 		console.log( JSON.stringify( storyArray.map(function( story ) {
 			var theme = themes[ rand( 0, themes.length - 1 ) ];
 			// get a unique array of keywords for this theme
-			var keywords = theme && randomArray( theme.keywords );
+			var keywords = theme && randomArray( theme.keywords, rand( 0, theme.keywords.length ) );
 			return extend({
 				story: story,
 				submitted: Date.now() + rand( -60000, 0 ),
