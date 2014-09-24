@@ -27,7 +27,7 @@
 <template name="listStoryKeywords">
 	<ul class="keywords">
 		{{#each keywords}}
-			<li>{{ this }}</li>
+			<li><a href="{{ pathFor 'keyword' keyword=this}}">{{this}}</a></li>
 		{{/each}}
 	</ul>
 </template>
