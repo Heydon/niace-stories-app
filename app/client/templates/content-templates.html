@@ -17,8 +17,19 @@
 <template name="storyListItem">
 	<li>
 		<h3>{{name}}</h3>
-		<p><a href="{{pathFor 'story'}}">Permalink</a></p>
+		<p>
+			<a href="{{pathFor 'story'}}">Permalink</a>
+			{{> listStoryKeywords}}
+		</p>
 	</li>
+</template>
+
+<template name="listStoryKeywords">
+	<ul class="keywords">
+		{{#each keywords}}
+			<li>{{ this }}</li>
+		{{/each}}
+	</ul>
 </template>
 
 <template name="story">
@@ -31,6 +42,10 @@
 		<label><input type="radio" value="Yes" class="vh" name="inspiring"> <span>Yes! Save it in <strong>"Inspiring Me"</strong> to read again later</span></label>
 		<label><input type="radio" value="No" class="vh" name="inspiring" checked> <span>No, I'll keep looking for more stories</span></label>
 	</form>
+	<div class="story-meta">
+		{{storyTheme.themeName}}
+		{{> listStoryKeywords}}
+	</div>
 </template>
 
 <template name="add">
@@ -111,6 +126,15 @@
 
 <template name="me">
 		<p>Personal data here</p>
+</template>
+
+<template name="keyword">
+	<h1>{{keyword}}</h1>
+	<ul>
+		{{#each stories}}
+			{{> storyListItem}}
+		{{/each}}
+	</ul>
 </template>
 
 <template name="theme">

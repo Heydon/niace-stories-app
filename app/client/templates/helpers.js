@@ -3,6 +3,12 @@
  * Move large helpers and stuff into client/features/feature.js
  */
 
+Template.story.helpers({
+	storyTheme: function() {
+		return Themes.findOne( this.theme );
+	}
+});
+
 Template.stories.helpers({
 	stories: function() {
 		return Stories.find({}, {sort: {submitted: -1}});
@@ -27,6 +33,10 @@ Template.themes.helpers({
 Template.theme.helpers({
 	empty: function() {
 		return this.stories.count() === 0;
+	},
+	name: function() {
+		var theme = Themes.findOne( this.id );
+		return theme ? theme.themeName : 'theme not found';
 	}
 });
 /***************************/
