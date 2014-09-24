@@ -27,11 +27,13 @@ Template.manageitem.events({
 		if( $('#check').val() !== '' ) {
 			return;
 		} else {
-			Meteor.call('modifyStory', {_id: this.story._id}, story, function( error ) {
-				if( error ) {
-					return alert( error.reason && error.reason.join('\n') );
+			Meteor.call('modifyStory', {_id: this.story._id}, story, function( errors ) {
+				if( errors ) {
+					Session.set( 'errors', errors.reason );
+				} else {
+					Session.set( 'errors', null );
+					Router.go('edited');
 				}
-				Router.go('edited');
 			});
 		}
 	}
