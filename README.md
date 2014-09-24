@@ -40,6 +40,7 @@ db.themes.drop();
 exit
 
 # stop meteor then cd back into the repo's root
+# ( replace 150 with as many stories as needed )
 cat app/private/data/themes.json | ./scripts/fillout.js 150 > app/private/data/stories.json
 
 # then restart meteor
