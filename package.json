@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "rtd runOnce; TESTRESULT=$?; rtd bgShell:killAll; exit $TESTRESULT",
+    "test": "rtd bgShell:killAll; rtd runOnce; TESTRESULT=$?; rtd bgShell:killAll; exit $TESTRESULT",
     "jshint": "jshint ./"
   },
   "repository": {
