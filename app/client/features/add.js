@@ -19,8 +19,7 @@ Template.add.events({
 				} else {
 					// nullify the residual errors from previous attempts
 					Session.set('errors', null);
-					//Router.go('thanks', {_id: data.id});
-					$(':input').val('');
+					Router.go('thanks', {_id: data.id});
 				}
 			});
 		}

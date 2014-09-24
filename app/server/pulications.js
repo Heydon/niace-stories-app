@@ -12,7 +12,10 @@ Meteor.publish('themes', function() {
 if( Stories.find().count() === 0 ) {
 	try { // 
 		var stories = JSON.parse( Assets.getText('stories/stories.json') );
-		_.each( stories, Stories.insert.bind( Stories ) );		
+		_.each( stories, function( story, i ) {
+			console.log( '\rImporting story ' + (i + 1) + '/' + stories.length );
+			Stories.insert( story );
+		});
 	} catch(e) {
 		console.log( 'couldn\'t load private/stories/stories.json' );
 	}
