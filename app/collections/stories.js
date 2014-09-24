@@ -42,6 +42,10 @@ Meteor.methods({
 		var output = {};
 		var errors = [];
 
+		if( !Meteor.user() ) {
+			throw new Meteor.Error( 409, ['Access denied']);
+		}
+
 		// normalize the input
 		id = id && id._id;
 
@@ -79,7 +83,7 @@ Meteor.methods({
 
 Stories.allow({
 	update: function() {
-		return true;
+		return !!Meteor.user();
 	},
 	insert: function() {
 		return true;
