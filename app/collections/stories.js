@@ -15,6 +15,10 @@ Meteor.methods({
 			errors.push('Please write a story');
 		}
 
+		if ( story.story && story.story.length < 300 ) {
+			errors.push('Your story is very short. Please try to write more!');
+		}
+
 		if( !errors.length ) {
 			story = _.extend(_.pick(story, 'name', 'story'), {
 				published: false,

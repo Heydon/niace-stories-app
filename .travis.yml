@@ -15,16 +15,12 @@ script:
 - chmod +x ./makeRTDTestsWorkInTravis.sh && ./makeRTDTestsWorkInTravis.sh
 - npm run test
 after_success:
-- cd app/
-- meteor build --directory ../deploy
-- cd ../
+- 'bash -c "cd app && meteor build --directory ../deploy"'
 before_deploy:
 - rm -rf app
 - rm -rf node_modules
 - rm -rf test
-- cd deploy/bundle/programs/server
-- npm install
-- cd ../../../../
+- 'bash -c "cd deploy/bundle/programs/server && npm install"'
 - npm install --production
 deploy:
   provider: heroku
