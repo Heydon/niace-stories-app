@@ -764,6 +764,10 @@ label [type="radio"] + span {
   cursor: pointer;
 }
 
+label [type="radio"] + span:hover {
+  color: #480;
+}
+
 label [type="radio"] + span:before {
   content: '';
   background: #fff;
@@ -813,6 +817,10 @@ Markup:
 label [type="checkbox"] + span {
   display: block;
   cursor: pointer;
+}
+
+label [type="checkbox"] + span:hover {
+  color: #480;
 }
 
 label [type="checkbox"] + span:before {

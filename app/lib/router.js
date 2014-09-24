@@ -14,7 +14,9 @@ Router.configure({
 
 Router.map(function() {
 	this.route('themes', {path: '/'});
-	this.route('me', {path: '/me'});
+	this.route('me', {
+		path: '/me'
+	});
 
 	this.route('add', { path: '/add' });
 	this.route('thanks', { path: '/thanks' });
@@ -35,8 +37,8 @@ Router.map(function() {
 	this.route('random', {
 		path: '/random',
 		action: function() {
-			var random = _.sample(Stories.find().fetch());
-    		Router.go('story', {_id: random._id});
+			var random = _.sample( Stories.find().fetch() );
+    		Router.go( 'story', {_id: random._id} );
 		}
 	});
 	this.route('manageitem', {

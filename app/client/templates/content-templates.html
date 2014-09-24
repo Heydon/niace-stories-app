@@ -26,6 +26,10 @@
 	<div class="story-body">
 		{{#markdown}}{{story}}{{/markdown}}
 	</div>
+	{{ > inspiringRadios }}
+</template>
+
+<template name="inspiringRadios">
 	<form action="" id="inspiring">
 		<h2>Did this story inspire you?</h2>
 		{{ > message }}
@@ -116,19 +120,24 @@
 </template>
 
 <template name="me">
-		<p>Personal data here</p>
+		<ul>
+			{{#each stories}}
+				<li><a href="{{ pathFor 'story' }}">{{this.name}}'s Story</a> <button class="delete" data-delete-id="{{this._id}}">delete</button></li>
+			{{/each}}
+		</ul>
 </template>
 
 <template name="theme">
 	<h1>{{name}}</h1>
 	{{#if empty}}
 		<p class="message">There are no stories for this theme so far :-(</p>
+	{{else}}
+		<ul>
+			{{#each stories}}
+				{{> storyListItem}}
+			{{/each}}
+		</ul>
 	{{/if}}
-	<ul>
-		{{#each stories}}
-			{{> storyListItem}}
-		{{/each}}
-	</ul>
 </template>
 
 <template name="themes">

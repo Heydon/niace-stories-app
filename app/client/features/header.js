@@ -1,7 +1,7 @@
 /**
  * Header
  */
-Template.header.events({
+Template.admin.events({
 	'click .logout': function() {
 		Meteor.logout(function() {
 			Router.go('/');
@@ -27,7 +27,7 @@ Template.header.events({
 /**
  * header helpers
  */
-Template.header.helpers({
+Template.admin.helpers({
 	loggedIn: function() {
 		return Meteor.user();
 	}

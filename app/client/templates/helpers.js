@@ -29,7 +29,21 @@ Template.theme.helpers({
 		return this.stories.count() === 0;
 	}
 });
-/***************************/
+
+/* Inspiring Me */
+
+Template.me.helpers({
+	stories: function() {
+		var inspiring = localStorage.getItem('inspiring').split(',');
+		return Stories.find( { _id: { $in : inspiring } } );
+	}
+});
+
+Template.stories.helpers({
+	stories: function() {
+		return Stories.find({}, {sort: {submitted: -1}});
+	}
+});
 
 // helper to display the errors from the session
 Template.errors.helpers({
