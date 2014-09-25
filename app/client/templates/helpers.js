@@ -3,9 +3,15 @@
  * Move large helpers and stuff into client/features/feature.js
  */
 
-Template.stories.helpers({
+Template.storiesList.helpers({
 	stories: function() {
-		return Stories.find({}, {sort: {submitted: -1}});
+		return Stories.find( this.query || {} );
+	},
+	loggedIn: function() {
+		return !!Meteor.user();
+	},
+	empty: function() {
+		return Stories.find( this.query ).count() === 0;
 	}
 });
 
@@ -26,7 +32,7 @@ Template.themes.helpers({
 
 Template.theme.helpers({
 	empty: function() {
-		return this.stories.count() === 0;
+		return Stories.find( this.query ).count() === 0;
 	}
 });
 /***************************/

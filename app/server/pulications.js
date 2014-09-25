@@ -1,7 +1,20 @@
 'use strict';
 
-Meteor.publish('stories', function() {
-	return Stories.find();
+var pageSize = 10;
+
+Meteor.publish('stories', function( loggedIn, page ) {
+	var query = {};
+	if( !loggedIn ) {
+		query.published = true;
+	}
+	page = page || 0;
+	return Stories.find(query, {
+		sort: {
+			submitted: -1
+		},
+		skip: page * pageSize,
+		limit: pageSize
+	});
 });
 
 Meteor.publish('themes', function() {

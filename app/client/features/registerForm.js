@@ -1,4 +1,3 @@
-
 Template.registerForm.events({
 	'submit #register': function(e) {
 

@@ -6,19 +6,30 @@
 	</div>
 </template>
 
-<template name="stories">
-	<ul class="stories-list">
+<template name="storiesList">
+	<ul class="stories-list" aria-label="all stories">
 		{{#each stories}}
-			{{> storyListItem}}
+			<li class="{{#if published}}published{{/if}}">
+				<h3>{{name}}</h3>
+				<p><a href="{{pathFor 'story'}}">Permalink</a></p>
+				{{#if loggedIn}}
+					<p>
+						<a href="{{ pathFor 'manageItem' }}">edit</a>
+					</p>
+				{{/if}}
+			</li>
 		{{/each}}
 	</ul>
+	{{> storyPagination}}
 </template>
 
-<template name="storyListItem">
-	<li>
-		<h3>{{name}}</h3>
-		<p><a href="{{pathFor 'story'}}">Permalink</a></p>
-	</li>
+<template name="storyPagination">
+	<!-- role = pagination is a thing? -->
+	<div role="pagination">
+		<a href="#page={{prev}}">Previous (page {{prev}})</a>
+		{{page}}
+		<a href="#page={{next}}">Next (page {{next}})</a>
+	</div>
 </template>
 
 <template name="story">
@@ -60,23 +71,12 @@
 </template>
 
 <template name="manage">
-	<ul class="manager-list" aria-label="all stories">
-		{{#each stories}}
-			{{> manageListItem}}
-		{{/each}}
-	</ul>
+	<div class="manager-list">
+		{{> storiesList}}
+	</div>
 </template>
 
-<template name="manageListItem">
-	<li class="{{#if published}}published{{/if}}">
-		<h1>{{name}}</h1>
-		<p>
-			<a href="{{ pathFor 'manageitem' }}">edit</a>
-		</p>
-	</li>
-</template>
-
-<template name="manageitem">
+<template name="manageItem">
 	<form>
 		<label for="name">Name</label>
 		<input id="name" type="text" value="{{story.name}}" />
@@ -119,11 +119,7 @@
 	{{#if empty}}
 		<p class="message">There are no stories for this theme so far :-(</p>
 	{{/if}}
-	<ul>
-		{{#each stories}}
-			{{> storyListItem}}
-		{{/each}}
-	</ul>
+	{{> storiesList}}
 </template>
 
 <template name="themes">
