@@ -27,10 +27,12 @@
 	<!-- role = pagination is a thing? -->
 	<div role="pagination">
 		{{#if showPrev}}
-			<a href="?page=1">Previous (page {{prev}})</a>
+			<a href="?page={{prev}}">Previous (page {{humanize prev}})</a>
 		{{/if}}
-		{{page}}
-		<a href="?page=2">Next (page {{next}})</a>
+		{{humanize page}}
+		{{#if showNext}}
+			<a href="?page={{next}}">Next (page {{humanize next}})</a>
+		{{/if}}
 	</div>
 </template>
 

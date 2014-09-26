@@ -38,7 +38,7 @@ Router.map(function() {
 			var random = _.sample(Stories.find({
 				published: true
 			}).fetch());
-    		Router.go('story', {_id: random._id});
+			Router.go('story', {_id: random._id});
 		}
 	});
 	this.route('manageItem', {

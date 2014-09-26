@@ -1,5 +1,6 @@
 'use strict';
 
+// TODO 
 var pageSize = 10;
 
 Meteor.publish('stories', function( loggedIn, page ) {
