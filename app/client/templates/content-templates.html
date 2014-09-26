@@ -1,5 +1,4 @@
 <!-- content templates -->
-
 <template name="loading">
 	<div style="min-height: 1000px">
 		<!-- keep blank -->
@@ -11,7 +10,10 @@
 		{{#each stories}}
 			<li class="{{#if published}}published{{/if}}">
 				<h3>{{name}}</h3>
-				<p><a href="{{pathFor 'story'}}">Permalink</a></p>
+				<p>
+					<a href="{{pathFor 'story'}}">Permalink</a>
+					{{> listStoryKeywords}}
+				</p>
 				{{#if loggedIn}}
 					<p>
 						<a href="{{ pathFor 'manageItem' }}">edit</a>
@@ -36,6 +38,14 @@
 	</div>
 </template>
 
+<template name="listStoryKeywords">
+	<ul class="keywords">
+		{{#each keywords}}
+			<li><a href="{{ pathFor 'keyword' keyword=this}}">{{this}}</a></li>
+		{{/each}}
+	</ul>
+</template>
+
 <template name="story">
 	<h1>{{name}}'s Story</h1>
 	<div class="story-body">
@@ -46,6 +56,10 @@
 		<label><input type="radio" value="Yes" class="vh" name="inspiring"> <span>Yes! Save it in <strong>"Inspiring Me"</strong> to read again later</span></label>
 		<label><input type="radio" value="No" class="vh" name="inspiring" checked> <span>No, I'll keep looking for more stories</span></label>
 	</form>
+	<div class="story-meta">
+		{{storyTheme.themeName}}
+		{{> listStoryKeywords}}
+	</div>
 </template>
 
 <template name="add">
@@ -116,6 +130,11 @@
 
 <template name="me">
 		<p>Personal data here</p>
+</template>
+
+<template name="keyword">
+	<h1>{{keyword}}</h1>
+	{{> storiesList}}
 </template>
 
 <template name="theme">

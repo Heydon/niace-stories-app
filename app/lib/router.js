@@ -50,8 +50,22 @@ Router.map(function() {
 		}
 	});
 
+	this.route('keyword', {
+		path: '/keyword/:keyword',
+		data: function() {
+			return {
+				stories: Stories.find({
+					keywords: {
+						'$in': ['banking']
+					}
+				}),
+				keyword: this.params.keyword
+			};
+		}
+	});
+
 	this.route('theme', {
-		path: '/theme/:themeName',
+		path: '/theme/:_id',
 		data: function() {
 			return {
 				name: this.params.themeName,
@@ -61,6 +75,7 @@ Router.map(function() {
 			};
 		}
 	});
+
 });
 
 Router.onBeforeAction('loading');

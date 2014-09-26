@@ -7,6 +7,7 @@
     "test": "test"
   },
   "scripts": {
+    "genStoryFixtures": "mongo 127.0.0.1:3001/meteor --quiet --eval \"printjson(db.themes.find().toArray())\" | ./scripts/fillout.js 150 > app/private/data/stories.json",
     "stubTemplates": "sed \"s/<template name=\\\"/Template.stub('/g\" `find ./app/client -name *.html` |sed \"s/\\\">/');/g\" |grep Template.stub\\( > test/unit/stubs.js",
     "test": "npm run stubTemplates; rtd bgShell:killAll; rtd runOnce; TESTRESULT=$?; rtd bgShell:killAll; exit $TESTRESULT",
     "jshint": "jshint ./"
@@ -35,6 +36,7 @@
     "karma-phantomjs-launcher": "^0.1.4",
     "karma-requirejs": "^0.2.2",
     "karma-script-launcher": "^0.1.0",
+    "mongoose": "^3.8.16",
     "requirejs": "^2.1.15",
     "rtd": "git+https://github.com/xolvio/rtd.git"
   }
