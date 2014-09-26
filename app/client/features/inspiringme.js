@@ -1,4 +1,4 @@
-saveStory = function( id ) {
+var saveStory = function( id ) {
 	if (localStorage.getItem('inspiring') === null) {
 
 		// Create new array of inspiring stories
@@ -17,10 +17,9 @@ saveStory = function( id ) {
 		// save updated arrays to 'inspiring'
 		localStorage.setItem('inspiring', ids.toString());
 	}
-	console.log
 };
 
-deleteStory = function( id ) {
+var deleteStory = function( id ) {
 	if (localStorage.getItem('inspiring') !== null) {
 
 		// convert extant string to array of IDs
@@ -30,7 +29,7 @@ deleteStory = function( id ) {
 		if ( _.contains(ids, id) ) {
 
 			// If so, remove the current id from the set
-			var reducedSet = _.reject(ids, function(i) { return i === id });
+			var reducedSet = _.reject(ids, function(i) { return i === id; });
 
 			// if that leaves no ids, kill the localStorage item
 			if (reducedSet.length === 0) {
@@ -48,7 +47,7 @@ deleteStory = function( id ) {
 };
 
 Template.inspiringRadios.events({
-	'change [name="inspiring"]' : function( e ) {
+	'change [name="inspiring"]' : function() {
 
 		var value = $('[name="inspiring"]:checked').val();
 		var inspiredMe = value === 'true' ? true : false;
@@ -65,14 +64,19 @@ Template.inspiringRadios.events({
 });
 
 Template.deleteLocal.events({
-	'click .delete' : function( e ) {
+	'click .delete' : function() {
 
 		deleteStory(this.toDelete);
 		Router.go('me');
 		Session.set('message', this.name +'\'s story deleted from your collection.');
 
 	},
-	'click .cancel' : function( e ) {
+	'click .cancel' : function() {
 		Router.go('me');
 	}
 });
+
+if( Meteor.isClient ) {
+	window.deleteStory = deleteStory;
+	window.saveStory = saveStory;
+}

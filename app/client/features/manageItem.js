@@ -1,9 +1,9 @@
-Template.manageitem.created = function() {
+Template.manageItem.created = function() {
 	this.selectedTheme = new ReactiveVar();
 	this.selectedTheme.set( this.data.story.theme );
 };
 
-Template.manageitem.events({
+Template.manageItem.events({
 	'change #theme': function( evt, template ) {
 		var $form = $( evt.currentTarget );
 
@@ -39,7 +39,7 @@ Template.manageitem.events({
 	}
 });
 
-Template.manageitem.helpers({
+Template.manageItem.helpers({
 	themes: function() {
 		return Themes.find();
 	},
