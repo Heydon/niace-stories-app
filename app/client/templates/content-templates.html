@@ -51,15 +51,20 @@
 	<div class="story-body">
 		{{#markdown}}{{story}}{{/markdown}}
 	</div>
-	<form action="">
-		<h2>Did this story inspire you?</h2>
-		<label><input type="radio" value="Yes" class="vh" name="inspiring"> <span>Yes! Save it in <strong>"Inspiring Me"</strong> to read again later</span></label>
-		<label><input type="radio" value="No" class="vh" name="inspiring" checked> <span>No, I'll keep looking for more stories</span></label>
-	</form>
+	{{> inspiringRadios }}
 	<div class="story-meta">
 		{{storyTheme.themeName}}
 		{{> listStoryKeywords}}
 	</div>
+</template>
+
+<template name="inspiringRadios">
+	<form action="" id="inspiring">
+		<h2>Did this story inspire you?</h2>
+		{{ > message }}
+		<label><input type="radio" value="true" class="vh" name="inspiring"> <span>Yes! Save it in <strong>"Inspiring Me"</strong> to read again later</span></label>
+		<label><input type="radio" value="false" class="vh" name="inspiring" checked> <span>No, I'll keep looking for more stories</span></label>
+	</form>
 </template>
 
 <template name="add">
@@ -78,14 +83,16 @@
 		</div>
 		<input id="name" type="text" readonly aria-live="polite" role="status" placeholder="Hit the generate button until you get a name you like" />
 		<input type="text" style="display: none" aria-hidden="true" id="check" value="" />
-		{{> errors}}
+		<div role="alert">
+			{{> errors}}
+		</div>
 		<button type="submit">Share your story!</button>
 	</form>
 </template>
 
 <template name="thanks">
-		<h1>Thanks!</h1>
-		<p>Thank you for posting a story to inspire people. We'll just check it then publish it in the app. Do you have <a href="/add">another story</a> to tell?</p>
+	<h1>Thanks!</h1>
+	<p>Thank you for posting a story to inspire people. We'll just check it then publish it in the app. Do you have <a href="/add">another story</a> to tell?</p>
 </template>
 
 <template name="manage">
@@ -118,18 +125,32 @@
 
 		<label><input type="checkbox" id="published" value="true" {{checked}}> Published</label>
 		<input type="text" style="display: none" aria-hidden="true" id="check" value="" />
-		{{> errors}}
+		<div role="alert">
+			{{> errors}}
+		</div>
 		<button type="submit">Save</button>
 	</form>
 </template>
 
 <template name="edited">
-		<h1>Story saved</h1>
-		<p>The story has been saved. Return to <a href="{{ pathFor 'manage' }}">the manager screen</a>.</p>
+	<h1>Story saved</h1>
+	<p>The story has been saved. Return to <a href="{{ pathFor 'manage' }}">the manager screen</a>.</p>
 </template>
 
 <template name="me">
-		<p>Personal data here</p>
+	<h1>Inspiring Me</h1>
+	{{ > message }}
+	<ul>
+		{{#each stories}}
+			<li><a href="{{ pathFor 'story' }}">{{this.name}}'s Story</a> <a href="/deleteLocal/{{ this._id }}/{{this.name}}">delete</a></li>
+		{{/each}}
+	</ul>
+</template>
+
+<template name="deleteLocal">
+	<h1>Delete story</h1>
+	<p>Are you sure you want to delete {{this.name}}'s story from your <strong>Inspiring Me</strong> collection?</p>
+	<p><button class="delete">Confirm</button> <button class="cancel">Cancel</button></p>
 </template>
 
 <template name="keyword">
@@ -141,8 +162,9 @@
 	<h1>{{name}}</h1>
 	{{#if empty}}
 		<p class="message">There are no stories for this theme so far :-(</p>
+	{{else}}
+		{{> storiesList}}
 	{{/if}}
-	{{> storiesList}}
 </template>
 
 <template name="themes">
