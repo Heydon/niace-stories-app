@@ -7,8 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "stubTemplates": "sed \"s/<template name=\\\"/Template.stub('/g\" app/client/**/*.html |sed \"s/\\\">/');/g\" |grep Template.stub\\( > test/unit/stubs.js",
-    "test": "rtd bgShell:killAll; rtd runOnce; TESTRESULT=$?; rtd bgShell:killAll; exit $TESTRESULT",
+    "stubTemplates": "sed \"s/<template name=\\\"/Template.stub('/g\" `find ./app/client -name *.html` |sed \"s/\\\">/');/g\" |grep Template.stub\\( > test/unit/stubs.js",
+    "test": "npm run stubTemplates; rtd bgShell:killAll; rtd runOnce; TESTRESULT=$?; rtd bgShell:killAll; exit $TESTRESULT",
     "jshint": "jshint ./"
   },
   "repository": {
