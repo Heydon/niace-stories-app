@@ -6,26 +6,38 @@ Router.configure({
 		setTimeout(function () {
 			$('main').removeAttr('class');
 		}, 1000);
-	},
-	waitOn: function () {
-		return Meteor.subscribe('stories', Meteor.user(), this.params.page || 0);
 	}
 });
 
+function waitOnStories() {
+	return Meteor.subscribe('stories', Meteor.user(), {}, {
+		page: this.params.page
+	});
+}
+
+function waitOnStory() {
+	return Meteor.subscribe('stories', Meteor.user());
+}
+
 Router.map(function() {
-	this.route('themes', {path: '/'});
 	this.route('me', { path: '/me'});
 	this.route('add', { path: '/add' });
 	this.route('thanks', { path: '/thanks' });
-	this.route('manage', { path: '/manage' });
 	this.route('edited', { path: '/edited' });
 	this.route('themes', { path: '/themes' });
+	this.route('themes', {path: '/'});
 
 	this.route('login', { path: '/login' });
 	this.route('register', { path: '/register' });
 
+	this.route('manage', { 
+		path: '/manage',
+		waitOn: waitOnStories
+	});
+
 	this.route('story', {
 		path: '/story/:_id',
+		waitOn: waitOnStory,
 		data: function() {
 			return Stories.findOne(this.params._id);
 		}
@@ -41,6 +53,7 @@ Router.map(function() {
 	});
 	this.route('random', {
 		path: '/random',
+		waitOn: waitOnStory,
 		action: function() {
 			var random = _.sample( Stories.find().fetch() );
 			Router.go( 'story', {_id: random._id} );
@@ -48,6 +61,7 @@ Router.map(function() {
 	});
 	this.route('manageItem', {
 		path: '/manageItem/:_id',
+		waitOn: waitOnStory,
 		data: function() {
 			return {
 				story: Stories.findOne( this.params._id )
@@ -57,13 +71,18 @@ Router.map(function() {
 
 	this.route('keyword', {
 		path: '/keyword/:keyword',
+		waitOn: function() {
+			return Meteor.subscribe('stories', Meteor.user(), {
+				keywords: {
+					'$in': [this.params.keyword]
+				}
+			}, {
+				page: this.params.page
+			});
+		},
 		data: function() {
 			return {
-				stories: Stories.find({
-					keywords: {
-						'$in': ['banking']
-					}
-				}),
+				stories: Stories.find(),
 				keyword: this.params.keyword
 			};
 		}
@@ -71,13 +90,12 @@ Router.map(function() {
 
 	this.route('theme', {
 		path: '/theme/:_id',
-		data: function() {
-			return {
-				id: this.params._id,
-				query: {
-					theme: this.params._id
-				}
-			};
+		waitOn: function() {
+			return Meteor.subscribe('stories', Meteor.user(), {
+				theme: this.params._id
+			}, {
+				page: this.params.page
+			});
 		}
 	});
 

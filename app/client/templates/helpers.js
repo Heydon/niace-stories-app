@@ -11,19 +11,13 @@ Template.story.helpers({
 
 Template.storiesList.helpers({
 	stories: function() {
-		return Stories.find( this.query || {} );
+		return Stories.find();
 	},
 	loggedIn: function() {
 		return !!Meteor.user();
 	},
 	empty: function() {
 		return Stories.find( this.query ).count() === 0;
-	}
-});
-
-Template.manage.helpers({
-	stories: function() {
-		return Stories.find();
 	}
 });
 
@@ -38,10 +32,10 @@ Template.themes.helpers({
 
 Template.theme.helpers({
 	empty: function() {
-		return Stories.find( this.query ).count() === 0;
+		return Stories.find().count() === 0;
 	},
 	name: function() {
-		var theme = Themes.findOne( this._id );
+		var theme = Themes.findOne( Router.current().params._id );
 		return theme ? theme.themeName : 'theme not found';
 	}
 });
@@ -50,8 +44,8 @@ Template.theme.helpers({
 
 Template.me.helpers({
 	stories: function() {
-		var inspiring = localStorage.getItem('inspiring').split(',');
-		return Stories.find( { _id: { $in : inspiring } } );
+		var inspiring = localStorage.getItem('inspiring') && localStorage.getItem('inspiring').split(',');
+		return Stories.find( { _id: { $in : inspiring || [] } } );
 	}
 });
 
