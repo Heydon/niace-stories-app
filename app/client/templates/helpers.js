@@ -41,11 +41,19 @@ Template.theme.helpers({
 		return Stories.find( this.query ).count() === 0;
 	},
 	name: function() {
-		var theme = Themes.findOne( this.id );
+		var theme = Themes.findOne( this._id );
 		return theme ? theme.themeName : 'theme not found';
 	}
 });
-/***************************/
+
+/* Inspiring Me */
+
+Template.me.helpers({
+	stories: function() {
+		var inspiring = localStorage.getItem('inspiring').split(',');
+		return Stories.find( { _id: { $in : inspiring } } );
+	}
+});
 
 // helper to display the errors from the session
 Template.errors.helpers({
@@ -58,4 +66,14 @@ Template.errors.helpers({
 // when returning to the page
 Template.errors.destroyed = function(){
 	Session.set('errors', null);
+};
+
+Template.message.helpers({
+	message: function() {
+		return Session.get('message');
+	}
+});
+
+Template.message.destroyed = function(){
+  Session.set('message', null);
 };
