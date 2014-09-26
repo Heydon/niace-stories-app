@@ -15,7 +15,7 @@ script:
 - chmod +x ./scripts/makeRTDTestsWorkInTravis.sh && ./scripts/makeRTDTestsWorkInTravis.sh
 - npm run test
 before_deploy:
-- cat app/private/data/themes.json | ./fillout.js 500 > app/private/data/stories.json
+- cat app/private/data/themes.json | ./scripts/fillout.js 500 > app/private/data/stories.json
 - 'bash -c "cd app && meteor build --directory ../deploy"'
 - rm -rf app
 - rm -rf node_modules
