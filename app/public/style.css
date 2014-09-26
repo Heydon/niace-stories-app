@@ -1005,6 +1005,10 @@ LANDMARKS
   border-top: 2px dashed #444;
 }
 
+[role="contentinfo"] * {
+  text-align: center;
+}
+
 [role="main"] {
   margin-top: 0.75em;
 }
@@ -1019,7 +1023,6 @@ THEME LIST
   list-style: none;
   border-radius: 0.25em;
   border: 2px solid #ddd;
-  box-shadow: 0 0.25em 0 #ddd;
   padding: 1em;
 }
 
@@ -1032,7 +1035,7 @@ THEME LIST
 }
 
 .theme-list li + li {
-  margin-top: 1em;
+  margin-top: 1.5em;
 }
 
 /**************************************************************

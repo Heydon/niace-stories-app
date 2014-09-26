@@ -62,8 +62,8 @@
 </template>
 
 <template name="thanks">
-		<h1>Thanks!</h1>
-		<p>Thank you for posting a story to inspire people. We'll just check it then publish it in the app. Do you have <a href="/add">another story</a> to tell?</p>
+	<h1>Thanks!</h1>
+	<p>Thank you for posting a story to inspire people. We'll just check it then publish it in the app. Do you have <a href="/add">another story</a> to tell?</p>
 </template>
 
 <template name="manage">
@@ -115,23 +115,24 @@
 </template>
 
 <template name="edited">
-		<h1>Story saved</h1>
-		<p>The story has been saved. Return to <a href="{{ pathFor 'manage' }}">the manager screen</a>.</p>
+	<h1>Story saved</h1>
+	<p>The story has been saved. Return to <a href="{{ pathFor 'manage' }}">the manager screen</a>.</p>
 </template>
 
 <template name="me">
-		{{ > message }}
-		<ul>
-			{{#each stories}}
-				<li><a href="{{ pathFor 'story' }}">{{this.name}}'s Story</a> <a href="/deleteLocal/{{ this._id }}/{{this.name}}">delete</a></li>
-			{{/each}}
-		</ul>
+	<h1>Inspiring Me</h1>
+	{{ > message }}
+	<ul>
+		{{#each stories}}
+			<li><a href="{{ pathFor 'story' }}">{{this.name}}'s Story</a> <a href="/deleteLocal/{{ this._id }}/{{this.name}}">delete</a></li>
+		{{/each}}
+	</ul>
 </template>
 
 <template name="deleteLocal">
-		<h1>Delete story</h1>
-		<p>Are you sure you want to delete {{this.name}}'s story from your <strong>Inspiring Me</strong> collection?</p>
-		<p><button class="delete">Confirm</button> <button class="cancel">Cancel</button></p>
+	<h1>Delete story</h1>
+	<p>Are you sure you want to delete {{this.name}}'s story from your <strong>Inspiring Me</strong> collection?</p>
+	<p><button class="delete">Confirm</button> <button class="cancel">Cancel</button></p>
 </template>
 
 <template name="theme">
