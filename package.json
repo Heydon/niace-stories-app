@@ -21,7 +21,8 @@
   },
   "homepage": "https://github.com/Heydon/niace-stories-app",
   "dependencies": {
-    "connect": "1.9.2"
+    "connect": "1.9.2",
+    "mongoose": "^3.8.16"
   },
   "devDependencies": {
     "jshint": "^2.5.5",
@@ -36,7 +37,6 @@
     "karma-phantomjs-launcher": "^0.1.4",
     "karma-requirejs": "^0.2.2",
     "karma-script-launcher": "^0.1.0",
-    "mongoose": "^3.8.16",
     "requirejs": "^2.1.15",
     "rtd": "git+https://github.com/xolvio/rtd.git"
   }
