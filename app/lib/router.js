@@ -14,14 +14,10 @@ Router.configure({
 
 Router.map(function() {
 	this.route('themes', {path: '/'});
-	this.route('me', {
-		path: '/me'
-	});
-
+	this.route('me', { path: '/me'});
 	this.route('add', { path: '/add' });
 	this.route('thanks', { path: '/thanks' });
 	this.route('manage', { path: '/manage' });
-
 	this.route('edited', { path: '/edited' });
 	this.route('themes', { path: '/themes' });
 
@@ -32,6 +28,15 @@ Router.map(function() {
 		path: '/story/:_id',
 		data: function() {
 			return Stories.findOne(this.params._id);
+		}
+	});
+	this.route('deleteLocal', {
+		path: '/deleteLocal/:_id/:name',
+		data: function() {
+			return {
+				toDelete : this.params._id,
+				name : this.params.name
+			}
 		}
 	});
 	this.route('random', {

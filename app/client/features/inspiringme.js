@@ -64,11 +64,15 @@ Template.inspiringRadios.events({
 	}
 });
 
-Template.me.events({
-	'click [data-delete-id]' : function( e ) {
-		
-		deleteStory($(e.target).attr('data-delete-id'));
-		
+Template.deleteLocal.events({
+	'click .delete' : function( e ) {
+
+		deleteStory(this.toDelete);
+		Router.go('me');
+		Session.set('message', this.name +'\'s story deleted from your collection.');
+
+	},
+	'click .cancel' : function( e ) {
+		Router.go('me');
 	}
 });
-

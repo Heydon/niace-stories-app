@@ -120,11 +120,18 @@
 </template>
 
 <template name="me">
+		{{ > message }}
 		<ul>
 			{{#each stories}}
-				<li><a href="{{ pathFor 'story' }}">{{this.name}}'s Story</a> <button class="delete" data-delete-id="{{this._id}}">delete</button></li>
+				<li><a href="{{ pathFor 'story' }}">{{this.name}}'s Story</a> <a href="/deleteLocal/{{ this._id }}/{{this.name}}">delete</a></li>
 			{{/each}}
 		</ul>
+</template>
+
+<template name="deleteLocal">
+		<h1>Delete story</h1>
+		<p>Are you sure you want to delete {{this.name}}'s story from your <strong>Inspiring Me</strong> collection?</p>
+		<p><button class="delete">Confirm</button> <button class="cancel">Cancel</button></p>
 </template>
 
 <template name="theme">
