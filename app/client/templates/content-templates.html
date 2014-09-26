@@ -26,9 +26,11 @@
 <template name="storyPagination">
 	<!-- role = pagination is a thing? -->
 	<div role="pagination">
-		<a href="#page={{prev}}">Previous (page {{prev}})</a>
+		{{#if showPrev}}
+			<a href="?page=1">Previous (page {{prev}})</a>
+		{{/if}}
 		{{page}}
-		<a href="#page={{next}}">Next (page {{next}})</a>
+		<a href="?page=2">Next (page {{next}})</a>
 	</div>
 </template>
 

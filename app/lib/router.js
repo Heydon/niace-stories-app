@@ -8,7 +8,7 @@ Router.configure({
 		}, 1000);
 	},
 	waitOn: function () {
-		return Meteor.subscribe('stories', Meteor.user(), 0);
+		return Meteor.subscribe('stories', Meteor.user(), this.params.page || 0);
 	}
 });
 

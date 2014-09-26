@@ -24,7 +24,6 @@
 		"Accounts": true,
 		"Session": true,
 		"ReactiveVar": true,
-		"Assets": true,
-		"ReactiveDict": true
+		"Assets": true
 	}
 }
