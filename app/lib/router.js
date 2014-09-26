@@ -8,8 +8,8 @@ Router.configure({
 		}, 1000);
 	},
 	waitOn: function () {
-		return Meteor.subscribe('stories');
-	}  
+		return Meteor.subscribe('stories', Meteor.user(), this.params.page || 0);
+	}
 });
 
 Router.map(function() {
@@ -35,12 +35,14 @@ Router.map(function() {
 	this.route('random', {
 		path: '/random',
 		action: function() {
-			var random = _.sample(Stories.find().fetch());
-    		Router.go('story', {_id: random._id});
+			var random = _.sample(Stories.find({
+				published: true
+			}).fetch());
+			Router.go('story', {_id: random._id});
 		}
 	});
-	this.route('manageitem', {
-		path: '/manageitem/:_id',
+	this.route('manageItem', {
+		path: '/manageItem/:_id',
 		data: function() {
 			return {
 				story: Stories.findOne( this.params._id )
@@ -66,10 +68,10 @@ Router.map(function() {
 		path: '/theme/:_id',
 		data: function() {
 			return {
-				id: this.params._id,
-				stories: Stories.find({
-					theme: this.params._id
-				})
+				name: this.params.themeName,
+				query: {
+					theme: this.params.themeName
+				}
 			};
 		}
 	});
@@ -89,4 +91,4 @@ var requireLogin = function(pause) {
 	}
 };
 
-Router.onBeforeAction(requireLogin, {only: ['manage', 'manageitem']});
+Router.onBeforeAction(requireLogin, {only: ['manage', 'manageItem']});
