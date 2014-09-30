@@ -27,6 +27,11 @@ Template.manage.helpers({
 	}
 });
 
+Template.storiesList.rendered = function() {
+	$('.truncated').trunk8({ lines: 5});
+};
+
+
 /**
  * themes helpers
  */

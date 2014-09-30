@@ -6,19 +6,21 @@
 </template>
 
 <template name="storiesList">
-	<ul class="stories-list" aria-label="all stories">
+	<ul class="grid-2-columns">
 		{{#each stories}}
-			<li class="{{#if published}}published{{/if}}">
-				<h3>{{name}}</h3>
-				<p>
-					<a href="{{pathFor 'story'}}">Permalink</a>
-					{{> listStoryKeywords}}
-				</p>
-				{{#if loggedIn}}
-					<p>
-						<a href="{{ pathFor 'manageItem' }}">edit</a>
-					</p>
-				{{/if}}
+			<li class="teaser {{#if published}}published{{/if}}">
+				<h2><a href="{{pathFor 'story'}}">{{name}}'s story</a></h2>
+				<div class="story-body">
+					<div class="truncated">
+						{{ this.story }}
+					</div>
+					{{#if loggedIn}}
+						<p>
+							<a href="{{ pathFor 'manageItem' }}">edit</a>
+						</p>
+					{{/if}}
+				</div>
+				{{> listStoryKeywords}}
 			</li>
 		{{/each}}
 	</ul>
@@ -27,19 +29,25 @@
 
 <template name="storyPagination">
 	<!-- role = pagination is a thing? -->
-	<div role="pagination">
-		{{#if showPrev}}
-			<a href="?page={{prev}}">Previous (page {{humanize prev}})</a>
-		{{/if}}
-		{{humanize page}}
-		{{#if showNext}}
-			<a href="?page={{next}}">Next (page {{humanize next}})</a>
-		{{/if}}
-	</div>
+	<nav role="navigation" aria-label="more stories">
+		<ul>
+			{{#if showPrev}}
+				<li>
+					<a rel="prev" href="?page={{prev}}">Previous (page {{humanize prev}})</a>
+				</li>
+			{{/if}}
+			{{humanize page}}
+			{{#if showNext}}
+				<li>
+					<a rel="next" href="?page={{next}}">Next (page {{humanize next}})</a>
+				</li>
+			{{/if}}
+		</ul>
+	</nav>
 </template>
 
 <template name="listStoryKeywords">
-	<ul class="keywords">
+	<ul class="keywords" aria-label="keywords for this story">
 		{{#each keywords}}
 			<li><a href="{{ pathFor 'keyword' keyword=this}}">{{this}}</a></li>
 		{{/each}}

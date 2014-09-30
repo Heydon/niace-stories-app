@@ -411,6 +411,10 @@ h5 {
   font-size: 1em;
 }
 
+h1 a:not(:hover), h2 a:not(:hover), h3 a:not(:hover) {
+  border: 0 !important;
+}
+
 /**************************************************************
 
 LISTS
@@ -971,7 +975,54 @@ Example markup (a three column grid):
   vertical-align: middle;
 }
 
-/*# sourceMappingURL=anatomy.css.map */
+/**************************************************************
+
+STORY TEASERS
+
+***************************************************************/
+
+.teaser {
+  list-style: none;
+}
+
+.teaser h2 {
+  text-align: center;
+  font-size: 1.5em;
+}
+
+.teaser .story-body {
+  margin-top: 0.5em;
+}
+
+.keywords {
+  font-size: 0.75em;
+  margin-left: 0;
+  margin-top: 0.5em;
+  text-align: center;
+}
+
+.keywords li {
+  display: inline-block;
+}
+
+.keywords a {
+  display: block;
+  font-weight: bold;
+  margin-right: 0.25em;
+  border: 0;
+  padding: 0.25em 0.5em;
+  background: #480;
+  color: #fff;
+  border-radius: 1em;
+}
+
+.keywords a:hover, .keywords a:focus {
+  background: #444;
+}
+
+.truncated {
+  overflow: hidden;
+}
 
 /**************************************************************
 
