@@ -1001,6 +1001,10 @@ STORY TEASERS
   text-align: center;
 }
 
+.story-meta .keywords {
+  text-align: left;
+}
+
 .keywords li {
   display: inline-block;
 }

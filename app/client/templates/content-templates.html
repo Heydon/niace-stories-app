@@ -66,14 +66,15 @@
 	</div>
 	{{> inspiringRadios }}
 	<div class="story-meta">
-		{{storyTheme.themeName}}
+		<h2>More inspiration</h2>
+		<p>Reading more stories about the <a href="/theme/{{storyTheme._id}}">{{storyTheme.themeName}}</a> part of your pathway, or choose one of the following keywords:</p>
 		{{> listStoryKeywords}}
 	</div>
 </template>
 
 <template name="inspiringRadios">
 	<form action="" id="inspiring">
-		<h2>Did this story inspire you?</h2>
+		<h3>Did this story inspire you?</h3>
 		{{ > message }}
 		<label><input type="radio" value="true" class="vh" name="inspiring"> <span>Yes! Save it in <strong>"Inspiring Me"</strong> to read again later</span></label>
 		<label><input type="radio" value="false" class="vh" name="inspiring" checked> <span>No, I'll keep looking for more stories</span></label>
