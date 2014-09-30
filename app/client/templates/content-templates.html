@@ -33,17 +33,18 @@
 
 <template name="storyPagination">
 	<!-- role = pagination is a thing? -->
-	<nav role="navigation" aria-label="more stories">
+	<nav role="navigation" class="pagination">
+		<h2>Similar stories</h2>
 		<ul>
 			{{#if showPrev}}
 				<li>
-					<a rel="prev" href="?page={{prev}}">Previous (page {{humanize prev}})</a>
+					<a rel="prev" href="?page={{prev}}"><span aria-hidden>&#x2190;</span> Previous (page {{humanize prev}})</a>
 				</li>
 			{{/if}}
 			{{humanize page}}
 			{{#if showNext}}
 				<li>
-					<a rel="next" href="?page={{next}}">Next (page {{humanize next}})</a>
+					<a rel="next" href="?page={{next}}">Next (page {{humanize next}}) <span aria-hidden>&#x2192;</span></a>
 				</li>
 			{{/if}}
 		</ul>

@@ -924,7 +924,7 @@ Example markup (a three column grid):
 }
 
 .grid-2-columns > *:nth-child(2n + 2) ~ * {
-  margin-top: 1.5em;
+  margin-top: 3em;
 }
 
 .grid-3-columns > * {
@@ -961,7 +961,7 @@ Example markup (a three column grid):
 }
 
 .grid-3-columns > *:nth-child(3n + 3) ~ * {
-  margin-top: 1.5em;
+  margin-top: 3em;
 }
 
 [class^="grid-"]:after {
@@ -1010,7 +1010,7 @@ STORY TEASERS
   font-weight: bold;
   margin-right: 0.25em;
   border: 0;
-  padding: 0.25em 0.5em;
+  padding: 0.125em 0.75em;
   background: #480;
   color: #fff;
   border-radius: 1em;
@@ -1022,6 +1022,36 @@ STORY TEASERS
 
 .truncated {
   overflow: hidden;
+}
+
+/**************************************************************
+
+PAGINATION
+
+Pagination nav landmarks
+
+***************************************************************/
+
+.pagination {
+  padding: 1em;
+  background: #eee;
+}
+
+.pagination ul {
+  display: block;
+  text-align: center;
+}
+
+.pagination li {
+  display: inline-block;
+}
+
+.pagination li + li {
+  margin-left: 1em;
+}
+
+.pagination h2 {
+  text-align: center;
 }
 
 /**************************************************************
