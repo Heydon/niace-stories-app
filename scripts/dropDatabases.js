@@ -8,3 +8,5 @@ if( process.env.MONGOHQ_URL ) {
 } else {
 	console.error('Dropping the databases requires a MONGOHQ_URL in the environment');
 }
+
+process.exit(0);

@@ -11,7 +11,7 @@ Template.story.helpers({
 
 Template.storiesList.helpers({
 	stories: function() {
-		return Stories.find( this.query || {} );
+		return Stories.find();
 	},
 	loggedIn: function() {
 		return !!Meteor.user();
@@ -21,16 +21,9 @@ Template.storiesList.helpers({
 	}
 });
 
-Template.manage.helpers({
-	stories: function() {
-		return Stories.find();
-	}
-});
-
 Template.storiesList.rendered = function() {
 	$('.truncated').trunk8({ lines: 5});
 };
-
 
 /**
  * themes helpers
@@ -43,10 +36,10 @@ Template.themes.helpers({
 
 Template.theme.helpers({
 	empty: function() {
-		return Stories.find( this.query ).count() === 0;
+		return Stories.find().count() === 0;
 	},
 	name: function() {
-		var theme = Themes.findOne( this._id );
+		var theme = Themes.findOne( Router.current().params._id );
 		return theme ? theme.themeName : 'theme not found';
 	}
 });
@@ -55,8 +48,8 @@ Template.theme.helpers({
 
 Template.me.helpers({
 	stories: function() {
-		var inspiring = localStorage.getItem('inspiring').split(',');
-		return Stories.find( { _id: { $in : inspiring } } );
+		var inspiring = localStorage.getItem('inspiring') && localStorage.getItem('inspiring').split(',');
+		return Stories.find( { _id: { $in : inspiring || [] } } );
 	}
 });
 
@@ -82,3 +75,11 @@ Template.message.helpers({
 Template.message.destroyed = function(){
   Session.set('message', null);
 };
+
+Template.allStories.helpers({
+	formatForDownload: function() {
+		return JSON.stringify( _.map( Stories.find().fetch(), function( story ) {
+			return _.omit( story, '_id' );
+		}));
+	}
+});
