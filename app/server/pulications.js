@@ -34,6 +34,11 @@ Meteor.publish('themes', function() {
 	return Themes.find();
 });
 
+Meteor.publish('alerts', function( query ) {
+	console.log( query );
+	return Alerts.find(query);
+});
+
 // Perhaps look to remove these fixture blocks when releasing?..
 if( Stories.find().count() === 0 ) {
 	try { // 
@@ -60,4 +65,13 @@ if( Themes.find().count() === 0 ) {
 	} catch(e) {
 		console.log( 'couldn\'t load private/data/themes.json' );
 	}
+}
+
+if( Alerts.find().count() === 0 ) {
+	Alerts.insert({
+		paths: ['/', '/manageAlerts'],
+		title: 'Home',
+		content: '_Inspire Me_ is the home of inspiring stories. Read stories from people like you working on their pathway and find out what has and hasn\'t worked for them. Submit your own stories to inspire others in [Add Story](/add).',
+		okButton: 'Okay, got it!'
+	});
 }

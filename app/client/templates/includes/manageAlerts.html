@@ -1,0 +1,22 @@
+<template name="manageAlerts">
+	<ul>
+		{{#each alerts}}
+			<li>
+				<h2>
+					{{title}}
+					<sub>
+						showing on
+						{{#each paths}}
+							{{this}},
+						{{/each}}
+					</sub>
+				</h2>
+				paths
+				title
+				content
+				okButton
+			</li>
+		{{/each}}
+	</ul>
+</template>
+

@@ -1,0 +1,21 @@
+Template.alertBubbles.helpers({
+	alerts: function() {
+		console.log( Session.get('viewedAlerts') );
+		return Alerts.find({
+			_id: {
+				$nin: ReactiveStore.get('viewedAlerts') || []
+			}
+		});
+	}
+});
+
+Template.alertBubbles.events({
+	'click .alert-bubble': function( evt ) {
+		var seen = ReactiveStore.get('viewedAlerts') || [];
+		var $el = $( evt.currentTarget );
+
+		seen.push( $el.data('alertId') );
+
+		ReactiveStore.set('viewedAlerts', seen);
+	}
+});

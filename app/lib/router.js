@@ -1,6 +1,13 @@
 Router.configure({  
 	layoutTemplate: 'layout',  
 	loadingTemplate: 'loading',
+	waitOn: function() {
+		return Meteor.subscribe('alerts', {
+			paths: {
+				$in: [this.path, this.route.originalPath]
+			}
+		});
+	},
 	onRun: function() {
 		$('main').attr('class', 'loaded');
 		setTimeout(function () {
@@ -15,12 +22,17 @@ function waitOnStories() {
 	});
 }
 
+function waitOnStoryWithID() {
+	return Meteor.subscribe('stories', Meteor.user(), {
+		_id: this.params._id
+	});
+}
+
 function waitOnStory() {
 	return Meteor.subscribe('stories', Meteor.user());
 }
 
 Router.map(function() {
-	this.route('me', { path: '/me'});
 	this.route('add', { path: '/add' });
 	this.route('thanks', { path: '/thanks' });
 	this.route('edited', { path: '/edited' });
@@ -35,9 +47,20 @@ Router.map(function() {
 		waitOn: waitOnStories
 	});
 
+	this.route('me', {
+		path: '/me',
+		waitOn: function() {
+			return Meteor.subscribe('stories', Meteor.user(), {
+				_id: {
+					$in: ReactiveStore.get('inspiring') || []
+				}
+			});
+		}
+	});
+
 	this.route('story', {
 		path: '/story/:_id',
-		waitOn: waitOnStory,
+		waitOn: waitOnStoryWithID,
 		data: function() {
 			return Stories.findOne(this.params._id);
 		}
@@ -61,7 +84,7 @@ Router.map(function() {
 	});
 	this.route('manageItem', {
 		path: '/manageItem/:_id',
-		waitOn: waitOnStory,
+		waitOn: waitOnStoryWithID,
 		data: function() {
 			return {
 				story: Stories.findOne( this.params._id )
@@ -103,6 +126,26 @@ Router.map(function() {
 		waitOn: waitOnStory
 	});
 
+	this.route('manageAlerts', {
+		path: '/manageAlerts',
+		waitOn: function() {
+			return Meteor.subscribe('alerts');
+		},
+		data: function() {
+			return Alerts.find();
+		}
+	});
+
+	this.route('manageAlert', {
+		path: '/manageAlert/:_id',
+		waitOn: function() {
+			return Meteor.subscribe('alerts');
+		},
+		data: function() {
+			return Alerts.findOne( this.params._id );
+		}
+	});
+
 });
 
 Router.onBeforeAction('loading');
@@ -118,4 +161,4 @@ var requireLogin = function(pause) {
 	}
 };
 
-Router.onBeforeAction(requireLogin, {only: ['manage', 'manageItem', 'allStories']});
+Router.onBeforeAction(requireLogin, {only: ['manage', 'manageItem', 'allStories', 'manageAlerts']});
