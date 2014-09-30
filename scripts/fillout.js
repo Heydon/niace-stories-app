@@ -29,7 +29,7 @@ var thisMany = parseInt( args[0], 10 ) || 25;
 
 var urlToFetchStories = 'http://jaspervdj.be/lorem-markdownum/markdown.txt?';
 var urlQueryOptions = {
-	'no-headers': ['', 'on'],
+	'no-headers': ['on'],
 	'no-code': ['on'],
 	'no-quotes': ['', 'on'],
 	'no-lists': ['', 'on'],

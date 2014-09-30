@@ -3,19 +3,31 @@
 // TODO 
 var pageSize = 10;
 
-Meteor.publish('stories', function( loggedIn, page ) {
-	var query = {};
+Meteor.publish('stories', function( loggedIn, query, options ) {
+	var page = options && options.page || 0;
+	query = query || {};
 	if( !loggedIn ) {
 		query.published = true;
 	}
-	page = page || 0;
-	return Stories.find(query, {
-		sort: {
-			submitted: -1
-		},
-		skip: page * pageSize,
-		limit: pageSize
-	});
+
+	if( options ) {
+		options = _.omit( options, 'page' );
+		options = _.extend({
+			sort: {
+				submitted: -1
+			},
+			skip: page * pageSize,
+			limit: pageSize
+		}, options );
+	} else {
+		options = {
+			sort: {
+				submitted: -1
+			}
+		};
+	}
+
+	return Stories.find(query, options);
 });
 
 Meteor.publish('themes', function() {
