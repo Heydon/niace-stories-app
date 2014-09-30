@@ -25,6 +25,10 @@
 	{{> storyPagination}}
 </template>
 
+<template name="allStories">
+	<a download="stories.json" href="data:text/plain,{{formatForDownload}}">Download</a>	
+</template>
+
 <template name="storyPagination">
 	<!-- role = pagination is a thing? -->
 	<div role="pagination">

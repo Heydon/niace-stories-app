@@ -71,3 +71,11 @@ Template.message.helpers({
 Template.message.destroyed = function(){
   Session.set('message', null);
 };
+
+Template.allStories.helpers({
+	formatForDownload: function() {
+		return JSON.stringify( _.map( Stories.find().fetch(), function( story ) {
+			return _.omit( story, '_id' );
+		}));
+	}
+});

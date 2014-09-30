@@ -99,6 +99,10 @@ Router.map(function() {
 		}
 	});
 
+	this.route('allStories', {
+		waitOn: waitOnStory
+	});
+
 });
 
 Router.onBeforeAction('loading');
@@ -114,4 +118,4 @@ var requireLogin = function(pause) {
 	}
 };
 
-Router.onBeforeAction(requireLogin, {only: ['manage', 'manageItem']});
+Router.onBeforeAction(requireLogin, {only: ['manage', 'manageItem', 'allStories']});
