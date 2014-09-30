@@ -67,7 +67,7 @@
 	{{> inspiringRadios }}
 	<div class="story-meta">
 		<h2>More inspiration</h2>
-		<p>Reading more stories about the <a href="/theme/{{storyTheme._id}}">{{storyTheme.themeName}}</a> part of your pathway, or choose one of the following keywords:</p>
+		<p><a href="/theme/{{storyTheme._id}}">Read more stories</a> about the <strong>{{storyThemeName this}}</strong> part of your pathway, or choose one of the following keywords to look at <strong>{{storyThemeName this}}</strong> in more detail:</p>
 		{{> listStoryKeywords}}
 	</div>
 </template>
@@ -154,11 +154,22 @@
 <template name="me">
 	<h1>Inspiring Me</h1>
 	{{ > message }}
-	<ul>
+	{{#if someStories}}
+		<p>Looks like you haven't found any inspiring stories yet. Let's help you <a href="/">find an inspiring story</a>.</p>
+	{{else}}
+	<ul class="inspiring-me-stories">
 		{{#each stories}}
-			<li><a href="{{ pathFor 'story' }}">{{this.name}}'s Story</a> <a href="/deleteLocal/{{ this._id }}/{{this.name}}">delete</a></li>
+			<li>
+				<div>
+					<p><a href="{{ pathFor 'story' }}">{{this.name}}'s Story</a> ({{storyThemeName this}})</p>
+				</div>
+				<div>
+					<a aria-label="delete" href="/deleteLocal/{{ this._id }}/{{this.name}}">&#x2716;</a>
+				</div>
+			</li>
 		{{/each}}
 	</ul>
+	{{/if}}
 </template>
 
 <template name="deleteLocal">

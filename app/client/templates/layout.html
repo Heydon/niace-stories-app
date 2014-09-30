@@ -2,15 +2,15 @@
 
 <template name="layout">
 	{{> admin}}
-	<nav role="navigation">
+	<nav role="navigation" aria-label="main menu">
 		{{> navigation}}
 	</nav>
+	<header role="banner">
+		<div>
+			{{> header}}
+		</div>
+	</header>
 	<div>
-		<header role="banner">
-			<div>
-				{{> header}}
-			</div>
-		</header>
 		<main role="main" id="main">
 			<div>
 				{{> yield}}

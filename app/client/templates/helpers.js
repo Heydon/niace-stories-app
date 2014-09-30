@@ -3,10 +3,8 @@
  * Move large helpers and stuff into client/features/feature.js
  */
 
-Template.story.helpers({
-	storyTheme: function() {
-		return Themes.findOne( this.theme );
-	}
+Handlebars.registerHelper('storyThemeName', function(story) {
+	return Themes.findOne(story.theme).themeName;
 });
 
 Template.storiesList.helpers({
@@ -46,10 +44,19 @@ Template.theme.helpers({
 
 /* Inspiring Me */
 
+areThereStories = function() {
+	var anyStories = localStorage.getItem('inspiring');
+	return anyStories;
+};
+
 Template.me.helpers({
+	someStories: function() {
+		return !areThereStories();
+	},
 	stories: function() {
 		var inspiring = localStorage.getItem('inspiring') && localStorage.getItem('inspiring').split(',');
-		return Stories.find( { _id: { $in : inspiring || [] } } );
+		console.log(inspiring);
+		return Stories.find( { _id: { $in : inspiring } } );
 	}
 });
 

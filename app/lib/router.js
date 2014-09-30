@@ -20,7 +20,10 @@ function waitOnStory() {
 }
 
 Router.map(function() {
-	this.route('me', { path: '/me'});
+	this.route('me', { 
+		path: '/me',
+		waitOn: waitOnStory
+	});
 	this.route('add', { path: '/add' });
 	this.route('thanks', { path: '/thanks' });
 	this.route('edited', { path: '/edited' });
