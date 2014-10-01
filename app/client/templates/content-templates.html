@@ -28,7 +28,7 @@
 </template>
 
 <template name="allStories">
-	<a download="stories.json" href="data:text/plain,{{formatForDownload}}">Download</a>	
+	<a download="stories.json" href="data:text/plain,{{formatForDownload}}">Download</a>
 </template>
 
 <template name="storyPagination">
@@ -75,9 +75,15 @@
 <template name="inspiringRadios">
 	<form action="" id="inspiring">
 		<h3>Did this story inspire you?</h3>
-		{{ > message }}
-		<label><input type="radio" value="true" class="vh" name="inspiring"> <span>Yes! Save it in <strong>"Inspiring Me"</strong> to read again later</span></label>
-		<label><input type="radio" value="false" class="vh" name="inspiring" checked> <span>No, I'll keep looking for more stories</span></label>
+		{{> message}}
+		<label>
+			<input type="radio" value="true" class="vh" name="inspiring" {{checked}}>
+			<span>Yes! Save it in <strong>"Inspiring Me"</strong> to read again later</span>
+		</label>
+		<label>
+			<input type="radio" value="false" class="vh" name="inspiring" {{notChecked}}>
+			<span>No, I'll keep looking for more stories</span>
+		</label>
 	</form>
 </template>
 

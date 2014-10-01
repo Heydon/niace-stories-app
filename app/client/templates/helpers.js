@@ -15,7 +15,7 @@ Template.storiesList.helpers({
 		return !!Meteor.user();
 	},
 	empty: function() {
-		return Stories.find( this.query ).count() === 0;
+		return Stories.find().count() === 0;
 	}
 });
 
@@ -44,19 +44,17 @@ Template.theme.helpers({
 
 /* Inspiring Me */
 
-areThereStories = function() {
-	var anyStories = localStorage.getItem('inspiring');
-	return anyStories;
-};
+function areThereStories() {
+	var inspiring = ReactiveStore.get('inspiring');
+	return inspiring && inspiring.length;
+}
 
 Template.me.helpers({
 	someStories: function() {
 		return !areThereStories();
 	},
 	stories: function() {
-		var inspiring = localStorage.getItem('inspiring') && localStorage.getItem('inspiring').split(',');
-		console.log(inspiring);
-		return Stories.find( { _id: { $in : inspiring } } );
+		return Stories.find();
 	}
 });
 
@@ -80,7 +78,7 @@ Template.message.helpers({
 });
 
 Template.message.destroyed = function(){
-  Session.set('message', null);
+	Session.set('message', null);
 };
 
 Template.allStories.helpers({
@@ -88,5 +86,17 @@ Template.allStories.helpers({
 		return JSON.stringify( _.map( Stories.find().fetch(), function( story ) {
 			return _.omit( story, '_id' );
 		}));
+	}
+});
+
+Template.inspiringRadios.helpers({
+	checked: function() {
+		var index = _.indexOf( ReactiveStore.get('inspiring') || [], this._id );
+		return index > -1 ? 'checked' : '';
+	},
+
+	notChecked: function() {
+		var index = _.indexOf( ReactiveStore.get('inspiring') || [], this._id );
+		return index > -1 ? '' : 'checked';
 	}
 });

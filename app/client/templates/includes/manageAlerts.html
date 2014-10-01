@@ -1,0 +1,56 @@
+<template name="manageAlerts">
+	{{> message}}
+	<p>These will appear at the top of pages which match the paths shown below.</p>
+	<p>NB. They will not appear if you are logged in!</p>
+	<a href="{{pathFor 'manageAlert'}}">Add new helper bubble</a>
+	<ul class="alerts-list">
+		{{#each alerts}}
+			<li>
+				<h2>
+					{{title}}
+				</h2>
+				<p>
+					showing on
+					<ul>
+						{{#each paths}}
+							<li>{{this}}</li>
+						{{/each}}
+					</ul>
+					<!-- pathFor will skip adding the id :S -->
+					<a href="{{ pathFor 'manageAlert' }}/{{_id}}">edit</a>
+				</p>
+			</li>
+		{{/each}}
+	</ul>
+</template>
+
+<template name="manageAlert">
+	<h1>Manage alert: {{title}}</h1>
+	<form name="manageAlert" tabindex="-1">
+		<div>
+			<label for="title">Title:</label>
+			<input id="title" name="title" value="{{title}}" type="text" />
+		</div>
+		<div>
+			<label for="content">Content (markdown)</label>
+			<textarea id="content" name="content">{{content}}</textarea>
+		</div>
+		<div>
+			<label for="ok-button">Ok button text</label>
+			<input id="ok-button" name="okButton" value="{{okButton}}" type="text" />
+		</div>
+		<div class="paths">
+			<label>Display on paths</label>
+			{{#each availablePaths}}
+				<label for="show-on-path-{{safePath}}" class="alert-path">
+					<input name="paths" id="show-on-path-{{safePath}}" type="checkbox" value="{{originalPath}}" {{pathSelected ..}} class="vh" />
+					<span>{{name}} - {{originalPath}}</span>
+				</label>
+			{{/each}}
+			<label for="custom-path">custom paths ( separated with commas )</label>
+			<input id="custom-path" type="text" name="custom-paths" value="{{notAccountedFor}}" />
+			{{reactivePaths}}
+		</div>
+		<button>Save</button>
+	</form>
+</template>
