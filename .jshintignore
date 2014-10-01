@@ -1,4 +1,5 @@
 app/packages/*
 test/*
 node_modules/*
-app/client/polyfills/*
+app/public/html5shiv.js
+app/client/thirdPartyScripts/*

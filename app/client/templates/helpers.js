@@ -2,10 +2,9 @@
  * File for small collections of helpers
  * Move large helpers and stuff into client/features/feature.js
  */
-Template.story.helpers({
-	storyTheme: function() {
-		return Themes.findOne( this.theme );
-	}
+
+Handlebars.registerHelper('storyThemeName', function(story) {
+	return Themes.findOne(story.theme).themeName;
 });
 
 Template.storiesList.helpers({
@@ -19,6 +18,10 @@ Template.storiesList.helpers({
 		return Stories.find().count() === 0;
 	}
 });
+
+Template.storiesList.rendered = function() {
+	$('.truncated').trunk8({ lines: 5});
+};
 
 /**
  * themes helpers
@@ -41,7 +44,15 @@ Template.theme.helpers({
 
 /* Inspiring Me */
 
+function areThereStories() {
+	var inspiring = ReactiveStore.get('inspiring');
+	return inspiring && inspiring.length;
+}
+
 Template.me.helpers({
+	someStories: function() {
+		return !areThereStories();
+	},
 	stories: function() {
 		return Stories.find();
 	}

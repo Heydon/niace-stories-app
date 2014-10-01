@@ -87,6 +87,7 @@ sub {
 
 img {
   border: 0;
+  width: 100%;
 }
 
 svg:not(:root) {
@@ -221,10 +222,19 @@ body {
   padding: 1em;
 }
 
-[role="banner"], [role="main"], [role="contentinfo"] {
+[role="main"], [role="contentinfo"] {
    max-width: 30em;
    margin-right: auto;
    margin-left: auto;
+}
+
+[role="banner"] img {
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+[role="main"] {
+  margin-top: 3em;
 }
 
 /**************************************************************
@@ -380,11 +390,12 @@ h1 - h5 styles
 
 h1 {
   text-align: center;
+  text-transform: capitalize;
 }
 
 h1, h2 {
   font-weight: 400;
-  line-height: 1.125;
+  line-height: 1;
 }
 
 h3, h4, h5 {
@@ -409,6 +420,10 @@ h4 {
 
 h5 {
   font-size: 1em;
+}
+
+h1 a:not(:hover), h2 a:not(:hover), h3 a:not(:hover) {
+  border: 0 !important;
 }
 
 /**************************************************************
@@ -501,6 +516,10 @@ heading eg.
 
 ***************************************************************/
 
+[role="navigation"] {
+  margin-top: 0;
+}
+
 [role="navigation"] ul {
   font-size: 0;
 }
@@ -526,12 +545,14 @@ heading eg.
 [role="navigation"] li {
   display: table-cell;
   vertical-align: middle;
+  font-size: 1.25rem;
 }
 
 [role="navigation"] a {
   background: $color-interactive;
   padding: 0.5em 0;
   text-align: center;
+  line-height: 1;
 }
 
 [role="navigation"] a:hover,
@@ -539,7 +560,7 @@ heading eg.
   text-decoration: underline;
 }
 
-[role="navigation"] li:nth-child(3) a {
+[role="navigation"] li:nth-child(2) a {
   font-size: 1.5em;
 }
 
@@ -920,7 +941,7 @@ Example markup (a three column grid):
 }
 
 .grid-2-columns > *:nth-child(2n + 2) ~ * {
-  margin-top: 1.5em;
+  margin-top: 3em;
 }
 
 .grid-3-columns > * {
@@ -957,7 +978,7 @@ Example markup (a three column grid):
 }
 
 .grid-3-columns > *:nth-child(3n + 3) ~ * {
-  margin-top: 1.5em;
+  margin-top: 3em;
 }
 
 [class^="grid-"]:after {
@@ -971,7 +992,88 @@ Example markup (a three column grid):
   vertical-align: middle;
 }
 
-/*# sourceMappingURL=anatomy.css.map */
+/**************************************************************
+
+STORY TEASERS
+
+***************************************************************/
+
+.teaser {
+  list-style: none;
+}
+
+.teaser h2 {
+  text-align: center;
+  font-size: 1.5em;
+}
+
+.teaser .story-body {
+  margin-top: 0.5em;
+}
+
+.keywords {
+  font-size: 0.75em;
+  margin-left: 0;
+  margin-top: 0.5em;
+  text-align: center;
+}
+
+.story-meta .keywords {
+  text-align: left;
+}
+
+.keywords li {
+  display: inline-block;
+}
+
+.keywords a {
+  display: block;
+  font-weight: bold;
+  margin: 0.125em;
+  border: 0;
+  padding: 0.125em 0.75em;
+  background: #480;
+  color: #fff;
+  border-radius: 1em;
+}
+
+.keywords a:hover, .keywords a:focus {
+  background: #444;
+}
+
+.truncated {
+  overflow: hidden;
+}
+
+/**************************************************************
+
+PAGINATION
+
+Pagination nav landmarks
+
+***************************************************************/
+
+.pagination {
+  padding: 1em;
+  background: #eee;
+}
+
+.pagination ul {
+  display: block;
+  text-align: center;
+}
+
+.pagination li {
+  display: inline-block;
+}
+
+.pagination li + li {
+  margin-left: 1em;
+}
+
+.pagination h2 {
+  text-align: center;
+}
 
 /**************************************************************
 
@@ -1007,10 +1109,6 @@ LANDMARKS
 
 [role="contentinfo"] * {
   text-align: center;
-}
-
-[role="main"] {
-  margin-top: 0.75em;
 }
 
 /**************************************************************
@@ -1084,4 +1182,131 @@ NOTIFICATIONS
 
 [role="alert"] li:before {
   content: '\2716\0020';
+}
+
+/**************************************************************
+
+INSPIRING ME
+
+***************************************************************/
+
+.inspiring-me-stories li {
+  list-style: none;
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+  font-size: 1.25em;
+}
+
+.inspiring-me-stories li + li {
+  margin-top: 0.75em;
+  padding-top: 0.75em;
+  border-top: 1px solid #ccc;
+}
+
+.inspiring-me-stories li > * {
+  display: table-cell;
+}
+
+.inspiring-me-stories li > *:last-child {
+  text-align: right;
+}
+
+[aria-label="delete"] {
+  color: #444;
+}
+
+.inspiring-me-stories li a:not(:hover) {
+  border: 0;
+}
+
+/**************************************************************
+
+BREAKPOINTS
+
+***************************************************************/
+
+@media all and (max-width: 800px) {
+
+  html {
+    font-size: 18px;
+  }
+
+}
+
+@media all and (max-width: 800px) {
+
+  [role="main"] {
+    max-width: none;
+  }
+
+  [href^="/random"] [aria-hidden] {
+    display: none;
+  }
+
+}
+
+@media all and (max-width: 550px) {
+
+  [class*="grid"] > * {
+    display: block;
+    width: auto !important;
+  }
+
+  [class*="grid"] > * {
+    padding: 0;
+  }
+
+  [class*="grid"] > * + * {
+    margin-top: 3em;
+  }
+
+}
+
+@media all and (max-width: 550px) {
+  
+  [aria-label="main menu"] {
+    padding: 0 0.75em;
+    padding-top: 5em !important;
+    background: url(/logo.svg) no-repeat center 0.5em;
+    background-size: auto 4em;
+  }
+
+  [aria-label="main menu"] ul {
+    display: block;
+  }
+
+  [aria-label="main menu"] ul > * {
+    display: block;
+    width: auto;
+  }
+
+  [aria-label="main menu"] a {
+    padding: 0.5em;
+    border: 2px solid;
+    border-radius: 0.25em;
+    font-size: 0.85em !important;
+  }
+
+  [aria-label="main menu"] a:hover, [aria-label="main menu"] a:focus {
+    border: 2px solid #444;
+    text-decoration: none;
+  }
+
+  [aria-label="main menu"] li + li {
+    margin-top: 0.75em;
+  }
+
+  [role="banner"] img {
+    display: none;
+  }
+
+  body {
+    padding: 0;
+  }
+
+  [role="main"] {
+    padding: 0 0.75em;
+  }
+
 }

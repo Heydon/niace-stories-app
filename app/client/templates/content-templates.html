@@ -6,19 +6,21 @@
 </template>
 
 <template name="storiesList">
-	<ul class="stories-list" aria-label="all stories">
+	<ul class="grid-2-columns">
 		{{#each stories}}
-			<li class="{{#if published}}published{{/if}}">
-				<h3>{{name}}</h3>
-				<p>
-					<a href="{{pathFor 'story'}}">Permalink</a>
-					{{> listStoryKeywords}}
-				</p>
-				{{#if loggedIn}}
-					<p>
-						<a href="{{ pathFor 'manageItem' }}">edit</a>
-					</p>
-				{{/if}}
+			<li class="teaser {{#if published}}published{{/if}}">
+				<h2><a href="{{pathFor 'story'}}">{{name}}'s story</a></h2>
+				<div class="story-body">
+					<div class="truncated">
+						{{ this.story }}
+					</div>
+					{{#if loggedIn}}
+						<p>
+							<a href="{{ pathFor 'manageItem' }}">edit</a>
+						</p>
+					{{/if}}
+				</div>
+				{{> listStoryKeywords}}
 			</li>
 		{{/each}}
 	</ul>
@@ -31,19 +33,26 @@
 
 <template name="storyPagination">
 	<!-- role = pagination is a thing? -->
-	<div role="pagination">
-		{{#if showPrev}}
-			<a href="?page={{prev}}">Previous (page {{humanize prev}})</a>
-		{{/if}}
-		{{humanize page}}
-		{{#if showNext}}
-			<a href="?page={{next}}">Next (page {{humanize next}})</a>
-		{{/if}}
-	</div>
+	<nav role="navigation" class="pagination">
+		<h2>Similar stories</h2>
+		<ul>
+			{{#if showPrev}}
+				<li>
+					<a rel="prev" href="?page={{prev}}"><span aria-hidden>&#x2190;</span> Previous (page {{humanize prev}})</a>
+				</li>
+			{{/if}}
+			{{humanize page}}
+			{{#if showNext}}
+				<li>
+					<a rel="next" href="?page={{next}}">Next (page {{humanize next}}) <span aria-hidden>&#x2192;</span></a>
+				</li>
+			{{/if}}
+		</ul>
+	</nav>
 </template>
 
 <template name="listStoryKeywords">
-	<ul class="keywords">
+	<ul class="keywords" aria-label="keywords for this story">
 		{{#each keywords}}
 			<li><a href="{{ pathFor 'keyword' keyword=this}}">{{this}}</a></li>
 		{{/each}}
@@ -57,14 +66,15 @@
 	</div>
 	{{> inspiringRadios }}
 	<div class="story-meta">
-		{{storyTheme.themeName}}
+		<h2>More inspiration</h2>
+		<p><a href="/theme/{{storyTheme._id}}">Read more stories</a> about the <strong>{{storyThemeName this}}</strong> part of your pathway, or choose one of the following keywords to look at <strong>{{storyThemeName this}}</strong> in more detail:</p>
 		{{> listStoryKeywords}}
 	</div>
 </template>
 
 <template name="inspiringRadios">
 	<form action="" id="inspiring">
-		<h2>Did this story inspire you?</h2>
+		<h3>Did this story inspire you?</h3>
 		{{> message}}
 		<label>
 			<input type="radio" value="true" class="vh" name="inspiring" {{checked}}>
@@ -159,12 +169,23 @@
 
 <template name="me">
 	<h1>Inspiring Me</h1>
-	{{> message }}
-	<ul>
+	{{ > message }}
+	{{#if someStories}}
+		<p>Looks like you haven't found any inspiring stories yet. Let's help you <a href="/">find an inspiring story</a>.</p>
+	{{else}}
+	<ul class="inspiring-me-stories">
 		{{#each stories}}
-			<li><a href="{{ pathFor 'story' }}">{{this.name}}'s Story</a> <a href="/deleteLocal/{{ this._id }}/{{this.name}}">delete</a></li>
+			<li>
+				<div>
+					<p><a href="{{ pathFor 'story' }}">{{this.name}}'s Story</a> ({{storyThemeName this}})</p>
+				</div>
+				<div>
+					<a aria-label="delete" href="/deleteLocal/{{ this._id }}/{{this.name}}">&#x2716;</a>
+				</div>
+			</li>
 		{{/each}}
 	</ul>
+	{{/if}}
 </template>
 
 <template name="deleteLocal">
