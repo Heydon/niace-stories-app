@@ -1,5 +1,7 @@
 <template name="manageAlerts">
 	{{> message}}
+	<p>These will appear at the top of pages which match the paths shown below.</p>
+	<p>NB. They will not appear if you are logged in!</p>
 	<a href="{{pathFor 'manageAlert'}}">Add new helper bubble</a>
 	<ul class="alerts-list">
 		{{#each alerts}}
