@@ -3,8 +3,32 @@
  * Move large helpers and stuff into client/features/feature.js
  */
 
-Handlebars.registerHelper('storyThemeName', function(story) {
-	return Themes.findOne(story.theme).themeName;
+Handlebars.registerHelper('storyThemes', function(story) {
+	return Themes.find({
+		_id: {
+			$in: story.themes
+		}
+	});
+});
+
+// this should take unsafe strings and make them classy.
+Handlebars.registerHelper('classify', function( str, prefix ) {
+	prefix = typeof prefix === 'string' ? prefix : 'class';
+	return prefix + '_' + (typeof str === 'string' ? str : '').replace(/[^a-z0-9]/g, function( s ) {
+		// get the character code
+		var c = s.charCodeAt(0);
+		// space
+		if( c === 32 ) {
+			return '-';
+		}
+		// uppercase
+		if( c >= 65 && c <= 90 ) {
+			return '_' + s.toLowerCase();
+		}
+		// convert to character code
+		// for symbols ( so $ would become '__24' )
+		return '__' + ('000' + c.toString(16)).slice(-4);
+	});
 });
 
 Template.storiesList.helpers({
@@ -36,9 +60,12 @@ Template.theme.helpers({
 	empty: function() {
 		return Stories.find().count() === 0;
 	},
-	name: function() {
-		var theme = Themes.findOne( Router.current().params._id );
-		return theme ? theme.themeName : 'theme not found';
+	names: function() {
+		return Themes.find({
+			_id: {
+				$in: this.ids
+			}
+		});
 	}
 });
 
