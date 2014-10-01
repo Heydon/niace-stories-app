@@ -35,8 +35,11 @@ Meteor.publish('themes', function() {
 });
 
 Meteor.publish('alerts', function( query ) {
-	console.log( query );
-	return Alerts.find(query);
+	if( query ) {
+		return Alerts.find(query);
+	} else {
+		return Alerts.find();
+	}
 });
 
 // Perhaps look to remove these fixture blocks when releasing?..
@@ -69,7 +72,7 @@ if( Themes.find().count() === 0 ) {
 
 if( Alerts.find().count() === 0 ) {
 	Alerts.insert({
-		paths: ['/', '/manageAlerts'],
+		paths: ['/'],
 		title: 'Home',
 		content: '_Inspire Me_ is the home of inspiring stories. Read stories from people like you working on their pathway and find out what has and hasn\'t worked for them. Submit your own stories to inspire others in [Add Story](/add).',
 		okButton: 'Okay, got it!'

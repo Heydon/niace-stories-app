@@ -1,6 +1,8 @@
 Template.alertBubbles.helpers({
 	alerts: function() {
-		console.log( Session.get('viewedAlerts') );
+		if( Meteor.user() ) {
+			return [];
+		}
 		return Alerts.find({
 			_id: {
 				$nin: ReactiveStore.get('viewedAlerts') || []

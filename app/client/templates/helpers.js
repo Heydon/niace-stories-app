@@ -77,3 +77,15 @@ Template.allStories.helpers({
 		}));
 	}
 });
+
+Template.inspiringRadios.helpers({
+	checked: function() {
+		var index = _.indexOf( ReactiveStore.get('inspiring') || [], this._id );
+		return index > -1 ? 'checked' : '';
+	},
+
+	notChecked: function() {
+		var index = _.indexOf( ReactiveStore.get('inspiring') || [], this._id );
+		return index > -1 ? '' : 'checked';
+	}
+});

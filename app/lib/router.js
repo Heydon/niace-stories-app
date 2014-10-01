@@ -38,7 +38,6 @@ Router.map(function() {
 	this.route('edited', { path: '/edited' });
 	this.route('themes', { path: '/themes' });
 	this.route('themes', {path: '/'});
-
 	this.route('login', { path: '/login' });
 	this.route('register', { path: '/register' });
 
@@ -139,12 +138,22 @@ Router.map(function() {
 	this.route('manageAlert', {
 		path: '/manageAlert/:_id',
 		waitOn: function() {
-			return Meteor.subscribe('alerts');
+			if( this.params._id ) {
+				return Meteor.subscribe('alerts', {
+					_id: this.params._id
+				});
+			}
+			return {};
 		},
 		data: function() {
-			return Alerts.findOne( this.params._id );
+			if( this.params._id ) {
+				return Alerts.findOne( this.params._id );
+			}
+			return {};
 		}
 	});
+
+	this.route('manageAlert', { path: '/manageAlert' });
 
 });
 
