@@ -12,7 +12,7 @@ Template.alertBubbles.helpers({
 });
 
 Template.alertBubbles.events({
-	'click .alert-bubble': function( evt ) {
+	'click .alert-bubble button': function( evt ) {
 		var seen = ReactiveStore.get('viewedAlerts') || [];
 		var $el = $( evt.currentTarget );
 
