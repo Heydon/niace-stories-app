@@ -26,7 +26,7 @@
 </template>
 
 <template name="allStories">
-	<a download="stories.json" href="data:text/plain,{{formatForDownload}}">Download</a>	
+	<a download="stories.json" href="data:text/plain,{{formatForDownload}}">Download</a>
 </template>
 
 <template name="storyPagination">
@@ -65,9 +65,15 @@
 <template name="inspiringRadios">
 	<form action="" id="inspiring">
 		<h2>Did this story inspire you?</h2>
-		{{ > message }}
-		<label><input type="radio" value="true" class="vh" name="inspiring"> <span>Yes! Save it in <strong>"Inspiring Me"</strong> to read again later</span></label>
-		<label><input type="radio" value="false" class="vh" name="inspiring" checked> <span>No, I'll keep looking for more stories</span></label>
+		{{> message}}
+		<label>
+			<input type="radio" value="true" class="vh" name="inspiring" {{checked}}>
+			<span>Yes! Save it in <strong>"Inspiring Me"</strong> to read again later</span>
+		</label>
+		<label>
+			<input type="radio" value="false" class="vh" name="inspiring" {{notChecked}}>
+			<span>No, I'll keep looking for more stories</span>
+		</label>
 	</form>
 </template>
 
@@ -143,7 +149,7 @@
 
 <template name="me">
 	<h1>Inspiring Me</h1>
-	{{ > message }}
+	{{> message }}
 	<ul>
 		{{#each stories}}
 			<li><a href="{{ pathFor 'story' }}">{{this.name}}'s Story</a> <a href="/deleteLocal/{{ this._id }}/{{this.name}}">delete</a></li>

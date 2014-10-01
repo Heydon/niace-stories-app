@@ -5,10 +5,10 @@ Template.inspiringRadios.events({
 		var inspiredMe = value === 'true' ? true : false;
 
 		if (inspiredMe) {
-			saveStory(this._id);
+			saveInspiringStory(this._id);
 			Session.set('message', 'Story saved in <a href="/me">Inspiring Me</a>');
 		} else {
-			deleteStory(this._id);
+			removeInspiringStory(this._id);
 			Session.set('message', 'Story removed from <a href="/me">Inspiring Me</a>');
 		}
 
