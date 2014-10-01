@@ -1,0 +1,15 @@
+<template name="alertBubbles">
+	{{#if alerts}}
+		<div role="status">
+			{{#each alerts}}
+				<div class="alert-bubble" data-alert-id="{{_id}}">
+					<h2>{{title}}</h2>
+					<p>{{#markdown}}{{content}}{{/markdown}}</p>
+					{{#if okButton}}
+						<button>{{okButton}}</button>
+					{{/if}}
+				</div>
+			{{/each}}
+		</div>
+	{{/if}}
+</template>

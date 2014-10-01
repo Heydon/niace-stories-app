@@ -2,7 +2,6 @@
  * File for small collections of helpers
  * Move large helpers and stuff into client/features/feature.js
  */
-
 Template.story.helpers({
 	storyTheme: function() {
 		return Themes.findOne( this.theme );
@@ -17,7 +16,7 @@ Template.storiesList.helpers({
 		return !!Meteor.user();
 	},
 	empty: function() {
-		return Stories.find( this.query ).count() === 0;
+		return Stories.find().count() === 0;
 	}
 });
 
@@ -44,8 +43,7 @@ Template.theme.helpers({
 
 Template.me.helpers({
 	stories: function() {
-		var inspiring = localStorage.getItem('inspiring') && localStorage.getItem('inspiring').split(',');
-		return Stories.find( { _id: { $in : inspiring || [] } } );
+		return Stories.find();
 	}
 });
 
@@ -69,7 +67,7 @@ Template.message.helpers({
 });
 
 Template.message.destroyed = function(){
-  Session.set('message', null);
+	Session.set('message', null);
 };
 
 Template.allStories.helpers({
@@ -77,5 +75,17 @@ Template.allStories.helpers({
 		return JSON.stringify( _.map( Stories.find().fetch(), function( story ) {
 			return _.omit( story, '_id' );
 		}));
+	}
+});
+
+Template.inspiringRadios.helpers({
+	checked: function() {
+		var index = _.indexOf( ReactiveStore.get('inspiring') || [], this._id );
+		return index > -1 ? 'checked' : '';
+	},
+
+	notChecked: function() {
+		var index = _.indexOf( ReactiveStore.get('inspiring') || [], this._id );
+		return index > -1 ? '' : 'checked';
 	}
 });
