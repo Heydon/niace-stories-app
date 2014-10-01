@@ -1,13 +1,20 @@
 Template.manageItem.created = function() {
-	this.selectedTheme = new ReactiveVar();
-	this.selectedTheme.set( this.data.story.theme );
+	this.selectedThemes = new ReactiveVar();
+	this.selectedThemes.set( this.data.story.themes );
 };
 
 Template.manageItem.events({
-	'change #theme': function( evt, template ) {
-		var $form = $( evt.currentTarget );
+	'change [name="themes"] .enable-theme': function( evt, template ) {
+		var $checkbox = $( evt.currentTarget );
+		var themes = template.selectedThemes.get();
+		var thisTheme = $checkbox.val();
 
-		template.selectedTheme.set( $form.val() );
+		if( $checkbox.is(':checked') ) {
+			themes.push( thisTheme );
+		} else {
+			_.without( themes, thisTheme );
+		}
+		template.selectedThemes.set( _.unique( themes ) );
 	},
 	'submit form': function( evt ) {
 		function getInputVal( el ) {
