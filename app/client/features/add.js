@@ -6,7 +6,6 @@ Template.add.events({
 			name: $('#name').val(),
 			story: $('#story').val()
 		};
-
 		// honeypot to fool spam bots
 		if( $('#check').val() !== '' ) {
 			return;

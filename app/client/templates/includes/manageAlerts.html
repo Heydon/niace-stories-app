@@ -2,23 +2,19 @@
 	{{> message}}
 	<p>These will appear at the top of pages which match the paths shown below.</p>
 	<p>NB. They will not appear if you are logged in!</p>
-	<a href="{{pathFor 'manageAlert'}}">Add new helper bubble</a>
+	<p><a class="larger" href="{{pathFor 'manageAlert'}}">Add new helper bubble</a></p>
 	<ul class="alerts-list">
 		{{#each alerts}}
 			<li>
 				<h2>
-					{{title}}
+					{{untitled}}{{title}} (<a href="{{ pathFor 'manageAlert' }}/{{_id}}">edit</a>)
 				</h2>
-				<p>
-					showing on
-					<ul>
-						{{#each paths}}
-							<li>{{this}}</li>
-						{{/each}}
-					</ul>
-					<!-- pathFor will skip adding the id :S -->
-					<a href="{{ pathFor 'manageAlert' }}/{{_id}}">edit</a>
-				</p>
+				<p><strong>Showing on these paths:</strong></p>
+				<ul>
+					{{#each paths}}
+						<li>{{this}}</li>
+					{{/each}}
+				</ul>
 			</li>
 		{{/each}}
 	</ul>

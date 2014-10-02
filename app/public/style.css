@@ -219,13 +219,24 @@ body {
   margin: 0 auto;
   color: #444;
   line-height: 1.5;
-  padding: 1em;
+  padding-bottom: 3em;
+}
+
+body > div {
+  padding-left: 1em;
+  padding-right: 1em;
 }
 
 [role="main"], [role="contentinfo"] {
    max-width: 30em;
    margin-right: auto;
    margin-left: auto;
+}
+
+[role="banner"] {
+  max-width: 40em;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 [role="banner"] img {
@@ -560,7 +571,7 @@ heading eg.
   text-decoration: underline;
 }
 
-[role="navigation"] li:nth-child(2) a {
+[aria-label="main menu"] li:nth-child(2) a {
   font-size: 1.5em;
 }
 
@@ -1024,6 +1035,31 @@ STORY TEASERS
   margin-top: 0.5em;
 }
 
+.add-your-story {
+  height: 10.5em;
+  padding: 1.5em;
+  border: 2px dashed #ccc;
+  text-align: center;
+  vertical-align: middle;
+  margin-top: 0.5em;
+  border-radius: 0.25em;
+  position: relative;
+}
+
+.add-your-story p {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  margin-top: -1em;
+  font-size: 1.75em;
+}
+
+.add-your-story a:not(:hover) {
+  border: 0;
+}
+
 .keywords {
   font-size: 0.75em;
   margin-left: 0;
@@ -1069,6 +1105,7 @@ Pagination nav landmarks
 .pagination {
   padding: 1em;
   background: #eee;
+  margin-top: 1.5em;
 }
 
 .pagination ul {
@@ -1197,6 +1234,19 @@ NOTIFICATIONS
   content: '\2716\0020';
 }
 
+.intro {
+  max-width: 30em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.intro > div {
+  font-size: 0.85em;
+  background: #fff;
+  border: 2px solid #d4ff2a;
+  padding: 1.5em;
+}
+
 /**************************************************************
 
 INSPIRING ME
@@ -1231,6 +1281,58 @@ INSPIRING ME
 
 .inspiring-me-stories li a:not(:hover) {
   border: 0;
+}
+
+/**************************************************************
+
+ALERTS LIST
+
+***************************************************************/
+
+.alerts-list li {
+  list-style: none;
+}
+
+.alerts-list li + li {
+  padding-top: 0.75em;
+  margin-top: 0.75em;
+  border-top: 1px solid #ccc;
+}
+
+.alerts-list li * {
+  margin-top: 0.25em;
+}
+
+.alerts-list ul {
+  margin-left: 0;
+}
+
+/**************************************************************
+
+ADMIN BAR
+
+***************************************************************/
+
+.admin {
+  background: #444;
+  padding: 0.5em;
+}
+
+.admin:before {
+  content: '~ ADMIN ~';
+  color: #fff;
+  display: block;
+  text-align: center;
+}
+
+.admin a {
+  color: #fff;
+}
+
+.admin button {
+  font-size: 0.75em;
+  border: 0;
+  box-shadow: none;
 }
 
 /**************************************************************
