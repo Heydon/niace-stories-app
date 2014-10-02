@@ -26,6 +26,7 @@
 		"ReactiveVar": true,
 		"Assets": true,
 		"Alerts": true,
-		"ReactiveStore": true
+		"ReactiveStore": true,
+		"Handlebars": true
 	}
 }
