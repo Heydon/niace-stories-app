@@ -82,5 +82,8 @@ Template.manageItem.helpers({
 	},
 	selectedThemes: function() {
 		return Template.instance().selectedThemes.get();
+	},
+	enableThemeForm: function( themeIDs, parentContext ) {
+		return _.indexOf( themeIDs, parentContext._id ) === -1 ? 'disabled' : '';
 	}
 });

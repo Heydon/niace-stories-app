@@ -67,10 +67,23 @@
 	{{> inspiringRadios }}
 	<div class="story-meta">
 		<h2>More inspiration</h2>
-		<p><a href="/theme/{{storyTheme._id}}">Read more stories</a> about the <strong>{{storyThemeName this}}</strong> part of your pathway, or choose one of the following keywords to look at <strong>{{storyThemeName this}}</strong> in more detail:</p>
+		<p>
+			<a href="{{ pathFor 'theme' _id=themes }}">Read more stories</a>
+			about the
+			{{#each storyThemeNames this}}
+				<strong>{{themeName}}</strong>
+			{{/each}}
+			part of your pathway, or choose one of the following keywords to look at
+			{{#each storyThemeNames this}}
+				<strong>{{themeName}}</strong>
+			{{/each}}
+			in more detail:
+		</p>
 		{{> listStoryKeywords}}
 	</div>
 </template>
+
+<template name="render"
 
 <template name="inspiringRadios">
 	<form action="" id="inspiring">
@@ -131,7 +144,7 @@
 			<legend>Themes</legend>
 			<div class="grid-3-columns">
 				{{#each themes}}
-					<fieldset>
+					<fieldset class="theme-{{enableThemeForm selectedThemes .}}">
 						<legend>{{themeName}}</legend>
 						<label for="enable-{{_id}}">
 							<input id="enable-{{_id}}" type="checkbox" value="{{_id}}" class="vh enable-theme" {{themeEnabled}}/>
@@ -140,7 +153,14 @@
 						<div class="keywords">
 							{{#each keywords}}
 								<label for="{{ classify this 'keyword' }}">
-									<input type="checkbox" id="{{ classify this 'keyword' }}" value="{{this}}" class="vh" {{hasThemeKeyword ..}}>
+									<input
+										{{enableThemeForm selectedThemes ..}}
+										type="checkbox"
+										id="{{ classify this 'keyword' }}"
+										value="{{this}}"
+										class="vh"
+										{{hasThemeKeyword ..}}
+									/>
 									<span> {{this}} </span>
 								</label>
 							{{/each}}

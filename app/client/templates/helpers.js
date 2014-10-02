@@ -3,13 +3,18 @@
  * Move large helpers and stuff into client/features/feature.js
  */
 
-Handlebars.registerHelper('storyThemeName', function(story) {
-	return Themes.findOne(story.theme).themeName;
+Handlebars.registerHelper('storyThemeNames', function(story) {
+	return Themes.find({
+		_id: {
+			$in: story.themes
+		}
+	});
 });
 
 // this should take unsafe strings and make them classy.
 Handlebars.registerHelper('classify', function( str, prefix ) {
-	return ( prefix || 'classy' ) + '_' + (typeof str === 'string' ? str : '').replace(/[^a-z0-9]/g, function( s ) {
+	prefix = typeof prefix === 'string' ? prefix : 'class';
+	return prefix + '_' + (typeof str === 'string' ? str : '').replace(/[^a-z0-9]/g, function( s ) {
 		// get the character code
 		var c = s.charCodeAt(0);
 		// space

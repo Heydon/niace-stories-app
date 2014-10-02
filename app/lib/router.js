@@ -113,8 +113,11 @@ Router.map(function() {
 	this.route('theme', {
 		path: '/theme/:_id',
 		waitOn: function() {
+			var themes = this.params._id && this.params._id.split(',');
 			return Meteor.subscribe('stories', Meteor.user(), {
-				theme: this.params._id
+				themes: {
+					$in: themes
+				}
 			}, {
 				page: this.params.page
 			});
