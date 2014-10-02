@@ -124,9 +124,9 @@
 <template name="manageItem">
 	<form>
 		<label for="name">Name</label>
-		<input id="name" type="text" value="{{story.name}}" />
+		<input id="name" name="name" type="text" value="{{story.name}}" />
 		<label for="story">Story</label>
-		<textarea id="story">{{story.story}}</textarea>
+		<textarea id="story" name="story">{{story.story}}</textarea>
 		<fieldset name="themes">
 			<legend>Themes</legend>
 			<div class="grid-3-columns">
@@ -134,14 +134,14 @@
 					<fieldset>
 						<legend>{{themeName}}</legend>
 						<label for="enable-{{_id}}">
-							<input id="enable-{{_id}}" type="checkbox" value="{{_id}}" class="vh enable-theme" />
+							<input id="enable-{{_id}}" type="checkbox" value="{{_id}}" class="vh enable-theme" {{themeEnabled}}/>
 							<span>enable {{themeName}}</span>
 						</label>
 						<div class="keywords">
-							{{#each keywords selectedTheme}}
-								<label for="keyword_{{ this }}">
-									<input type="checkbox" id="keyword_{{ this }}" value="{{this}}" {{hasThemeKeyword .. selectedTheme}}>
-									{{this}}
+							{{#each keywords}}
+								<label for="{{ classify this 'keyword' }}">
+									<input type="checkbox" id="{{ classify this 'keyword' }}" value="{{this}}" class="vh" {{hasThemeKeyword ..}}>
+									<span> {{this}} </span>
 								</label>
 							{{/each}}
 						</div>
@@ -151,7 +151,7 @@
 		</fieldset>
 
 		<label>
-			<input type="checkbox" id="published" value="true" class="vh" {{checked}}>
+			<input name="published" type="checkbox" id="published" value="true" class="vh" {{checked}}>
 			<span>Published</span>
 		</label>
 		<input type="text" style="display: none" aria-hidden="true" id="check" value="" />

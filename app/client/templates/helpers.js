@@ -7,6 +7,25 @@ Handlebars.registerHelper('storyThemeName', function(story) {
 	return Themes.findOne(story.theme).themeName;
 });
 
+// this should take unsafe strings and make them classy.
+Handlebars.registerHelper('classify', function( str, prefix ) {
+	return ( prefix || 'classy' ) + '_' + (typeof str === 'string' ? str : '').replace(/[^a-z0-9]/g, function( s ) {
+		// get the character code
+		var c = s.charCodeAt(0);
+		// space
+		if( c === 32 ) {
+			return '-';
+		}
+		// uppercase
+		if( c >= 65 && c <= 90 ) {
+			return '_' + s.toLowerCase();
+		}
+		// convert to character code
+		// for symbols ( so $ would become '__24' )
+		return '__' + ('000' + c.toString(16)).slice(-4);
+	});
+});
+
 Template.storiesList.helpers({
 	stories: function() {
 		return Stories.find();
