@@ -1,6 +1,11 @@
 Template.manageAlerts.helpers({
 	alerts: function() {
 		return Alerts.find();
+	},
+	untitled: function() {
+		if (!this.title) {
+			return 'Untitled ';
+		}
 	}
 });
 

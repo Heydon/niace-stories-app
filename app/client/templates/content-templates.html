@@ -7,6 +7,14 @@
 
 <template name="storiesList">
 	<ul class="grid-2-columns">
+		<li class="teaser">
+			<div class="your-story">
+				<h2>What's <em>your</em> story?</h2>
+				<div class="add-your-story">
+					<p><a href="/add">Add your story!</a></p>
+				</div>
+			</div>
+		</li>
 		{{#each stories}}
 			<li class="teaser {{#if published}}published{{/if}}">
 				<h2><a href="{{pathFor 'story'}}">{{name}}'s story</a></h2>
@@ -16,7 +24,7 @@
 					</div>
 					{{#if loggedIn}}
 						<p>
-							<a href="{{ pathFor 'manageItem' }}">edit</a>
+							<a href="{{ pathFor 'manageItem' }}">edit/publish this story</a>
 						</p>
 					{{/if}}
 				</div>
@@ -67,7 +75,7 @@
 	{{> inspiringRadios }}
 	<div class="story-meta">
 		<h2>More inspiration</h2>
-		<p><a href="/theme/{{storyTheme._id}}">Read more stories</a> about the <strong>{{storyThemeName this}}</strong> part of your pathway, or choose one of the following keywords to look at <strong>{{storyThemeName this}}</strong> in more detail:</p>
+		<p><a href="/theme/{{storyTheme._id}}">Read more stories</a> about the <strong>{{storyThemeName this}}</strong> part of your pathway, or choose more stories like {{name}}'s that feature the following keywords:</p>
 		{{> listStoryKeywords}}
 	</div>
 </template>
