@@ -77,12 +77,9 @@
 		<h2>More inspiration</h2>
 		<p>
 			<a href="{{ pathFor 'theme' _id=themes }}">Read more stories</a>
-			about the
-			{{#each storyThemeNames this}}
-				<strong>{{themeName}}</strong>
-			{{/each}}
-			part of your pathway, or choose more stories like {{name}}'s that feature the following keywords:
+			featured in the {{> strongThemeList}} themes.
 		</p>
+		<p>Or you can look at more stories that have similar keywords to {{name}}'s:</p>
 		{{> listStoryKeywords}}
 	</div>
 </template>
@@ -199,7 +196,8 @@
 		{{#each stories}}
 			<li>
 				<div>
-					<p><a href="{{ pathFor 'story' }}">{{this.name}}'s Story</a> ({{storyThemeName this}})</p>
+					<p><a href="{{ pathFor 'story' }}">{{this.name}}'s Story</a></p>
+					<p>({{> strongThemeList}})</p>
 				</div>
 				<div>
 					<a aria-label="delete" href="/deleteLocal/{{ this._id }}/{{this.name}}">&#x2716;</a>
@@ -208,6 +206,16 @@
 		{{/each}}
 	</ul>
 	{{/if}}
+</template>
+
+<template name="strongThemeList">
+	{{#each storyThemes this}}
+		<strong>
+			<!-- <a href="{{ pathFor 'theme' }}">{{themeName}}</a> -->
+			{{themeName}}
+		</strong>
+		<span class="inline-list-separator"> / </span>
+	{{/each}}
 </template>
 
 <template name="deleteLocal">
@@ -222,7 +230,12 @@
 </template>
 
 <template name="theme">
-	<h1>{{name}}</h1>
+	<h1>
+		{{#each names}}
+			{{themeName}}
+			<span class="inline-list-separator"> / </span>
+		{{/each}}
+	</h1>
 	{{#if empty}}
 		<p class="message">There are no stories for this theme so far :-(</p>
 	{{else}}
@@ -245,11 +258,11 @@
 <template name="loginForm">
 	<form action="action" id="login">
 		<label for="email">Email</label>
-        <input type="email" id="email" />
-        <label for="password">Password</label>
-        <input type="password" id="password" />
-        <button type="submit">Log in</button>
-        <p><a href="{{pathFor 'register'}}">Need an account?</a></p>
+		<input type="email" id="email" />
+		<label for="password">Password</label>
+		<input type="password" id="password" />
+		<button type="submit">Log in</button>
+		<p><a href="{{pathFor 'register'}}">Need an account?</a></p>
    </form> 
 </template>
 
@@ -261,10 +274,10 @@
 <template name="registerForm">
 	<form action="action" id="register">
 		<label for="email">Email</label>
-        <input type="email" id="email" />
-        <label for="password">Password</label>
-        <input type="password" id="password" />
-        <button type="submit">Register</button>
+		<input type="email" id="email" />
+		<label for="password">Password</label>
+		<input type="password" id="password" />
+		<button type="submit">Register</button>
    </form> 
 </template>
 

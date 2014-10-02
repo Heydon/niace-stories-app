@@ -3,7 +3,7 @@
  * Move large helpers and stuff into client/features/feature.js
  */
 
-Handlebars.registerHelper('storyThemeNames', function(story) {
+Handlebars.registerHelper('storyThemes', function(story) {
 	return Themes.find({
 		_id: {
 			$in: story.themes
@@ -60,9 +60,12 @@ Template.theme.helpers({
 	empty: function() {
 		return Stories.find().count() === 0;
 	},
-	name: function() {
-		var theme = Themes.findOne( Router.current().params._id );
-		return theme ? theme.themeName : 'theme not found';
+	names: function() {
+		return Themes.find({
+			_id: {
+				$in: this.ids
+			}
+		});
 	}
 });
 

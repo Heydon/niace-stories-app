@@ -121,6 +121,11 @@ Router.map(function() {
 			}, {
 				page: this.params.page
 			});
+		},
+		data: function() {
+			return {
+				ids: this.params._id && this.params._id.split(',')
+			};
 		}
 	});
 

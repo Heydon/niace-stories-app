@@ -1208,6 +1208,10 @@ STORY BODY
   margin-top: 0.5em;
 }
 
+.inline-list-separator:last-of-type {
+  display: none;
+}
+
 /**************************************************************
 
 NOTIFICATIONS
