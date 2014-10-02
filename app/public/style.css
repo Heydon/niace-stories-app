@@ -571,8 +571,12 @@ heading eg.
   text-decoration: underline;
 }
 
-[aria-label="main menu"] li:nth-child(2) a {
+[aria-label="main menu"] li:nth-child(3) a {
   font-size: 1.5em;
+}
+
+[aria-label="main menu"] li:first-child {
+  display: none;
 }
 
 /**************************************************************
@@ -1228,7 +1232,6 @@ NOTIFICATIONS
 }
 
 .intro > div {
-  font-size: 0.85em;
   background: #fff;
   border: 2px solid #d4ff2a;
   padding: 1.5em;
@@ -1383,6 +1386,10 @@ BREAKPOINTS
     width: auto;
   }
 
+  [aria-label="main menu"] li:first-child {
+    display: block;
+  }
+
   [aria-label="main menu"] a {
     padding: 0.5em;
     border: 2px solid;
@@ -1409,6 +1416,10 @@ BREAKPOINTS
 
   [role="main"] {
     padding: 0 0.75em;
+  }
+
+  [class*="grid"] > * + * {
+    margin-top: 1.5em;
   }
 
 }
