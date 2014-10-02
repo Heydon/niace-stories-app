@@ -6,7 +6,7 @@
 					<h2>{{title}}</h2>
 					<p>{{#markdown}}{{content}}{{/markdown}}</p>
 					{{#if okButton}}
-						<button>{{okButton}}</button>
+						<button data-alert-id="{{_id}}">{{okButton}}</button>
 					{{/if}}
 				</div>
 			{{/each}}
