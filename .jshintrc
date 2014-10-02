@@ -4,6 +4,7 @@
 	"eqeqeq": true,
 	"globalstrict": true,
 	"strict": false,
+	"undef": true,
 	"globals": {
 		"Meteor": true,
 		"Stories": true,
@@ -26,6 +27,11 @@
 		"ReactiveVar": true,
 		"Assets": true,
 		"Alerts": true,
-		"ReactiveStore": true
-	}
+		"ReactiveStore": true,
+		"Handlebars": true,
+		"window": true,
+		"saveInspiringStory": true,
+		"removeInspiringStory": true,
+		"setTimeout": true
+	} 
 }
