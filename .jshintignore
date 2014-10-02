@@ -1,5 +1,5 @@
-app/packages/*
 test/*
 node_modules/*
 app/public/html5shiv.js
 app/client/thirdPartyScripts/*
+app/.meteor
