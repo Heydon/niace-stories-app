@@ -70,15 +70,9 @@ Template.theme.helpers({
 });
 
 /* Inspiring Me */
-
-function areThereStories() {
-	var inspiring = ReactiveStore.get('inspiring');
-	return inspiring && inspiring.length;
-}
-
 Template.me.helpers({
-	someStories: function() {
-		return !areThereStories();
+	noInspiration: function() {
+		return !ReactiveStore.get('inspiring') || !ReactiveStore.get('inspiring').length;
 	},
 	stories: function() {
 		return Stories.find();

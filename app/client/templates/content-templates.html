@@ -188,8 +188,8 @@
 
 <template name="me">
 	<h1>Inspiring Me</h1>
-	{{ > message }}
-	{{#if someStories}}
+	{{> message}}
+	{{#if noInspiration}}
 		<p>Looks like you haven't found any inspiring stories yet. Let's help you <a href="/">find an inspiring story</a>.</p>
 	{{else}}
 	<ul class="inspiring-me-stories">

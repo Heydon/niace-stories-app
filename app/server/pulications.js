@@ -89,4 +89,10 @@ if( Alerts.find().count() === 0 ) {
 		content: 'It\'s time to write your first story! Try to include information that can help other people with their own pathway.\n After you share the story it will be processed and published in the Inspire Me app.\n\n Tip: \\_italic\\_ = _italic_ and \\**bold** = **bold**',
 		okButton: 'Okay, got it!'
 	});
+	Alerts.insert({
+		paths: ['/me'],
+		title: '"Inspiring Me"',
+		content: 'Track what has been inspiring you, find the stories you\'ve been inspired by and get help taking your next steps',
+		okButton: 'Okay, got it!'
+	});
 }
