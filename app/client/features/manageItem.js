@@ -1,27 +1,40 @@
 Template.manageItem.created = function() {
-	this.selectedTheme = new ReactiveVar();
-	this.selectedTheme.set( this.data.story.theme );
+	this.selectedThemes = new ReactiveVar();
+	this.selectedThemes.set( this.data.story.themes );
 };
 
-Template.manageItem.events({
-	'change #theme': function( evt, template ) {
-		var $form = $( evt.currentTarget );
+function val( el ) {return el.value;}
 
-		template.selectedTheme.set( $form.val() );
+function scrapeStoryData( $form ) {
+	var story = {};
+	
+	story.themes = _.map( $form.find('[name="themes"] .enable-theme:checked'), val );
+	story.keywords = _.map( $form.find('[name="themes"] .keywords :checked'), val );
+
+	_.each( ['name', 'story'], function( prop ) {
+		story[ prop ] = $form.find('[name="' + prop + '"]').val();
+	});
+
+	return story;
+}
+
+Template.manageItem.events({
+	'change [name="themes"] .enable-theme': function( evt, template ) {
+		var $checkbox = $( evt.currentTarget );
+		var themes = template.selectedThemes.get();
+		var thisTheme = $checkbox.val();
+
+		if( $checkbox.is(':checked') ) {
+			themes.push( thisTheme );
+		} else {
+			themes = _.without( themes, thisTheme );
+		}
+		template.selectedThemes.set( _.unique( themes ) );
 	},
 	'submit form': function( evt ) {
-		function getInputVal( el ) {
-			var $el = $(el);
-			return $el.is(':checked') && $el.attr('value');
-		}
-		var story = {
-			name: $('#name').val(),
-			story: $('#story').val(),
-			theme: $('#theme').val(),
-			published: $('#published').is(':checked'),
-			keywords: _.chain( $('.keywords input') ).map( getInputVal ).filter( Boolean ).value()
-		};
 		evt.preventDefault();
+
+		var story = scrapeStoryData( $( evt.currentTarget ) );
 
 		// honeypot to fool spam bots
 		if( $('#check').val() !== '' ) {
@@ -43,8 +56,8 @@ Template.manageItem.helpers({
 	themes: function() {
 		return Themes.find();
 	},
-	keywords: function( themeId ) {
-		var search = Themes.findOne( themeId );
+	keywords: function() {
+		var search = Themes.findOne( this._id );
 		return search ? search.keywords : [];
 	},
 	currentTheme: function() {
@@ -53,17 +66,24 @@ Template.manageItem.helpers({
 	checked: function() {
 		return this.story.published ? 'checked': '';
 	},
-	selected: function( parentContext ) {
-		return this._id === parentContext.story.theme ? 'selected' : '';
+	themeEnabled: function() {
+		var selectedThemes = Template.instance().selectedThemes.get();
+
+		return _.indexOf( selectedThemes, this._id ) > -1 ? 'checked' : '';
 	},
-	hasThemeKeyword: function( parentContext, selectedTheme ) {
+	hasThemeKeyword: function( parentContext ) {
 		var keyword = this && this.toString();
-		if( parentContext.story.theme === selectedTheme ) {
-			return _.indexOf(parentContext.story.keywords || [], keyword) > -1 ? 'checked' : '';
+		var selectedThemes = Template.instance().selectedThemes.get();
+
+		if( _.indexOf( selectedThemes, parentContext._id ) > -1 ) {
+			return _.indexOf( Template.instance().data.story.keywords || [], keyword ) > -1 ? 'checked' : '';
 		}
 		return '';
 	},
-	selectedTheme: function() {
-		return Template.instance().selectedTheme.get();
+	selectedThemes: function() {
+		return Template.instance().selectedThemes.get();
+	},
+	enableThemeForm: function( themeIDs, parentContext ) {
+		return _.indexOf( themeIDs, parentContext._id ) === -1 ? 'disabled' : '';
 	}
 });

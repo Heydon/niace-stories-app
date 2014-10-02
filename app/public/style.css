@@ -893,6 +893,19 @@ label [type="checkbox"]:focus + span:before {
   outline-offset: 0.25em;
 }
 
+/** Sorry Heydon, pls make betterer */
+label [type="checkbox"][disabled] + span,
+label [type="checkbox"][disabled] + span:hover,
+label [type="checkbox"][disabled] + span:before {
+  cursor: default;
+  color: #8B8B8B;
+}
+
+label [type="checkbox"][disabled] + span:before {
+  background-color: #BEBEBE;
+  border-color: #BEBEBE;
+}
+
 /**************************************************************
 
 GRIDS
@@ -1197,6 +1210,10 @@ STORY BODY
 
 .story-body + form {
   margin-top: 0.5em;
+}
+
+.inline-list-separator:last-of-type {
+  display: none;
 }
 
 /**************************************************************

@@ -35,7 +35,6 @@ Template.manageAlert.helpers({
 });
 
 function constructAlertObjectFromForm( $form ) {
-
 	var alert = {};
 
 	var paths = $form.find('.paths input').map(function() {
