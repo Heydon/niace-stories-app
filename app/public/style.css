@@ -233,6 +233,10 @@ body > div {
    margin-left: auto;
 }
 
+[role="main"]:focus {
+  outline: none;
+}
+
 [role="banner"] {
   max-width: 40em;
   margin-left: auto;
@@ -586,31 +590,55 @@ ANIMATIONS
 ***************************************************************/
 
 @-webkit-keyframes wibble {
-  0%   { transform: rotate(3deg); }
-  50%  { transform: rotate(-3deg); }
+  0%   { transform: rotate(2deg); }
+  50%  { transform: rotate(-2deg); }
   100% { transform: rotate(0); }
 }
 @-moz-keyframes wibble {
-  0%   { transform: rotate(3deg); }
-  50%  { transform: rotate(-3deg); }
+  0%   { transform: rotate(2deg); }
+  50%  { transform: rotate(-2deg); }
   100% { transform: rotate(0); }
 }
 @-o-keyframes wibble {
-  0%   { transform: rotate(3deg); }
-  50%  { transform: rotate(-3deg); }
+  0%   { transform: rotate(2deg); }
+  50%  { transform: rotate(-2deg); }
   100% { transform: rotate(0); }
 }
 @keyframes wibble {
-  0%   { transform: rotate(3deg); }
-  50%  { transform: rotate(-3deg); }
+  0%   { transform: rotate(2deg); }
+  50%  { transform: rotate(-2deg); }
   100% { transform: rotate(0); }
 }
 
+@-webkit-keyframes height {
+  0%   { max-height: 0; }
+  100% { max-height: 1000px; }
+}
+@-moz-keyframes height {
+  0%   { max-height: 0; }
+  100% { max-height: 1000px; }
+}
+@-o-keyframes height {
+  0%   { max-height: 0; }
+  100% { max-height: 1000px; }
+}
+@keyframes height {
+  0%   { max-height: 0; }
+  100% { max-height: 1000px; }
+}
+
 .loaded {
-  -webkit-animation: wibble 0.2s 2; /* Safari 4+ */
-  -moz-animation:    wibble 0.2s 2; /* Fx 5+ */
-  -o-animation:      wibble 0.2s 2; /* Opera 12+ */
-  animation:         wibble 0.2s 2;
+  -webkit-animation: wibble 0.25s 2; /* Safari 4+ */
+  -moz-animation:    wibble 0.25s 2; /* Fx 5+ */
+  -o-animation:      wibble 0.25s 2; /* Opera 12+ */
+  animation:         wibble 0.25s 2;
+}
+
+.animate {
+  -webkit-animation: height 5s 2; /* Safari 4+ */
+  -moz-animation:    height 5s 2; /* Fx 5+ */
+  -o-animation:      height 5s 2; /* Opera 12+ */
+  animation:         height 5s 2; 
 }
 
 /**************************************************************
@@ -1175,6 +1203,12 @@ THEME LIST
 
 .theme-list li + li {
   margin-top: 1.5em;
+}
+
+.page {
+  color: #666;
+  font-size: 0.5em;
+  vertical-align: middle;
 }
 
 /**************************************************************

@@ -13,6 +13,8 @@ Router.configure({
 		setTimeout(function () {
 			$('main').removeAttr('class');
 		}, 1000);
+		$('html').animate({scrollTop:0}, '400');
+		$('main').focus();
 	}
 });
 

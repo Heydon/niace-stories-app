@@ -10,9 +10,9 @@
 			{{> header}}
 		</div>
 	</header>
-	{{> alertBubbles}}
 	<div>
-		<main role="main" id="main">
+		<main role="main" id="main" tabindex="-1">
+			{{> alertBubbles}}
 			<div>
 				{{> yield}}
 			</div>
