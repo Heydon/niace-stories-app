@@ -191,21 +191,54 @@
 	{{> message}}
 	{{#if noInspiration}}
 		<p>Looks like you haven't found any inspiring stories yet. Let's help you <a href="/">find an inspiring story</a>.</p>
-	{{else}}
-	<ul class="inspiring-me-stories">
-		{{#each stories}}
-			<li>
-				<div>
-					<p><a href="{{ pathFor 'story' }}">{{this.name}}'s Story</a></p>
-					<p>({{> strongThemeList}})</p>
+	{{/if}}
+	<ul class="inspiring-me-themes">
+		{{#each themes}}
+			<li class="expando-parent collapsed {{#if size stories}}has-stories{{else}}no-stories{{/if}}">
+				<div class="expando-controls">
+					<h2>
+						{{themeName}}
+						{{#if size stories}}
+							{{size stories}}
+						{{else}}
+							<a href="{{pathFor 'theme'}}">find inspiration</a>
+						{{/if}}
+					</h2>
+					<p>{{description}}</p>
 				</div>
-				<div>
-					<a aria-label="delete" href="/deleteLocal/{{ this._id }}/{{this.name}}">&#x2716;</a>
+				<div class="expando">
+					<h3>Stories that inspired you:</h3>
+					<ul class="inspiring-me-stories">
+						{{#each stories}}
+							<li>
+								<div>
+									<p><a href="{{ pathFor 'story' }}">{{this.name}}'s Story</a></p>
+									<p>({{> strongThemeList}})</p>
+								</div>
+								<div>
+									<a aria-label="delete" href="/deleteLocal/{{ this._id }}/{{this.name}}">&#x2716;</a>
+								</div>
+							</li>
+						{{/each}}
+					</ul>
+					<h3>Most interesting keywords:</h3>
+					{{> listStoryKeywords keywords=storiesKeywords}}
+					{{#if size resources}}
+						<h3>Next steps:</h3>
+						<ul>
+							{{#each resources}}
+								<li>
+									<h4>{{title}}</h4>
+									{{#markdown}}{{content}}{{/markdown}}
+									{{keywords}}
+								</li>
+							{{/each}}
+						</ul>
+					{{/if}}
 				</div>
 			</li>
 		{{/each}}
 	</ul>
-	{{/if}}
 </template>
 
 <template name="strongThemeList">

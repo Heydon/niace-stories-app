@@ -69,15 +69,6 @@ Template.theme.helpers({
 	}
 });
 
-/* Inspiring Me */
-Template.me.helpers({
-	noInspiration: function() {
-		return !ReactiveStore.get('inspiring') || !ReactiveStore.get('inspiring').length;
-	},
-	stories: function() {
-		return Stories.find();
-	}
-});
 
 // helper to display the errors from the session
 Template.errors.helpers({

@@ -42,6 +42,10 @@ Meteor.publish('alerts', function( query ) {
 	}
 });
 
+Meteor.publish('resources', function() {
+	return Resources.find();
+});
+
 // Perhaps look to remove these fixture blocks when releasing?..
 if( Stories.find().count() === 0 ) {
 	try { // 
@@ -67,6 +71,20 @@ if( Themes.find().count() === 0 ) {
 		});
 	} catch(e) {
 		console.log( 'couldn\'t load private/data/themes.json' );
+	}
+}
+
+// Fixture for resources if database empty
+if( Resources.find().count() === 0 ) {
+	try { // 
+		console.log( 'Attempting to import resources from private/data/resources.json' );
+		var resources = JSON.parse( Assets.getText('data/resources.json') );
+		_.each( resources, function( resource, i ) {
+			console.log( 'Importing resource ' + (i + 1) + '/' + resources.length );
+			Resources.insert( resource );
+		});
+	} catch(e) {
+		console.log( 'couldn\'t load private/data/resources.json' );
 	}
 }
 
