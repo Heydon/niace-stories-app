@@ -46,13 +46,13 @@
 		<ul>
 			{{#if showPrev}}
 				<li>
-					<a rel="prev" href="?page={{prev}}"><span aria-hidden>&#x2190;</span> Previous (page {{humanize prev}})</a>
+					<a rel="prev" href="?page={{prev}}"><span aria-hidden>&#x2190;</span> Previous (page {{humanizePage prev}})</a>
 				</li>
 			{{/if}}
-			{{humanize page}}
+			{{humanizePage}}
 			{{#if showNext}}
 				<li>
-					<a rel="next" href="?page={{next}}">Next (page {{humanize next}}) <span aria-hidden>&#x2192;</span></a>
+					<a rel="next" href="?page={{next}}">Next (page {{humanizePage next}}) <span aria-hidden>&#x2192;</span></a>
 				</li>
 			{{/if}}
 		</ul>
@@ -258,16 +258,19 @@
 </template>
 
 <template name="keyword">
-	<h1>{{keyword}}</h1>
+	<h1>{{keyword}} {{#if page}}<span class="page">(Page: {{humanizePage}})</span>{{/if}}</h1>
 	{{> storiesList}}
 </template>
 
 <template name="theme">
 	<h1>
 		{{#each names}}
-			{{themeName}}
-			<span class="inline-list-separator"> / </span>
+			<span class="theme-name">
+				{{themeName}}
+				<span class="inline-list-separator"> / </span>
+			</span> 
 		{{/each}}
+		{{#if page}}<span class="page">(Page: {{humanizePage}})</span>{{/if}}
 	</h1>
 	{{#if empty}}
 		<p class="message">There are no stories for this theme so far :-(</p>
