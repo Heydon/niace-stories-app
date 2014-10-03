@@ -36,10 +36,11 @@ Template.me.helpers({
 			.unique()
 			.value();
 	},
-	resources: function() {
+	resources: function( kw ) {
+		console.log( kw );
 		return Resources.find({
 			keywords: {
-				$in: this.keywords
+				$in: _.isArray( kw ) ? kw : this.keywords
 			}
 		});
 	}
