@@ -63,8 +63,8 @@ function rand( min, max ) {
 	if( max === undefined ) {
 		max = min;
 		min = 0;
-    }
-    return min + Math.floor(Math.random() * (max - min + 1));
+	}
+	return min + Math.floor(Math.random() * (max - min + 1));
 }
 
 function randomArray( arrayOfOptions, len ) {
@@ -130,18 +130,52 @@ function fetchThese( count, url, opts, cb ) {
 	};
 }
 
+function pluck( arr, val ) {
+	return arr.map(function( v ) { return v[val]; });
+}
+
+var ArrayPrototype = Array.prototype;
+var concat = ArrayPrototype.concat;
+function _f( arr, output ) {
+	arr.forEach(function( val ) {
+		if( val instanceof Array ) {
+			_f( val, output );
+		} else {
+			output.push( val );
+		}
+	});
+	return output;
+}
+function flatten( arr ) {
+	var arrs = concat.call( ArrayPrototype, arr );
+	return _f( arrs, [] );
+}
+
+function getThemesAndKeywords( themes ) {
+	var subset = randomArray( themes, themes.length / 2 | 0);
+
+	if( subset.length === 0 ) {
+		subset.push( themes[ rand( 0, themes.length - 1 ) ] );
+	}
+
+	return {
+		themes: pluck(subset, '_id'),
+		keywords: flatten( pluck(subset, 'keywords') )
+	};
+}
+
+var sevenDays = 1000 * 60 * 60 * 24 * 7;
+
 function compileStoriesWithThemes( themes ) {
 	themes = themes || [];
 	return function compileStories( storyArray ) {
 		console.log( JSON.stringify( storyArray.map(function( story ) {
-			var theme = themes[ rand( 0, themes.length - 1 ) ];
-			// get a unique array of keywords for this theme
-			var keywords = theme && randomArray( theme.keywords, rand( 0, theme.keywords.length ) );
+			var themeIdsAndKeywords = getThemesAndKeywords( themes );
 			return extend({
 				story: story,
-				submitted: Date.now() + rand( -60000, 0 ),
-				keywords: keywords || [],
-				theme: theme ? theme._id : ''
+				submitted: Date.now() + rand( -sevenDays, 0 ),
+				keywords: randomArray( themeIdsAndKeywords.keywords, rand( 0, themeIdsAndKeywords.keywords.length )),
+				themes: themeIdsAndKeywords.themes
 			}, randomObjectValue( baseStory ) );
 		})) );
 	};

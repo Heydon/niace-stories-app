@@ -47,7 +47,7 @@ Meteor.methods({
 		}
 
 		// normalize the input
-		id = id && id._id;
+		id = id && id._id || story && story._id;
 
 		if( !id || !story ) {
 			errors.push('Please supply both an ID and a story with data');
@@ -65,7 +65,7 @@ Meteor.methods({
 			errors.push('Please write a story');
 		}
 
-		if( !story.theme ) {
+		if( !story.themes || !story.themes.length ) {
 			errors.push('Please select a theme');
 		}
 

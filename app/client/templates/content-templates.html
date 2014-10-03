@@ -75,7 +75,11 @@
 	{{> inspiringRadios }}
 	<div class="story-meta">
 		<h2>More inspiration</h2>
-		<p><a href="/theme/{{storyTheme._id}}">Read more stories</a> about the <strong>{{storyThemeName this}}</strong> part of your pathway, or choose more stories like {{name}}'s that feature the following keywords:</p>
+		<p>
+			<a href="{{ pathFor 'theme' _id=themes }}">Read more stories</a>
+			featured in the {{> strongThemeList}} themes.
+		</p>
+		<p>Or you can look at more stories that have similar keywords to {{name}}'s:</p>
 		{{> listStoryKeywords}}
 	</div>
 </template>
@@ -132,26 +136,43 @@
 <template name="manageItem">
 	<form>
 		<label for="name">Name</label>
-		<input id="name" type="text" value="{{story.name}}" />
+		<input id="name" name="name" type="text" value="{{story.name}}" />
 		<label for="story">Story</label>
-		<textarea id="story">{{story.story}}</textarea>
-		<label for="theme">Theme</label>
-		<select id="theme">
-			<option disabled selected>Please choose</option>
-			{{#each themes}}
-				<option value="{{this._id}}" {{selected ..}}>{{this.themeName}}</option>
-			{{/each}}
-		</select>
-		<div class="keywords">
-			{{#each keywords selectedTheme}}
-				<label for="keyword_{{ this }}">
-					<input type="checkbox" id="keyword_{{ this }}" value="{{this}}" {{hasThemeKeyword .. selectedTheme}}>
-					{{this}}
-				</label>
-			{{/each}}
-		</div>
+		<textarea id="story" name="story">{{story.story}}</textarea>
+		<fieldset name="themes">
+			<legend>Themes</legend>
+			<div class="grid-3-columns">
+				{{#each themes}}
+					<fieldset class="theme-{{enableThemeForm selectedThemes .}}">
+						<legend>{{themeName}}</legend>
+						<label for="enable-{{_id}}">
+							<input id="enable-{{_id}}" type="checkbox" value="{{_id}}" class="vh enable-theme" {{themeEnabled}}/>
+							<span>enable {{themeName}}</span>
+						</label>
+						<div class="keywords">
+							{{#each keywords}}
+								<label for="{{ classify this 'keyword' }}">
+									<input
+										{{enableThemeForm selectedThemes ..}}
+										type="checkbox"
+										id="{{ classify this 'keyword' }}"
+										value="{{this}}"
+										class="vh"
+										{{hasThemeKeyword ..}}
+									/>
+									<span> {{this}} </span>
+								</label>
+							{{/each}}
+						</div>
+					</fieldset>
+				{{/each}}
+			</div>
+		</fieldset>
 
-		<label><input type="checkbox" id="published" value="true" {{checked}}> Published</label>
+		<label>
+			<input name="published" type="checkbox" id="published" value="true" class="vh" {{checked}}>
+			<span>Published</span>
+		</label>
 		<input type="text" style="display: none" aria-hidden="true" id="check" value="" />
 		<div role="alert">
 			{{> errors}}
@@ -175,7 +196,8 @@
 		{{#each stories}}
 			<li>
 				<div>
-					<p><a href="{{ pathFor 'story' }}">{{this.name}}'s Story</a> ({{storyThemeName this}})</p>
+					<p><a href="{{ pathFor 'story' }}">{{this.name}}'s Story</a></p>
+					<p>({{> strongThemeList}})</p>
 				</div>
 				<div>
 					<a aria-label="delete" href="/deleteLocal/{{ this._id }}/{{this.name}}">&#x2716;</a>
@@ -184,6 +206,16 @@
 		{{/each}}
 	</ul>
 	{{/if}}
+</template>
+
+<template name="strongThemeList">
+	{{#each storyThemes this}}
+		<strong>
+			<!-- <a href="{{ pathFor 'theme' }}">{{themeName}}</a> -->
+			{{themeName}}
+		</strong>
+		<span class="inline-list-separator"> / </span>
+	{{/each}}
 </template>
 
 <template name="deleteLocal">
@@ -198,7 +230,13 @@
 </template>
 
 <template name="theme">
-	<h1>{{name}} {{#if page}}<span class="page">(Page: {{humanizePage}})</span>{{/if}}</h1>
+	<h1>
+		{{#each names}}
+			{{themeName}}
+			<span class="inline-list-separator"> / </span> 
+		{{/each}}
+		{{#if page}}<span class="page">(Page: {{humanizePage}})</span>{{/if}}
+	</h1>
 	{{#if empty}}
 		<p class="message">There are no stories for this theme so far :-(</p>
 	{{else}}
@@ -221,11 +259,11 @@
 <template name="loginForm">
 	<form action="action" id="login">
 		<label for="email">Email</label>
-        <input type="email" id="email" />
-        <label for="password">Password</label>
-        <input type="password" id="password" />
-        <button type="submit">Log in</button>
-        <p><a href="{{pathFor 'register'}}">Need an account?</a></p>
+		<input type="email" id="email" />
+		<label for="password">Password</label>
+		<input type="password" id="password" />
+		<button type="submit">Log in</button>
+		<p><a href="{{pathFor 'register'}}">Need an account?</a></p>
    </form> 
 </template>
 
@@ -237,10 +275,10 @@
 <template name="registerForm">
 	<form action="action" id="register">
 		<label for="email">Email</label>
-        <input type="email" id="email" />
-        <label for="password">Password</label>
-        <input type="password" id="password" />
-        <button type="submit">Register</button>
+		<input type="email" id="email" />
+		<label for="password">Password</label>
+		<input type="password" id="password" />
+		<button type="submit">Register</button>
    </form> 
 </template>
 
