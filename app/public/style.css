@@ -1224,6 +1224,10 @@ THEME LIST
   vertical-align: middle;
 }
 
+.theme-name:last-of-type .inline-list-separator {
+  display: none;
+}
+
 /**************************************************************
 
 STORY BODY

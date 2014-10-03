@@ -232,8 +232,10 @@
 <template name="theme">
 	<h1>
 		{{#each names}}
-			{{themeName}}
-			<span class="inline-list-separator"> / </span> 
+			<span class="theme-name">
+				{{themeName}}
+				<span class="inline-list-separator"> / </span>
+			</span> 
 		{{/each}}
 		{{#if page}}<span class="page">(Page: {{humanizePage}})</span>{{/if}}
 	</h1>
