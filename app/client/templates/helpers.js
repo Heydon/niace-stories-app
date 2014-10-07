@@ -3,6 +3,14 @@
  * Move large helpers and stuff into client/features/feature.js
  */
 
+ Handlebars.registerHelper('key_value', function(context, options) {
+  var result = [];
+  _.each(context, function(value, key, list){
+    result.push({key:key, value:value});
+  });
+  return result;
+});
+
 Handlebars.registerHelper('storyThemes', function(story) {
 	return Themes.find({
 		_id: {

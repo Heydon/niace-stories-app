@@ -54,6 +54,9 @@ Template.me.events({
 				.parents('.expando-parent')
 				.toggleClass('collapsed')
 				.toggleClass('open');
+
+			var expanded = $(evt.currentTarget).attr('aria-expanded') === 'false' ? 'true' : 'false';
+			$(evt.currentTarget).attr('aria-expanded', expanded);
 		}
 	}
 });

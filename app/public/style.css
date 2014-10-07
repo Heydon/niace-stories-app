@@ -292,7 +292,6 @@ h1 + p {
 
 /* markdown-friendly blockquote styles */
 blockquote > * {
-  font-size: 0.85em;
   margin-left: 2em;
 }
 
@@ -1393,7 +1392,8 @@ EXPANDO
 }
 
 .expando-parent.open .expando {
-  max-height: 2000px;
+  max-height: 10000px;
+  padding-bottom: 1.5em;
   opacity: 1;
 }
 
@@ -1406,6 +1406,84 @@ EXPANDO
   -moz-transition: opacity 1s ease;
   -o-transition: opacity 1s ease;
   transition: opacity 1s ease;
+}
+
+/**************************************************************
+
+INSPIRING ME
+
+***************************************************************/
+
+.inspiring-me-themes li {
+  list-style: none;
+}
+
+.inspiring-me-themes li:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.inspiring-me-themes h2 {
+  position: relative;
+}
+
+.inspiring-me-themes h2 span {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  font-weight: 400;
+  font-size: 0.75em;
+  margin-top: 0.33em;
+}
+
+.inspiring-me-themes h2 button {
+  display: block;
+  width: 100%;
+  border: 0;
+  box-shadow: none;
+  text-align: left;
+  padding: 0;
+}
+
+.inspiring-me-themes h2 button:before {
+  content: '\25bc\0020';
+  font-size: 0.75em;
+  vertical-align: 0.125em;
+}
+
+.inspiring-me-themes h2 button[aria-expanded="true"]:before {
+  content: '\25b2\0020';
+}
+
+.inspiring-me-themes > li {
+  margin-bottom: 1.5em;
+  border-bottom: 2px solid #ddd;
+}
+
+.inspiring-me-themes ul {
+  margin-left: 0;
+}
+
+.inspiring-me-themes .keywords, fieldset .keywords {
+  text-align: left;
+}
+
+fieldset {
+  padding: 1.5em;
+  border: 2px solid #444;
+  border-radius: 0.25em;
+}
+
+legend {
+  background: #444;
+  border-radius: 1em;
+  padding: 0.25em 1em;
+  color: #fff;
+}
+
+legend + * {
+  margin-top: 0;
 }
 
 /**************************************************************

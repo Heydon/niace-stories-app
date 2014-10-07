@@ -24,7 +24,7 @@
 					</div>
 					{{#if loggedIn}}
 						<p>
-							<a href="{{ pathFor 'manageItem' }}">edit/publish this story</a>
+							<a href="{{ pathFor 'manageItem' }}">Edit this story</a>
 						</p>
 					{{/if}}
 				</div>
@@ -134,41 +134,39 @@
 </template>
 
 <template name="manageItem">
+	<h1>Manage {{story.name}}'s story</h1>
 	<form>
 		<label for="name">Name</label>
 		<input id="name" name="name" type="text" value="{{story.name}}" />
 		<label for="story">Story</label>
-		<textarea id="story" name="story">{{story.story}}</textarea>
-		<fieldset name="themes">
-			<legend>Themes</legend>
-			<div class="grid-3-columns">
-				{{#each themes}}
-					<fieldset class="theme-{{enableThemeForm selectedThemes .}}">
-						<legend>{{themeName}}</legend>
-						<label for="enable-{{_id}}">
-							<input id="enable-{{_id}}" type="checkbox" value="{{_id}}" class="vh enable-theme" {{themeEnabled}}/>
-							<span>enable {{themeName}}</span>
+		<textarea id="story" name="story" rows="10">{{story.story}}</textarea>
+		<h2>Set themes and keywords</h2>
+		{{#each themes}}
+			<fieldset class="theme-{{enableThemeForm selectedThemes .}}">
+				<legend>{{themeName}}</legend>
+				<label for="enable-{{_id}}">
+					<input id="enable-{{_id}}" type="checkbox" value="{{_id}}" class="vh enable-theme" {{themeEnabled}}/>
+					<span>enable {{themeName}}</span>
+				</label>
+				<div class="keywords">
+					{{#each keywords}}
+						<label for="{{ classify this 'keyword' }}">
+							<input
+								{{enableThemeForm selectedThemes ..}}
+								type="checkbox"
+								id="{{ classify this 'keyword' }}"
+								value="{{this}}"
+								class="vh"
+								{{hasThemeKeyword ..}}
+							/>
+							<span> {{this}} </span>
 						</label>
-						<div class="keywords">
-							{{#each keywords}}
-								<label for="{{ classify this 'keyword' }}">
-									<input
-										{{enableThemeForm selectedThemes ..}}
-										type="checkbox"
-										id="{{ classify this 'keyword' }}"
-										value="{{this}}"
-										class="vh"
-										{{hasThemeKeyword ..}}
-									/>
-									<span> {{this}} </span>
-								</label>
-							{{/each}}
-						</div>
-					</fieldset>
-				{{/each}}
-			</div>
-		</fieldset>
-
+					{{/each}}
+				</div>
+			</fieldset>
+		{{/each}}
+		<h2>Published?</h2>
+		<p>Is the story ready to be shown in the app?</p>
 		<label>
 			<input name="published" type="checkbox" id="published" value="true" class="vh" {{checked}}>
 			<span>Published</span>
@@ -195,25 +193,27 @@
 	<ul class="inspiring-me-themes">
 		{{#each themes}}
 			<li class="expando-parent collapsed {{#if size stories}}has-stories{{else}}no-stories{{/if}}">
-				<div class="expando-controls">
+				<div>
 					<h2>
-						{{themeName}}
+						<button class="expando-controls" aria-expanded="false" aria-controls="expando-{{_id}}">
+							{{themeName}}
+						</button>
 						{{#if size stories}}
-							{{size stories}}
+							<span class="count">({{size stories}} saved)</span>
 						{{else}}
-							<a href="{{pathFor 'theme'}}">find inspiration</a>
+							<span class="count">(<a href="{{pathFor 'theme'}}">None yet :-(</a>)</span>
 						{{/if}}
 					</h2>
-					<p>{{description}}</p>
 				</div>
-				<div class="expando">
-					<h3>Stories that inspired you:</h3>
+				<div class="expando" id="expando-{{_id}}" tabindex="-1">
+					<h3>About {{themeName}}:</h3>
+					<p>{{description}}</p>
+					<h3>Stories that inspired me:</h3>
 					<ul class="inspiring-me-stories">
 						{{#each stories}}
 							<li>
 								<div>
 									<p><a href="{{ pathFor 'story' }}">{{this.name}}'s Story</a></p>
-									<p>({{> strongThemeList}})</p>
 								</div>
 								<div>
 									<a aria-label="delete" href="{{pathFor 'deleteLocal'}}">&#x2716;</a>
