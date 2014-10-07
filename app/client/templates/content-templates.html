@@ -7,6 +7,7 @@
 
 <template name="storiesList">
 	<ul class="grid-2-columns">
+		{{#unless loggedIn}}
 		<li class="teaser">
 			<div class="your-story">
 				<h2>What's <em>your</em> story?</h2>
@@ -15,9 +16,20 @@
 				</div>
 			</div>
 		</li>
+		{{/unless}}
 		{{#each stories}}
 			<li class="teaser {{#if published}}published{{/if}}">
-				<h2><a href="{{pathFor 'story'}}">{{name}}'s story</a></h2>
+				<h2><a href="{{pathFor 'story'}}">{{name}}'s story</a>
+					{{#if loggedIn}}
+						<em class="status {{publishedClass}}">
+							{{#if published}}
+								published
+							{{else}}
+								not published
+							{{/if}}
+						</em>
+					{{/if}}
+				</h2>
 				<div class="story-body">
 					<div class="truncated">
 						{{ this.story }}

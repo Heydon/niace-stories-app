@@ -338,8 +338,8 @@ code {
 kbd eg.
 
 <kbd>
-	<kbd>shift</kbd> + 
-	<kbd>tab</kbd>
+  <kbd>shift</kbd> + 
+  <kbd>tab</kbd>
 </kbd>
 
 */
@@ -510,22 +510,22 @@ Navigation blocks using ARIA role="navigation"
 aria-label eg.
 
 <nav role="navigation" aria-label="main menu">
-	<ul>
-		<li><a href="[URL]">[LINK TEXT]</a></li>
-		<li><a href="[URL]">[LINK TEXT]</a></li>
-		<li><a href="[URL]">[LINK TEXT]</a></li>
-	</ul>
+  <ul>
+    <li><a href="[URL]">[LINK TEXT]</a></li>
+    <li><a href="[URL]">[LINK TEXT]</a></li>
+    <li><a href="[URL]">[LINK TEXT]</a></li>
+  </ul>
 </nav>
 
 heading eg.
 
 <nav role="navigation">
-	<h2>Main Menu</h2>
-	<ul>
-		<li><a href="[URL]">[LINK TEXT]</a></li>
-		<li><a href="[URL]">[LINK TEXT]</a></li>
-		<li><a href="[URL]">[LINK TEXT]</a></li>
-	</ul>
+  <h2>Main Menu</h2>
+  <ul>
+    <li><a href="[URL]">[LINK TEXT]</a></li>
+    <li><a href="[URL]">[LINK TEXT]</a></li>
+    <li><a href="[URL]">[LINK TEXT]</a></li>
+  </ul>
 </nav>
 
 ***************************************************************/
@@ -818,7 +818,7 @@ THEMABLE RADIO BUTTON PATTERN
 Markup:
 
 <label>
-	<input type="radio" value="[value]" class="vh" /> <span>[label text]</span>
+  <input type="radio" value="[value]" class="vh" /> <span>[label text]</span>
 </label>
 
 ***************************************************************/
@@ -873,7 +873,7 @@ THEMABLE CHECKBOX PATTERN
 Markup:
 
 <label>
-	<input type="checkbox" value="[value]" class="vh" /> <span>[label text]</span>
+  <input type="checkbox" value="[value]" class="vh" /> <span>[label text]</span>
 </label>
 
 ***************************************************************/
@@ -942,10 +942,10 @@ list of column variants
 Example markup (a three column grid):
 
 <div class="grid-3-columns">
-	<div></div>
-	<div></div>
-	<div></div>
-	<div></div> <!-- will be corrected to fill space -->
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div> <!-- will be corrected to fill space -->
 </div>
 
 ***************************************************************/
@@ -1444,16 +1444,7 @@ INSPIRING ME
   box-shadow: none;
   text-align: left;
   padding: 0;
-}
-
-.inspiring-me-themes h2 button:before {
-  content: '\25bc\0020';
-  font-size: 0.75em;
-  vertical-align: 0.125em;
-}
-
-.inspiring-me-themes h2 button[aria-expanded="true"]:before {
-  content: '\25b2\0020';
+  padding-right: 4em;
 }
 
 .inspiring-me-themes > li {
@@ -1484,6 +1475,18 @@ legend {
 
 legend + * {
   margin-top: 0;
+}
+
+.status {
+  display: block;
+  font-size: 0.75em;
+  padding: 0.25em;
+  margin-top: 0.25em;
+}
+
+.status.not-published {
+  color: #fff;
+  background: #f55;
 }
 
 /**************************************************************
@@ -1582,5 +1585,10 @@ BREAKPOINTS
   [class*="grid"] > * + * {
     margin-top: 1.5em;
   }
+  
+  .inspiring-me-themes .count {
+    position: static;
+  }
+  
 
 }

@@ -48,6 +48,11 @@ Template.storiesList.helpers({
 	},
 	empty: function() {
 		return Stories.find().count() === 0;
+	},
+	publishedClass: function() {
+		if (!this.published) {
+			return 'not-published';
+		}
 	}
 });
 
