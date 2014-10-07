@@ -69,21 +69,6 @@ Template.theme.helpers({
 	}
 });
 
-/* Inspiring Me */
-
-function areThereStories() {
-	var inspiring = ReactiveStore.get('inspiring');
-	return inspiring && inspiring.length;
-}
-
-Template.me.helpers({
-	someStories: function() {
-		return !areThereStories();
-	},
-	stories: function() {
-		return Stories.find();
-	}
-});
 
 // helper to display the errors from the session
 Template.errors.helpers({

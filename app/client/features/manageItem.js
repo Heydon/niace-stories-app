@@ -1,13 +1,13 @@
 Template.manageItem.created = function() {
 	this.selectedThemes = new ReactiveVar();
-	this.selectedThemes.set( this.data.story.themes );
+	this.selectedThemes.set( this.data.story.themes || [] );
 };
 
 function val( el ) {return el.value;}
 
 function scrapeStoryData( $form ) {
 	var story = {};
-	
+
 	story.themes = _.map( $form.find('[name="themes"] .enable-theme:checked'), val );
 	story.keywords = _.map( $form.find('[name="themes"] .keywords :checked'), val );
 

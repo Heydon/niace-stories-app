@@ -175,7 +175,8 @@ function compileStoriesWithThemes( themes ) {
 				story: story,
 				submitted: Date.now() + rand( -sevenDays, 0 ),
 				keywords: randomArray( themeIdsAndKeywords.keywords, rand( 0, themeIdsAndKeywords.keywords.length )),
-				themes: themeIdsAndKeywords.themes
+				themes: themeIdsAndKeywords.themes,
+				fixture: true
 			}, randomObjectValue( baseStory ) );
 		})) );
 	};

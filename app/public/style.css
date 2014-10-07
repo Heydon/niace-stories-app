@@ -1382,6 +1382,34 @@ ADMIN BAR
 
 /**************************************************************
 
+EXPANDO
+
+***************************************************************/
+
+.expando-parent.collapsed .expando {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+}
+
+.expando-parent.open .expando {
+  max-height: 2000px;
+  opacity: 1;
+}
+
+.expando-parent .expando {
+  -webkit-transition: max-height 0.5s ease;
+  -moz-transition: max-height 0.5s ease;
+  -o-transition: max-height 0.5s ease;
+  transition: max-height 0.5s ease;
+  -webkit-transition: opacity 1s ease;
+  -moz-transition: opacity 1s ease;
+  -o-transition: opacity 1s ease;
+  transition: opacity 1s ease;
+}
+
+/**************************************************************
+
 BREAKPOINTS
 
 ***************************************************************/
