@@ -154,7 +154,7 @@
 		<textarea id="story" name="story" rows="10">{{story.story}}</textarea>
 		<h2>Set themes and keywords</h2>
 		{{#each themes}}
-			<fieldset class="theme-{{enableThemeForm selectedThemes .}}">
+			<fieldset name="themes" class="theme-{{enableThemeForm selectedThemes .}}">
 				<legend>{{themeName}}</legend>
 				<label for="enable-{{_id}}">
 					<input id="enable-{{_id}}" type="checkbox" value="{{_id}}" class="vh enable-theme" {{themeEnabled}}/>
