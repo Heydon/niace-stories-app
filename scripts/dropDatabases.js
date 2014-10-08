@@ -18,7 +18,7 @@ if( process.env.MONGOHQ_URL ) {
 				}
 				console.log('Dropped themes and stories from the mongo database');
 				hasErrored && console.error('There was an error though');
-				process.exit( hasErrord );
+				process.exit( hasErrored );
 			});
 		});
 	});
