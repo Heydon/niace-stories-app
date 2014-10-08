@@ -10,6 +10,7 @@
     "genStoryFixtures": "mongo 127.0.0.1:3001/meteor --quiet --eval \"printjson(db.themes.find().toArray())\" | ./scripts/fillout.js 150 > app/private/data/stories.json",
     "stubTemplates": "sed \"s/<template name=\\\"/Template.stub('/g\" `find ./app/client -name *.html` |sed \"s/\\\">/');/g\" |grep Template.stub\\( > test/unit/stubs.js",
     "test": "npm run stubTemplates; rtd bgShell:killAll; rtd runOnce; TESTRESULT=$?; rtd bgShell:killAll; exit $TESTRESULT",
+    "loudTest": "npm run stubTemplates; rtd bgShell:killAll; rtd runOnce --debug; TESTRESULT=$?; rtd bgShell:killAll; exit $TESTRESULT",
     "jshint": "jshint ./"
   },
   "repository": {
