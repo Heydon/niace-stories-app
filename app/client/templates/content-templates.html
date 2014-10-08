@@ -162,11 +162,11 @@
 				</label>
 				<div class="keywords">
 					{{#each keywords}}
-						<label for="{{ classify this 'keyword' }}">
+						<label for="{{parentId ..}}_{{ classify this 'keyword' }}">
 							<input
 								{{enableThemeForm selectedThemes ..}}
 								type="checkbox"
-								id="{{ classify this 'keyword' }}"
+								id="{{parentId ..}}_{{ classify this 'keyword' }}"
 								value="{{this}}"
 								class="vh"
 								{{hasThemeKeyword ..}}

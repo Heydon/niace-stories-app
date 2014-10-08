@@ -58,6 +58,16 @@ if( Stories.find().count() === 0 ) {
 	} catch(e) {
 		console.log( 'couldn\'t load private/data/stories.json' );
 	}
+	try { // 
+		console.log( 'Attempting to import stories from private/data/real_stories.json' );
+		var stories = JSON.parse( Assets.getText('data/real_stories.json') );
+		_.each( stories, function( story, i ) {
+			console.log( 'Importing story ' + (i + 1) + '/' + stories.length );
+			Stories.insert( story );
+		});
+	} catch(e) {
+		console.log( 'couldn\'t load private/data/real_stories.json' );
+	}
 }
 
 // Fixture for themes if database empty

@@ -23,7 +23,6 @@
       "courses",
       "school",
       "volunteering",
-      "apprenticeships",
       "higher education"
     ],
     "description": "There are lots of choices when it comes to education. Read people's experiences"
@@ -40,7 +39,6 @@
   {
     "themeName": "Health",
     "keywords": [
-      "mental health",
       "diet",
       "exercise",
       "appointments",
