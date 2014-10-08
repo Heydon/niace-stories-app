@@ -87,5 +87,8 @@ Template.manageItem.helpers({
 	},
 	enableThemeForm: function( themeIDs, parentContext ) {
 		return _.indexOf( themeIDs, parentContext._id ) === -1 ? 'disabled' : '';
+	},
+	parentId: function( par ) {
+		return par._id;
 	}
 });
