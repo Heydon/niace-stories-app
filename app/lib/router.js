@@ -165,6 +165,20 @@ Router.map(function() {
 
 	this.route('manageAlert', { path: '/manageAlert' });
 
+	this.route('manageResources', {
+		path: 'resources'
+	});
+
+	this.route('manageResource', {
+		path: 'resource/:_id',
+		data: function() {
+			if( this.params._id ) {
+				return Resources.findOne( this.params._id );
+			}
+		}
+	});
+	this.route('manageResource', {path: 'resource'});
+
 });
 
 Router.onBeforeAction('loading');
@@ -180,4 +194,4 @@ var requireLogin = function(pause) {
 	}
 };
 
-Router.onBeforeAction(requireLogin, {only: ['manage', 'manageItem', 'allStories', 'manageAlerts']});
+Router.onBeforeAction(requireLogin, {only: ['manage', 'manageItem', 'allStories', 'manageAlerts', 'manageResources']});
