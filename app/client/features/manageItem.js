@@ -15,6 +15,8 @@ function scrapeStoryData( $form ) {
 		story[ prop ] = $form.find('[name="' + prop + '"]').val();
 	});
 
+	story.published = $form.find('[name="published"]').is(':checked');
+
 	return story;
 }
 
