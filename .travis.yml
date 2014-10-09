@@ -4,24 +4,23 @@ node_js:
 branches:
   only:
   - master
+services:
+  - mongodb
+env: 
+  - LAIKA_OPTIONS="-t 5000"
 before_install:
 - curl https://install.meteor.com/ | sh
-- sudo apt-get install openjdk-7-jre-headless
 install:
 - npm install --development
 script:
 - echo Running tests and hinting
 - npm run jshint
-- chmod +x ./scripts/makeRTDTestsWorkInTravis.sh
-- ./scripts/makeRTDTestsWorkInTravis.sh
-- npm run travisTest
-- rm -rf build
+- npm test
 before_deploy:
 - cat app/private/data/themes.json | ./scripts/fillout.js 500 > app/private/data/stories.json
 - 'bash -c "cd app && meteor build --directory ../deploy"'
 - rm -rf app
 - rm -rf node_modules
-- rm -rf test
 - 'bash -c "cd deploy/bundle/programs/server && npm install"'
 - npm install --production
 deploy:
@@ -31,7 +30,7 @@ deploy:
   skip_cleanup: true
   api_key:
     secure: vMSuLcI2rzDVWBxsb7FcsVYBtIO13iLhnn7rWIG09Rd5dRG0hFJljpmi8FPKrL1ynF9RNn7vVEBIb1LZb+e/+Dn93gaeceIgXb9FbTQHALJju0lzyQ/FgsgKf8CU3tEnWiAu9rHKc+idR7pH7As/A+zQeoxiC2WuE8br+a36NTw=
-  run: 
+  run:
     - "node scripts/dropDatabases.js"
     - restart
 notifications:
@@ -39,5 +38,5 @@ notifications:
     recipients:
     - rob@neontribe.co.uk
     - heydon@neontribe.co.uk
-    on_sucess: always
-    on_failure: always
+    on_sucess: change
+    on_failure: change

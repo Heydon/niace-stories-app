@@ -1,3 +1,0 @@
-Handlebars = {
-	registerHelper: function() {}
-};
