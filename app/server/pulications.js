@@ -46,6 +46,12 @@ Meteor.publish('resources', function() {
 	return Resources.find();
 });
 
+/**
+ * TODO: Move this to an import button, so we don't _always_ mess with the database
+ * This function takes a file and a datatype and imports the file into the datatype
+ * @param  {string} file the file path from app/private/
+ * @param  {Collection} Type the collection constructor
+ */
 function preLoadDatabase( file, Type ) {
 	try { // 
 		console.log( 'Attempting to import database entries from private/' + file );

@@ -11,14 +11,20 @@ if( process.env.MONGOHQ_URL ) {
 				console.error( err );
 				hasErrored = 1;
 			}
-			mongoose.connection.db.dropCollection('stories', function( err ) {
+			mongoose.connection.db.dropCollection('resources', function( err ) {
 				if( err ) {
 					console.error( err );
 					hasErrored = 1;
 				}
-				console.log('Dropped themes and stories from the mongo database');
-				hasErrored && console.error('There was an error though');
-				process.exit( hasErrored );
+				mongoose.connection.db.dropCollection('stories', function( err ) {
+					if( err ) {
+						console.error( err );
+						hasErrored = 1;
+					}
+					console.log('Dropped themes and stories from the mongo database');
+					hasErrored && console.error('There was an error though');
+					process.exit( hasErrored );
+				});
 			});
 		});
 	});
