@@ -33,6 +33,7 @@
 		"saveInspiringStory": true,
 		"removeInspiringStory": true,
 		"setTimeout": true,
-		"Resources": true
+		"Resources": true,
+		"Config": true
 	} 
 }

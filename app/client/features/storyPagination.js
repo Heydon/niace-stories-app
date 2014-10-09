@@ -10,7 +10,7 @@ Handlebars.registerHelper('humanizePage', function( page ) {
 
 Template.storyPagination.helpers({
 	showNext: function() {
-		return Stories.find().count() === 10;
+		return Stories.find().count() === Config.findOne('pageSize').value;
 	},
 	showPrev: function() {
 		return getCurrentPage() > 0;

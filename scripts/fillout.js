@@ -35,7 +35,7 @@ var urlQueryOptions = {
 	'no-lists': ['', 'on'],
 	'no-inline-markup': ['', 'on'],
 	'reference-links': ['', 'on'],
-	'underline-headers': ['', 'on'],
+	'underline-headers': [''],
 	'underscore-em': ['', 'on'],
 	'underscore-strong': ['', 'on'],
 	'num-blocks': [1,2,3,4,5]

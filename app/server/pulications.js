@@ -1,13 +1,30 @@
 'use strict';
 
-// TODO move this to a config variable
-var pageSize = 10;
+// default config options
+if( !Config.find().count() ) {
+	Config.insert({
+		_id: 'pageSize',
+		value: 10
+	});
+	Config.insert({
+		_id: 'fixture',
+		value: false
+	});
+}
 
 Meteor.publish('stories', function( loggedIn, query, options ) {
+	var pageSize = Config.findOne('pageSize').value;
+
 	var page = options && options.page || 0;
 	query = query || {};
 	if( !loggedIn ) {
 		query.published = true;
+	}
+
+	if( !Config.findOne('fixture').value ) {
+		query.fixture = {
+			$exists: false
+		};
 	}
 
 	if( options ) {
@@ -46,6 +63,10 @@ Meteor.publish('resources', function() {
 	return Resources.find();
 });
 
+Meteor.publish('config', function() {
+	return Config.find();
+});
+
 /**
  * TODO: Move this to an import button, so we don't _always_ mess with the database
  * This function takes a file and a datatype and imports the file into the datatype
@@ -57,7 +78,7 @@ function preLoadDatabase( file, Type ) {
 		console.log( 'Attempting to import database entries from private/' + file );
 		var entries = JSON.parse( Assets.getText( file ) );
 		_.each( entries, function( data, i ) {
-			console.log( 'Importing story ' + (i + 1) + '/' + entries.length );
+			console.log( 'Importing data from ' + file + ' ' + (i + 1) + '/' + entries.length );
 			Type.insert( data );
 		});
 	} catch(e) {
