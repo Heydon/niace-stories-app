@@ -8,7 +8,7 @@ The alpha application for NIACE, running on Meteor.
 http://inspire-me-dev.herokuapp.com/
 
 # Travis Status
-![Travis status](https://travis-ci.org/Heydon/niace-stories-app.svg)
+[![Travis status](https://travis-ci.org/Heydon/niace-stories-app.svg)](https://travis-ci.org/Heydon/niace-stories-app)
 
 ## Setup
 
@@ -21,8 +21,6 @@ http://inspire-me-dev.herokuapp.com/
 curl https://install.meteor.com/ | sh
 npm install
 npm run jshint
-# java is required for the tests
-# sudo apt-get install openjdk-7-jre-headless
 npm run test
 cd app
 meteor
