@@ -1,4 +1,4 @@
-//tests/posts.js
+//tests/server
 var assert = require('assert');
 
 suite('Database import', function() {
