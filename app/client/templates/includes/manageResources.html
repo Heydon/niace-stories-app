@@ -1,8 +1,8 @@
 <template name="manageResources">
-	<h2>Manage resources</h2>
+	<h1>Manage resources</h1>
 	{{> message}}
 	<p><a class="larger" href="{{pathFor 'manageResource'}}">Add new resource</a></p>
-	<ul>
+	<ul class="manage-resources">
 		{{#each resources}}
 			<li>
 				<h2>{{title}} <a href="{{pathFor 'manageResource'}}/{{_id}}">edit</a></h2>
@@ -13,13 +13,13 @@
 </template>
 
 <template name="manageResource">
-	<h2>Resource {{#if title}}"{{title}}"{{/if}}</h2>
+	<h1>Resource {{#if title}}"{{title}}"{{/if}}</h1>
 	<form>
 		<label for="title">Title</label>
 		<input id="title" type="text" name="title" value="{{title}}" />
 		<label for="content">Content</label>
 		<textarea id="content" name="content">{{content}}</textarea>
-		<h3>Keywords</h3>
+		<h2>Keywords</h2>
 		<p>
 			This will be used to match stories that are found to be inspiring to the resource,
 			which will appear on the next times area on the inspiring me page
@@ -28,7 +28,7 @@
 			{{#each themes}}
 				<li>
 					{{themeName}}
-					<ul>
+					<ul class="keywords">
 						{{#each keywords}}
 							<li>
 								<label>

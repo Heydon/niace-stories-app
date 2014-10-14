@@ -2,6 +2,10 @@ function getCurrentPage() {
 	return parseInt( Router.current().params.page, 10 ) || 0;
 }
 
+function arePages() {
+	return Stories.find().count() === Config.findOne('pageSize').value;
+}
+
 Handlebars.registerHelper('page', getCurrentPage );
 
 Handlebars.registerHelper('humanizePage', function( page ) {
@@ -9,9 +13,7 @@ Handlebars.registerHelper('humanizePage', function( page ) {
 });
 
 Template.storyPagination.helpers({
-	showNext: function() {
-		return Stories.find().count() === Config.findOne('pageSize').value;
-	},
+	showNext: arePages,
 	showPrev: function() {
 		return getCurrentPage() > 0;
 	},
@@ -20,5 +22,8 @@ Template.storyPagination.helpers({
 	},
 	prev: function() {
 		return getCurrentPage() - 1;
+	},
+	paged: function() {
+		return !(getCurrentPage() === 0 && !arePages());
 	}
 });

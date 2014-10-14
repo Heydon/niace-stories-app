@@ -3,6 +3,10 @@ Template.manageItem.created = function() {
 	this.selectedThemes.set( this.data.story.themes || [] );
 };
 
+Template.manageItem.rendered = function() {
+	$('textarea').autosize();
+}
+
 function val( el ) {return el.value;}
 
 function scrapeStoryData( $form ) {

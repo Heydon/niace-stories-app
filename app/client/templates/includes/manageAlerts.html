@@ -1,6 +1,6 @@
 <template name="manageAlerts">
 	{{> message}}
-	<p>These will appear at the top of pages which match the paths shown below.</p>
+	<p>These tutorial boxes will appear at the top of pages which match the paths shown below.</p>
 	<p>NB. They will not appear if you are logged in!</p>
 	<p><a class="larger" href="{{pathFor 'manageAlert'}}">Add new helper bubble</a></p>
 	<ul class="alerts-list">
@@ -21,10 +21,10 @@
 </template>
 
 <template name="manageAlert">
-	<h1>Manage alert: {{title}}</h1>
+	<h1>Manage tutorials: {{title}}</h1>
 	<form name="manageAlert" tabindex="-1">
 		<div>
-			<label for="title">Title:</label>
+			<label for="title">Title (for your reference only):</label>
 			<input id="title" name="title" value="{{title}}" type="text" />
 		</div>
 		<div>

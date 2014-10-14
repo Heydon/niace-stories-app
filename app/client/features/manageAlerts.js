@@ -9,6 +9,10 @@ Template.manageAlerts.helpers({
 	}
 });
 
+Template.manageAlert.rendered = function() {
+	$('textarea').autosize();
+}
+
 Template.manageAlert.helpers({
 	availablePaths: function() {
 		return Router.routes;

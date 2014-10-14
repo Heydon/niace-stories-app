@@ -249,7 +249,7 @@ body > div {
 }
 
 [role="main"] {
-  margin-top: 3em;
+  margin-top: 1.5em;
 }
 
 /**************************************************************
@@ -417,7 +417,7 @@ h3, h4, h5 {
 }
 
 h1 {
-  font-size: 2.5em;
+  font-size: 3em;
 }
 
 h2 {
@@ -429,7 +429,7 @@ h3 {
 }
 
 h4 {
-  font-size: 1.25em;
+  font-size: 1.125em;
 }
 
 h5 {
@@ -531,23 +531,8 @@ heading eg.
 ***************************************************************/
 
 [role="navigation"] {
-  margin-top: 0;
-}
-
-[role="navigation"] ul {
-  font-size: 0;
-}
-
-[role="navigation"] li {
-  list-style: none;
-  display: inline-block;
-  font-size: $font-size-base; /* smelly IE8 */
-  font-size: 1rem;
-}
-
-[role="navigation"] a {
-  display: block;
-  border: 0;
+  padding: 0.75em;
+  font-size: 1.125em;
 }
 
 [role="navigation"] ul {
@@ -558,28 +543,29 @@ heading eg.
 
 [role="navigation"] li {
   display: table-cell;
-  vertical-align: middle;
-  font-size: 1.25rem;
-}
-
-[role="navigation"] a {
-  background: $color-interactive;
-  padding: 0.5em 0;
   text-align: center;
+  vertical-align: middle;
   line-height: 1;
 }
 
-[role="navigation"] a:hover,
-[role="navigation"] a:focus {
-  text-decoration: underline;
+[role="navigation"] li:first-child {
+  width: 35%;
 }
 
-[aria-label="main menu"] li:nth-child(3) a {
-  font-size: 1.5em;
+[role="navigation"] a {
+  border: 2px solid #777;
+  padding: 0.25em 0.5em;
+  border-radius: 0.25em;
+  margin: 0 1em;
+  display: block;
 }
 
-[aria-label="main menu"] li:first-child {
-  display: none;
+[role="navigation"] a:hover, [role="navigation"] a:focus {
+  border-color: #480;
+}
+
+[role="navigation"] li:first-child a {
+  border: 0;
 }
 
 /**************************************************************
@@ -1286,9 +1272,29 @@ NOTIFICATIONS
 }
 
 .intro > div {
-  background: #fff;
-  border: 2px solid #d4ff2a;
+  color: #fff;
+  background: #444;
   padding: 1.5em;
+}
+
+.intro button {
+  border: 0;
+  box-shadow: none;
+}
+
+.intro a {
+  color: #fff;
+}
+
+.intro button:hover, .intro button:focus,
+.admin button:hover, .admin button:focus {
+  outline: thin dotted #fff;
+  outline-offset: 0.25em;
+}
+
+.intro button:active,
+.admin button:active {
+  top: 0;
 }
 
 /**************************************************************
@@ -1360,6 +1366,7 @@ ADMIN BAR
 .admin {
   background: #444;
   padding: 0.5em;
+  font-size: 1.125em;
 }
 
 .admin:before {
@@ -1371,6 +1378,10 @@ ADMIN BAR
 
 .admin a {
   color: #fff;
+}
+
+.admin a:hover, .admin a:active {
+  border-bottom: 2px solid;
 }
 
 .admin button {
@@ -1406,6 +1417,22 @@ EXPANDO
   -moz-transition: opacity 1s ease;
   -o-transition: opacity 1s ease;
   transition: opacity 1s ease;
+}
+
+.next-steps li + li {
+  margin-top: 1.5em;
+}
+
+.expando h3 {
+  border-bottom: 1px solid #ccc;
+}
+
+.expando .keywords {
+  margin-top: 1.5em
+}
+
+.next-steps h4 + * {
+  margin-top: 0;
 }
 
 /**************************************************************
@@ -1495,22 +1522,30 @@ BREAKPOINTS
 
 ***************************************************************/
 
-@media all and (max-width: 800px) {
+@media all and (max-width: 950px) {
 
-  html {
-    font-size: 18px;
+  [aria-label="main menu"] li:first-child a {
+    padding: 0;
   }
 
 }
 
 @media all and (max-width: 800px) {
 
-  [role="main"] {
-    max-width: none;
+  html {
+    font-size: 18px;
   }
 
   [href^="/random"] [aria-hidden] {
     display: none;
+  }
+
+  [role="main"] {
+    max-width: none;
+  }
+  
+  [role="navigation"] a {
+    margin: 0 0.25em;
   }
 
 }
@@ -1532,14 +1567,7 @@ BREAKPOINTS
 
 }
 
-@media all and (max-width: 550px) {
-  
-  [aria-label="main menu"] {
-    padding: 0 0.75em;
-    padding-top: 5em !important;
-    background: url(/logo.svg) no-repeat center 0.5em;
-    background-size: auto 4em;
-  }
+@media all and (max-width: 600px) {
 
   [aria-label="main menu"] ul {
     display: block;
@@ -1552,6 +1580,13 @@ BREAKPOINTS
 
   [aria-label="main menu"] li:first-child {
     display: block;
+    width: 100%;
+  }
+
+  [aria-label="main menu"] li:first-child img {
+    max-width: 400px;
+    display: block;
+    margin: 0 auto;
   }
 
   [aria-label="main menu"] a {
