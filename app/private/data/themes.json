@@ -7,7 +7,7 @@
       "banking",
       "student loans"
     ],
-    "description": "Learning how to handle money is a big step towards achieving independence"
+    "description": "Learning how to handle money is a big step towards achieving independence."
   },
   {
     "_id" : "PKzZkGiTt2MRk3MJH",
@@ -27,7 +27,7 @@
       "volunteering",
       "higher education"
     ],
-    "description": "There are lots of choices when it comes to education. Read people's experiences"
+    "description": "There are lots of choices when it comes to education. Read people's experiences."
   },
   {
     "_id" : "8TYbgNdogWyDz2x4z",
@@ -37,7 +37,7 @@
       "family",
       "key workers"
     ],
-    "description": "Whether we're talking family or romance, relationships are a big part of our lives"
+    "description": "Whether we're talking family or romance, relationships are a big part of our lives."
   },
   {
     "_id" : "gtn8bwLTYJ3TPTstp",
@@ -48,7 +48,7 @@
       "appointments",
       "mental health"
     ],
-    "description": "It's hard to get on when you're not feeling it physically. Mental health is also important"
+    "description": "It's hard to get on when you're not feeling it physically. Mental health is also important."
   },
   {
     "_id" : "PdhL83zrrMQbLgtET",
@@ -59,7 +59,7 @@
       "independence",
       "refuge"
     ],
-    "description": ""
+    "description": "Making a home is a big part of your pathway and life in general. How have other people made it work?"
   },
   {
     "_id" : "eJCa6bKRs7HH8XP7Y",
@@ -70,6 +70,6 @@
       "charity",
       "apprenticeships"
     ],
-    "description": ""
+    "description": "Learning to apply your skills and being successful in the job market is not a small challenge. Perhaps others have some wisdom to share."
   }
 ]

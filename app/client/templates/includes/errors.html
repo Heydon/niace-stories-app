@@ -1,10 +1,10 @@
 <template name="errors">
 	{{#Animate}}
 		{{#if errors}}
-			<div role="alert" class="animate">
+			<div role="alert">
 				<ul>
 					{{#each errors}}
-						<li>{{this}}</li>
+						<li><span aria-hidden>&#x2716;</span> {{this}}</li>
 					{{/each}}
 				</ul>
 			</div>
