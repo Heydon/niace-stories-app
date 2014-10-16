@@ -213,7 +213,7 @@
 			<li class="expando-parent collapsed {{#if size stories}}has-stories{{else}}no-stories{{/if}}">
 				<div>
 					<h2>
-						<button class="expando-controls" aria-expanded="false" aria-controls="expando-{{_id}}">
+						<button class="expando-controls" aria-expanded="false" {{disabled stories}} aria-controls="expando-{{_id}}">
 							{{themeName}}
 						</button>
 						{{#if size stories}}

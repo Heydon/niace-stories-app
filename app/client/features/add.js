@@ -1,6 +1,6 @@
 Template.add.rendered = function() {
 	$('textarea').autosize();
-}
+};
 
 Template.add.events({
 	'submit form': function(e) {

@@ -5,7 +5,7 @@ Template.manageItem.created = function() {
 
 Template.manageItem.rendered = function() {
 	$('textarea').autosize();
-}
+};
 
 function val( el ) {return el.value;}
 

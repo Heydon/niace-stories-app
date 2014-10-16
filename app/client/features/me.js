@@ -24,6 +24,9 @@ Template.me.helpers({
 	size: function( thing ) {
 		return thing.count();
 	},
+	disabled: function( stories ) {
+		return stories.count() ? '' : 'disabled';
+	},
 	storiesKeywords: function() {
 		// underscore chainy goodness
 		return _.chain(Stories.find({

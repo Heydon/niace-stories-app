@@ -671,8 +671,7 @@ button:active, button[aria-pressed="true"], button[aria-selected] {
 
 button[disabled]:active, button[disabled][aria-pressed="true"], button[aria-selected] {
   top: 0;
-  box-shadow: 0 0.33em 0 #444;
-  background: #ff2a2a;
+  color: #ff2a2a;
 }
 
 button[disabled] {
@@ -1472,6 +1471,11 @@ INSPIRING ME
   text-align: left;
   padding: 0;
   padding-right: 4em;
+}
+
+.inspiring-me-themes h2 button:focus, 
+.inspiring-me-themes h2 button:active {
+  top: 0;
 }
 
 .inspiring-me-themes > li {
