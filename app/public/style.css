@@ -1268,29 +1268,8 @@ NOTIFICATIONS
 }
 
 .intro > div {
-  color: #fff;
-  background: #444;
+  border: 2px solid #444;
   padding: 1.5em;
-}
-
-.intro button {
-  border: 0;
-  box-shadow: none;
-}
-
-.intro a {
-  color: #fff;
-}
-
-.intro button:hover, .intro button:focus,
-.admin button:hover, .admin button:focus {
-  outline: thin dotted #fff;
-  outline-offset: 0.25em;
-}
-
-.intro button:active,
-.admin button:active {
-  top: 0;
 }
 
 /**************************************************************
