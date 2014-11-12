@@ -22,7 +22,7 @@ suite('Database import', function() {
 
 		var counted = 0;
 		var dataTypes = {
-				Stories: 8,
+				Stories: 18,
 				Alerts: 4,
 				Resources: 12,
 				Themes: 7
