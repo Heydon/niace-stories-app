@@ -5,7 +5,8 @@
     "keywords": [
       "budgeting",
       "banking",
-      "student loans"
+      "student loans",
+      "bills"
     ],
     "description": "Learning how to handle money is a big step towards achieving independence."
   },
@@ -14,7 +15,8 @@
     "themeName": "Identity",
     "keywords": [
       "background",
-      "values"
+      "values",
+      "sexuality"
     ],
     "description": "It helps to know who you are before you can decide what you want to do!"
   },
@@ -25,7 +27,8 @@
       "courses",
       "school",
       "volunteering",
-      "higher education"
+      "higher education",
+      "university"
     ],
     "description": "There are lots of choices when it comes to education. Read people's experiences."
   },
@@ -35,7 +38,11 @@
     "keywords": [
       "friends",
       "family",
-      "key workers"
+      "key workers", 
+      "fostering",
+      "bullying",
+      "support workers",
+      "teachers"
     ],
     "description": "Whether we're talking family or romance, relationships are a big part of our lives."
   },
@@ -46,7 +53,8 @@
       "diet",
       "exercise",
       "appointments",
-      "mental health"
+      "mental health",
+      "substance abuse"
     ],
     "description": "It's hard to get on when you're not feeling it physically. Mental health is also important."
   },
@@ -68,7 +76,8 @@
       "earning",
       "finding a job",
       "charity",
-      "apprenticeships"
+      "apprenticeships",
+      "volunteering"
     ],
     "description": "Learning to apply your skills and being successful in the job market is not a small challenge. Perhaps others have some wisdom to share."
   }
