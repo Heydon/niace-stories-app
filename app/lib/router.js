@@ -110,17 +110,12 @@ Router.map(function() {
 	this.route('keyword', {
 		path: '/keyword/:keyword',
 		data: function() {
-			return Meteor.subscribe('stories', Meteor.user(), {
-				keywords: {
-					'$in': [this.params.keyword]
-				}
-			}, {
-				page: this.params.page
-			});
-		},
-		data: function() {
+			var storyQuery = pageQuery( this.params.page );
+			storyQuery.keywords = {
+				'$in': [this.params.keyword]
+			};
 			return {
-				stories: Stories.find(),
+				stories: Stories.find( storyQuery ),
 				keyword: this.params.keyword
 			};
 		}
@@ -130,17 +125,13 @@ Router.map(function() {
 		path: '/theme/:_id',
 		data: function() {
 			var themes = this.params._id && this.params._id.split(',');
-			return Meteor.subscribe('stories', Meteor.user(), {
-				themes: {
-					$in: themes
-				}
-			}, {
-				page: this.params.page
-			});
-		},
-		data: function() {
+			var storyQuery = pageQuery( this.params.page );
+			storyQuery.themes = {
+				'$in': themes
+			};
 			return {
-				ids: this.params._id && this.params._id.split(',')
+				stories: Stories.find( storyQuery )
+				ids: themes
 			};
 		}
 	});
@@ -152,23 +143,12 @@ Router.map(function() {
 	this.route('manageAlerts', {
 		path: '/manageAlerts',
 		data: function() {
-			return Meteor.subscribe('alerts');
-		},
-		data: function() {
 			return Alerts.find();
 		}
 	});
 
 	this.route('manageAlert', {
 		path: '/manageAlert/:_id',
-		data: function() {
-			if( this.params._id ) {
-				return Meteor.subscribe('alerts', {
-					_id: this.params._id
-				});
-			}
-			return {};
-		},
 		data: function() {
 			if( this.params._id ) {
 				return Alerts.findOne( this.params._id );
