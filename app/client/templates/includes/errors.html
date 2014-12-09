@@ -1,13 +1,11 @@
 <template name="errors">
 	{{#Animate}}
 		{{#if errors}}
-			<div role="alert">
-				<ul>
-					{{#each errors}}
-						<li><span aria-hidden>&#x2716;</span> {{this}}</li>
-					{{/each}}
-				</ul>
-			</div>
+			<ul>
+				{{#each errors}}
+					<li><span aria-hidden>&#x2716;</span> {{this}}</li>
+				{{/each}}
+			</ul>
 		{{/if}}
 	{{/Animate}}
 </template>

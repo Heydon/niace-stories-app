@@ -3,11 +3,9 @@
 		<div class="intro">
 			{{#each alerts}}
 				<div class="alert-bubble" data-alert-id="{{_id}}">
-					<h2>Tutorial</h2>
+					<h2 class="vh">Tutorial</h2>
 					{{#markdown}}{{content}}{{/markdown}}
-					{{#if okButton}}
-						<button data-alert-id="{{_id}}">{{okButton}}</button>
-					{{/if}}
+					<button data-alert-id="{{_id}}" aria-label="close">&#x2716;</button>
 				</div>
 			{{/each}}
 		</div>
