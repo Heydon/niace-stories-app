@@ -90,12 +90,9 @@
 	{{> inspiringRadios }}
 	<div class="story-meta">
 		<h2>More inspiration</h2>
-		<p>
-			<a href="{{ pathFor 'theme' _id=themes }}">Read more stories</a>
-			featured in the {{> strongThemeList}} themes.
-		</p>
+		<p>Featured in the {{> strongThemeList}} themes of your pathway.</p>
 		{{#if keywords.length}}
-			<p>Or you can look at more stories that have similar keywords to {{name}}'s:</p>
+			<p>Try looking at more stories like {{name}}'s, with the same keywords:</p>
 			{{> listStoryKeywords}}
 		{{/if}}
 	</div>
@@ -104,7 +101,9 @@
 <template name="inspiringRadios">
 	<form action="" id="inspiring">
 		<h3>Did this story inspire you?</h3>
-		{{> message}}
+		<div role="status">
+			{{> message}}
+		</div>
 		<label>
 			<input type="radio" value="true" class="vh" name="inspiring" {{checked}}>
 			<span>Yes! Save it in <strong>"Inspiring Me"</strong> to read again later</span>
@@ -131,7 +130,7 @@
 				<button class="random" aria-controls="name">Generate a name</button>
 			</div>
 		</div>
-		<input id="name" type="text" aria-live="polite" role="status" placeholder="Hit the generate button until you get a name you like" />
+		<input id="name" type="text" aria-live="polite" role="status" placeholder="Type or hit 'generate a name'" />
 		<input type="text" style="display: none" aria-hidden="true" id="check" value="" />
 		<div role="alert">
 			{{> errors}}
@@ -276,10 +275,9 @@
 <template name="strongThemeList">
 	{{#each storyThemes this}}
 		<strong>
-			<!-- <a href="{{ pathFor 'theme' }}">{{themeName}}</a> -->
-			{{themeName}}
+			<a href="{{ pathFor 'theme' }}">{{themeName}}</a>
 		</strong>
-		<span class="inline-list-separator"> / </span>
+		<span class="inline-list-separator">/ </span>
 	{{/each}}
 </template>
 
