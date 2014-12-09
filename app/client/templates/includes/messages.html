@@ -1,9 +1,7 @@
 <template name="message">
-	<div role="status">
-		{{#if message}}
-			<div>
-				<p>{{{message}}}</p>
-			</div>
-		{{/if}}
-	</div>
+	{{#if message}}
+		<div class="message">
+			<p>{{{message}}}</p>
+		</div>
+	{{/if}}
 </template>
