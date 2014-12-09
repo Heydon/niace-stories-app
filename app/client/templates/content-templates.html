@@ -275,8 +275,7 @@
 <template name="strongThemeList">
 	{{#each storyThemes this}}
 		<strong>
-			<!-- <a href="{{ pathFor 'theme' }}">{{themeName}}</a> -->
-			{{themeName}}
+			<a href="{{ pathFor 'theme' }}">{{themeName}}</a>
 		</strong>
 		<span class="inline-list-separator">/ </span>
 	{{/each}}
