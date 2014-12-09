@@ -374,6 +374,7 @@ BUTTONS
 ***************************************************************/
 
 button, .button-shaped {
+  display: inline-block;
   background: #5F2167;
   padding: 0.5em 1em;
   color: #fff;
@@ -795,6 +796,35 @@ ARCHIVE PAGES
   margin-top: 1.5em
 }
 
+.teaser h2 {
+  text-align: center;
+}
+
+.teaser h2 a:not(:hover):not(:focus) {
+  border: 0;
+}
+
+.teaser .keywords {
+  text-align: center;
+}
+
+.add-your-story {
+  height: 12em;
+  width: 100%;
+  padding: 1.5em;
+  border: 2px dashed #ccc;
+  border-radius: 0.25em;
+  display: table;
+}
+
+.add-your-story div {
+  display: table-cell;
+  width: 100%;
+  height: 100%;
+  vertical-align: middle;
+  text-align: center;
+}
+
 /**************************************************************
 
 MESSAGES
@@ -853,6 +883,25 @@ MESSAGES
 
 /* BREAK POINTS
 ------------------------------------------------------- */
+
+@media all and (max-width: 700px) {
+  
+  .teaser {
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  .teaser + .teaser {
+    margin-top: 2.25em;
+  }
+
+  .add-your-story {
+    height: auto;
+  }
+
+}
 
 @media all and (max-width: 600px) {
 
