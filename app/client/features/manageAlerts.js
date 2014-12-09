@@ -15,7 +15,12 @@ Template.manageAlert.rendered = function() {
 
 Template.manageAlert.helpers({
 	availablePaths: function() {
-		return Router.routes;
+		return _.map(Router.routes, function( route ) {
+			return {
+				name: route.getName(),
+				originalPath: route._path
+			}
+		});
 	},
 
 	safePath: function() {

@@ -4,7 +4,7 @@ Router.configure({
 	waitOn: function() {
 		return Meteor.subscribe('alerts', {
 			paths: {
-				$in: [this.route._path]
+				$in: [this.route._path, this.location.get().path]
 			}
 		});
 	},

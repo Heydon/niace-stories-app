@@ -1,7 +1,7 @@
 <template name="manageResources">
 	<h1>Manage resources</h1>
 	{{> message}}
-	<p><a class="larger" href="{{pathFor 'manageResource'}}">Add new resource</a></p>
+	<p><a class="larger" href="{{pathFor 'manageResource' _id=''}}">Add new resource</a></p>
 	<ul class="manage-resources">
 		{{#each resources}}
 			<li>
