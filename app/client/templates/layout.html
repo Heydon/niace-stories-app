@@ -2,19 +2,20 @@
 
 <template name="layout">
 	{{> admin}}
+	<header role="banner">
+		{{> banner}}
+	</header>
 	<nav role="navigation" aria-label="main menu">
 		{{> navigation}}
 	</nav>
-	<div>
-		<main role="main" id="main" tabindex="-1">
-			<div>
-				{{> yield}}
-			</div>
-		</main>
-		<footer role="contentinfo">
-			<div>
-				{{> footer}}
-			</div>
-		</footer>
-	</div>
+	<main role="main" id="main" tabindex="-1">
+		<div>
+			{{> yield}}
+		</div>
+	</main>
+	<footer role="contentinfo">
+		<div>
+			{{> footer}}
+		</div>
+	</footer>
 </template>
