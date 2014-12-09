@@ -4,7 +4,7 @@ Router.configure({
 	waitOn: function() {
 		return Meteor.subscribe('alerts', {
 			paths: {
-				$in: [this.path, this.route.originalPath]
+				$in: [this.route._path]
 			}
 		});
 	},
@@ -13,14 +13,16 @@ Router.configure({
 		setTimeout(function () {
 			$('main').removeAttr('class');
 		}, 1000);
-		$('html').animate({scrollTop:0}, '400');
+		$('html, body').animate({scrollTop:0}, '400');
 		$('main').focus();
+		//
+		this.next();
 	}
 });
 
 function waitOnStories() {
 	return Meteor.subscribe('stories', Meteor.user(), {}, {
-		page: this.params.page
+		page: this.params.query.page
 	});
 }
 
@@ -35,21 +37,23 @@ function waitOnStory() {
 }
 
 Router.map(function() {
-	this.route('add', { path: '/add' });
-	this.route('thanks', { path: '/thanks' });
-	this.route('edited', { path: '/edited' });
-	this.route('themes', { path: '/themes' });
-	this.route('themes', {path: '/'});
-	this.route('login', { path: '/login' });
-	this.route('register', { path: '/register' });
+	this.route('/add');
+	this.route('/thanks');
+	this.route('/edited');
+	this.route('/themes');
+	this.route('/', function() {
+		this.render('themes');
+	}, {
+		name: 'home'
+	});
+	this.route('/login');
+	this.route('/register');
 
-	this.route('manage', { 
-		path: '/manage',
+	this.route('/manage', {
 		waitOn: waitOnStories
 	});
 
-	this.route('me', {
-		path: '/me',
+	this.route('/me', {
 		waitOn: function() {
 			return Meteor.subscribe('stories', Meteor.user(), {
 				_id: {
@@ -59,15 +63,15 @@ Router.map(function() {
 		}
 	});
 
-	this.route('story', {
-		path: '/story/:_id',
+	this.route('/story/:_id', {
+		name: 'story',
 		waitOn: waitOnStoryWithID,
 		data: function() {
 			return Stories.findOne(this.params._id);
 		}
 	});
-	this.route('deleteLocal', {
-		path: '/deleteLocal/:_id/:name',
+	this.route('/deleteLocal/:_id/:name', {
+		name: 'deleteLocal',
 		data: function() {
 			return {
 				toDelete : this.params._id,
@@ -75,16 +79,16 @@ Router.map(function() {
 			};
 		}
 	});
-	this.route('random', {
-		path: '/random',
+	this.route('/random', {
+		name: 'random',
 		waitOn: waitOnStory,
 		action: function() {
 			var random = _.sample( Stories.find().fetch() );
 			Router.go( 'story', {_id: random._id} );
 		}
 	});
-	this.route('manageItem', {
-		path: '/manageItem/:_id',
+	this.route('/manageItem/:_id', {
+		name: 'manageItem',
 		waitOn: waitOnStoryWithID,
 		data: function() {
 			return {
@@ -93,27 +97,27 @@ Router.map(function() {
 		}
 	});
 
-	this.route('keyword', {
-		path: '/keyword/:keyword',
+	this.route('/keyword/:keyword', {
+		name: 'keyword',
 		waitOn: function() {
 			return Meteor.subscribe('stories', Meteor.user(), {
 				keywords: {
 					'$in': [this.params.keyword]
 				}
 			}, {
-				page: this.params.page
+				page: this.params.query.page
 			});
 		},
 		data: function() {
 			return {
 				stories: Stories.find(),
-				keyword: this.params.keyword
+				keyword: this.params.query.keyword
 			};
 		}
 	});
 
-	this.route('theme', {
-		path: '/theme/:_id',
+	this.route('/theme/:_id', {
+		name: 'theme',
 		waitOn: function() {
 			var themes = this.params._id && this.params._id.split(',');
 			return Meteor.subscribe('stories', Meteor.user(), {
@@ -135,8 +139,8 @@ Router.map(function() {
 		waitOn: waitOnStory
 	});
 
-	this.route('manageAlerts', {
-		path: '/manageAlerts',
+	this.route('/manageAlerts', {
+		name: 'manageAlerts',
 		waitOn: function() {
 			return Meteor.subscribe('alerts');
 		},
@@ -145,8 +149,8 @@ Router.map(function() {
 		}
 	});
 
-	this.route('manageAlert', {
-		path: '/manageAlert/:_id',
+	this.route('/manageAlert/:_id', {
+		name: 'manageAlert',
 		waitOn: function() {
 			if( this.params._id ) {
 				return Meteor.subscribe('alerts', {
@@ -163,35 +167,43 @@ Router.map(function() {
 		}
 	});
 
-	this.route('manageAlert', { path: '/manageAlert' });
-
-	this.route('manageResources', {
-		path: 'resources'
+	this.route('/manageAlert', {
+		template: 'manageAlert',
+		name: 'addAlert'
 	});
 
-	this.route('manageResource', {
-		path: 'resource/:_id',
+	this.route('/resources', {
+		name: 'manageResources'
+	});
+
+	this.route('/resource/:_id', {
+		name: 'manageResource',
 		data: function() {
 			if( this.params._id ) {
 				return Resources.findOne( this.params._id );
 			}
 		}
 	});
-	this.route('manageResource', {path: 'resource'});
+	this.route('/resource', {
+		template: 'manageResource',
+		name: 'addResource'
+	});
 
 });
 
-Router.onBeforeAction('loading');
-
-var requireLogin = function(pause) {
+var requireLogin = function() {
 	if( !Meteor.user() ) {
 		if( Meteor.loggingIn() ) {
 			this.render('loading');
+			this.next();
 		} else {
 			this.render('login');
-			pause();
 		}
+	} else {
+		this.next();
 	}
 };
 
-Router.onBeforeAction(requireLogin, {only: ['manage', 'manageItem', 'allStories', 'manageAlerts', 'manageResources']});
+Router.onBeforeAction(requireLogin, {
+	only: ['manage', 'manageItem', 'allStories', 'manageAlerts', 'manageResources']
+});
