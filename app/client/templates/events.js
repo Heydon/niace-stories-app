@@ -4,7 +4,6 @@
  */
 
 var showSubmenu = function(dropdown) {
-	console.log('show');
 	dropdown.attr('aria-hidden', 'false');
 };
 
