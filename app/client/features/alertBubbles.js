@@ -1,3 +1,14 @@
+function alertsIn() {
+	var activeRoute = Router.current();
+	var searchInRoutes = [];
+
+	searchInRoutes.push( activeRoute.path );
+	if( activeRoute.route ) {
+		searchInRoutes.push( activeRoute.route.originalPath );
+	}
+	return searchInRoutes;
+}
+
 Template.alertBubbles.helpers({
 	alerts: function() {
 		if( Meteor.user() ) {
@@ -5,7 +16,8 @@ Template.alertBubbles.helpers({
 		}
 		return Alerts.find({
 			_id: {
-				$nin: ReactiveStore.get('viewedAlerts') || []
+				'$in': alertsIn(),
+				'$nin': ReactiveStore.get('viewedAlerts') || []
 			}
 		});
 	}

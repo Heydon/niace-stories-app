@@ -13,13 +13,6 @@ if( Meteor.isClient ) {
 Router.configure({
 	layoutTemplate: 'layout',
 	loadingTemplate: 'loading',
-	data: function() {
-		return Alerts.find({
-			paths: {
-				$in: [this.path, this.route.originalPath]
-			}
-		});
-	},
 	onRun: function() {
 		$('main').attr('class', 'loaded');
 		setTimeout(function () {
@@ -32,10 +25,10 @@ Router.configure({
 
 function pageQuery( page, conf ) {
 	var pageSize = Config.findOne('pageSize') ? Config.findOne('pageSize').value : 10;
-	return {
+	return _.extend({
 		skip: page * pageSize,
 		limit: pageSize
-	}
+	}, conf);
 }
 
 function dataStories() {
@@ -64,14 +57,7 @@ Router.map(function() {
 	});
 
 	this.route('me', {
-		path: '/me',
-		data: function() {
-			return Meteor.subscribe('stories', Meteor.user(), {
-				_id: {
-					$in: ReactiveStore.get('inspiring') || []
-				}
-			});
-		}
+		path: '/me'
 	});
 
 	this.route('story', {
@@ -110,12 +96,12 @@ Router.map(function() {
 	this.route('keyword', {
 		path: '/keyword/:keyword',
 		data: function() {
-			var storyQuery = pageQuery( this.params.page );
-			storyQuery.keywords = {
-				'$in': [this.params.keyword]
-			};
 			return {
-				stories: Stories.find( storyQuery ),
+				stories: Stories.find( pageQuery(this.params.page, {
+					keywords: {
+						'$in': [this.params.keyword]
+					}
+				})),
 				keyword: this.params.keyword
 			};
 		}
@@ -125,12 +111,12 @@ Router.map(function() {
 		path: '/theme/:_id',
 		data: function() {
 			var themes = this.params._id && this.params._id.split(',');
-			var storyQuery = pageQuery( this.params.page );
-			storyQuery.themes = {
-				'$in': themes
-			};
 			return {
-				stories: Stories.find( storyQuery )
+				stories: Stories.find( pageQuery(this.params.page, {
+					themes: {
+						'$in': themes
+					}
+				})),
 				ids: themes
 			};
 		}
