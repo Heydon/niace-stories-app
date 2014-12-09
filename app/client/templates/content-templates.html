@@ -94,8 +94,10 @@
 			<a href="{{ pathFor 'theme' _id=themes }}">Read more stories</a>
 			featured in the {{> strongThemeList}} themes.
 		</p>
-		<p>Or you can look at more stories that have similar keywords to {{name}}'s:</p>
-		{{> listStoryKeywords}}
+		{{#if keywords.length}}
+			<p>Or you can look at more stories that have similar keywords to {{name}}'s:</p>
+			{{> listStoryKeywords}}
+		{{/if}}
 	</div>
 </template>
 
@@ -298,7 +300,7 @@
 			<span class="theme-name">
 				{{themeName}}
 				<span class="inline-list-separator"> / </span>
-			</span> 
+			</span>
 		{{/each}}
 		{{#if page}}<span class="page">(Page: {{humanizePage}})</span>{{/if}}
 	</h1>
@@ -331,7 +333,7 @@
 		<input type="password" id="password" />
 		<button type="submit">Log in</button>
 		<p><a href="{{pathFor 'register'}}">Need an account?</a></p>
-   </form> 
+   </form>
 </template>
 
 <template name="login">
@@ -346,7 +348,7 @@
 		<label for="password">Password</label>
 		<input type="password" id="password" />
 		<button type="submit">Register</button>
-   </form> 
+   </form>
 </template>
 
 <template name="register">
