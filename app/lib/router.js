@@ -1,15 +1,3 @@
-if( Meteor.isClient ) {
-	var sub = false;
-	Tracker.autorun(function() {
-		if( !sub ) {
-			Meteor.subscribe('stories', Meteor.user());
-			Meteor.subscribe('alerts');
-			Meteor.subscribe('config');
-			sub = true;
-		}
-	});
-}
-
 Router.configure({
 	layoutTemplate: 'layout',
 	loadingTemplate: 'loading',
@@ -77,7 +65,6 @@ Router.map(function() {
 	});
 	this.route('random', {
 		path: '/random',
-		data: dataStory,
 		action: function() {
 			var random = _.sample( Stories.find().fetch() );
 			Router.go( 'story', {_id: random._id} );
@@ -175,3 +162,18 @@ var requireLogin = function(pause) {
 };
 
 Router.onBeforeAction(requireLogin, {only: ['manage', 'manageItem', 'allStories', 'manageAlerts', 'manageResources']});
+
+if( Meteor.isClient ) {
+	var sub = false;
+	Tracker.autorun(function() {
+		if( !sub ) {
+			Meteor.subscribe('stories');
+			Meteor.subscribe('alerts');
+			Meteor.subscribe('config');
+			Meteor.subscribe('themes');
+			Meteor.subscribe('resources');
+
+			sub = true;
+		}
+	});
+}

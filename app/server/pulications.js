@@ -12,12 +12,13 @@ if( !Config.find().count() ) {
 	});
 }
 
-Meteor.publish('stories', function( loggedIn, query, options ) {
+Meteor.publish('stories', function( query, options ) {
 	var pageSize = Config.findOne('pageSize').value;
 
 	var page = options && options.page || 0;
 	query = query || {};
-	if( !loggedIn ) {
+
+	if( !this.userId || !Meteor.users.findOne( this.userId ) ) {
 		query.published = true;
 	}
 
@@ -43,7 +44,7 @@ Meteor.publish('stories', function( loggedIn, query, options ) {
 			}
 		};
 	}
-
+	console.log(query, options);
 	return Stories.find(query, options);
 });
 

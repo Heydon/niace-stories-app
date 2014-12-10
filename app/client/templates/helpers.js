@@ -41,13 +41,13 @@ Template.storiesList.helpers({
 		return Stories.find().count() === 0;
 	},
 	publishedClass: function() {
-		if (!this.published) {
+		if( !this.published ) {
 			return 'not-published';
 		}
 	}
 });
 
-Template.storiesList.rendered = function() {
+Template.storiesList.render = function() {
 	$('.truncated').trunk8({ lines: 5});
 };
 
