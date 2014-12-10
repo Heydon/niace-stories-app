@@ -18,6 +18,9 @@ Template.me.helpers({
 		return Stories.find({
 			themes: {
 				$in: [this._id]
+			},
+			_id: {
+				$in: ReactiveStore.get('inspiring') || []
 			}
 		});
 	},
