@@ -47,8 +47,8 @@ Template.storiesList.helpers({
 	}
 });
 
-Template.storiesList.render = function() {
-	$('.truncated').trunk8({ lines: 5});
+Template.storiesList.rendered = function() {
+	this.$('.truncated').trunk8({ lines: 5});
 };
 
 /**

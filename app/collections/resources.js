@@ -7,6 +7,7 @@
  * }
  */
 Resources = new Meteor.Collection('resources');
+GroundDB( Resources );
 
 Resources.allow({
 	insert: function() {

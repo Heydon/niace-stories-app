@@ -1,4 +1,5 @@
 Alerts = new Meteor.Collection('alerts');
+GroundDB( Alerts );
 
 Alerts.allow({
 	insert: function() {

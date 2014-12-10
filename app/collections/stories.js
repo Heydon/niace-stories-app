@@ -1,4 +1,5 @@
 Stories = new Meteor.Collection('stories');
+GroundDB( Stories );
 
 Meteor.methods({
 	share: function( story ) {

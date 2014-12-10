@@ -44,7 +44,6 @@ Meteor.publish('stories', function( query, options ) {
 			}
 		};
 	}
-	console.log(query, options);
 	return Stories.find(query, options);
 });
 
