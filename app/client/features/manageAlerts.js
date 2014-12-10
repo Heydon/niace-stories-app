@@ -19,7 +19,7 @@ Template.manageAlert.helpers({
 			return {
 				name: route.getName(),
 				originalPath: route._path
-			}
+			};
 		});
 	},
 
