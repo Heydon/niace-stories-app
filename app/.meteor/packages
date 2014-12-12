@@ -8,4 +8,7 @@ reactive-var
 mrt:reactive-store
 mrt:animation-helper
 copleykj:autolinker
+cfs:standard-packages
+cfs:filesystem
+mrt:soundcloud
 

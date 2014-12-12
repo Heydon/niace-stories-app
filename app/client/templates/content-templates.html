@@ -85,6 +85,9 @@
 
 <template name="story">
 	<h1>{{name}}&#x2019;s Story</h1>
+	{{#if recording}}
+		<iframe width="100%" height="170" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url={{recording}}&amp;auto_play=false&amp;hide_related=true&amp;show_reposts=false&amp;visual=false&amp;color=007FA3&amp;theme_color=007FA3&amp;sharing=false&amp;show_artwork=false&amp;show_user=false"></iframe>
+	{{/if}}
 	{{> alertBubbles}}
 	<div class="story-body">
 		{{#markdown}}{{story}}{{/markdown}}
@@ -139,6 +142,9 @@
 			</div>
 		</div>
 		<input id="name" type="text" aria-live="polite" role="status" placeholder="Type or hit 'generate a name'" />
+		<!--<label for="recording">Recording</label>
+		<p>Have you tried recording your story? You could use your phone's voice recorder then upload the file below.</p>
+		<input type="file" name="recording" id="recording" />-->
 		<input type="text" style="display: none" aria-hidden="true" id="check" value="" />
 		<div role="alert">
 			{{> errors}}
@@ -191,13 +197,16 @@
 				</div>
 			</fieldset>
 		{{/each}}
+		<h2>Audio Recording</h2>
+		<label for="soundcloud">Soundcloud link for the recording (optional)</label>
+		<input placeholder="A web address starting https://" type="text" name="soundcloud" id="soundcloud" value="{{story.recording}}">
 		<h2>Published?</h2>
 		<p>Is the story ready to be shown in the app?</p>
 		<label>
 			<input name="published" type="checkbox" id="published" value="true" class="vh" {{checked}}>
 			<span>Published</span>
 		</label>
-		<label for="help">Help and resources</label>
+		<h2>Help &amp; Resources</h2>
 		<p>Are there any places to find help regarding issues in this story? Are there any people to contact?</p>
 		<p>Web addresses (eg. www.niace.org.uk) are automatically converted into links. To make a list, use asterisks as in the following example:</p>
 		<p>
@@ -205,6 +214,7 @@
 			<span style="display:block; margin-top: 0;">* Item 2: www.niace.org.uk</span>
 			<span style="display:block; margin-top: 0;">* Another item</span>
 		</p>
+		<label for="help">Help and resources (optional)</label>
 		<textarea id="help" name="help" rows="10">{{story.help}}</textarea>
 		<input type="text" style="display: none" aria-hidden="true" id="check" value="" />
 		<div role="alert">
