@@ -17,7 +17,6 @@ script:
 - npm run jshint
 - npm test
 before_deploy:
-- cat app/private/data/themes.json | ./scripts/fillout.js 500 > app/private/data/stories.json
 - 'bash -c "cd app && meteor build --directory ../deploy"'
 - rm -rf app
 - rm -rf node_modules
@@ -30,9 +29,6 @@ deploy:
   skip_cleanup: true
   api_key:
     secure: vMSuLcI2rzDVWBxsb7FcsVYBtIO13iLhnn7rWIG09Rd5dRG0hFJljpmi8FPKrL1ynF9RNn7vVEBIb1LZb+e/+Dn93gaeceIgXb9FbTQHALJju0lzyQ/FgsgKf8CU3tEnWiAu9rHKc+idR7pH7As/A+zQeoxiC2WuE8br+a36NTw=
-  run:
-    - "node scripts/dropDatabases.js"
-    - restart
 notifications:
   email:
     recipients:
