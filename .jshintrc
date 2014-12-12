@@ -9,6 +9,7 @@
 		"Meteor": true,
 		"Stories": true,
 		"Themes": true,
+		"Glossary": true,
 		"_": true,
 		"require": true,
 		"describe": true,
@@ -33,7 +34,6 @@
 		"saveInspiringStory": true,
 		"removeInspiringStory": true,
 		"setTimeout": true,
-		"Resources": true,
 		"Config": true
 	} 
 }
