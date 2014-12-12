@@ -1,11 +1,11 @@
 <template name="manageResources">
 	<h1>Manage resources</h1>
 	{{> message}}
-	<p><a class="larger" href="{{pathFor 'manageResource'}}">Add new resource</a></p>
+	<p><a class="larger" href="{{pathFor 'manageResource' _id=''}}">Add new resource</a></p>
 	<ul class="manage-resources">
 		{{#each resources}}
 			<li>
-				<h2>{{title}} <a href="{{pathFor 'manageResource'}}/{{_id}}">edit</a></h2>
+				<h2>{{title}} <a href="{{pathFor 'manageResource'}}">edit</a></h2>
 				{{#markdown}}{{content}}{{/markdown}}
 			</li>
 		{{/each}}

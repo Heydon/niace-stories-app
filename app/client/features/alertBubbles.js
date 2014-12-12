@@ -1,12 +1,7 @@
 function alertsIn() {
 	var activeRoute = Router.current();
-	var searchInRoutes = [];
 
-	searchInRoutes.push( activeRoute.path );
-	if( activeRoute.route ) {
-		searchInRoutes.push( activeRoute.route.originalPath );
-	}
-	return searchInRoutes;
+	return [activeRoute.route._path, activeRoute.location.get().path];
 }
 
 Template.alertBubbles.helpers({

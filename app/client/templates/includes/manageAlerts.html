@@ -2,12 +2,12 @@
 	{{> message}}
 	<p>These tutorial boxes will appear at the top of pages which match the paths shown below.</p>
 	<p>NB. They will not appear if you are logged in!</p>
-	<p><a class="larger" href="{{pathFor 'manageAlert'}}">Add new helper bubble</a></p>
+	<p><a class="larger" href="{{pathFor 'manageAlert' _id=''}}">Add new helper bubble</a></p>
 	<ul class="alerts-list">
 		{{#each alerts}}
 			<li>
 				<h2>
-					{{untitled}}{{title}} (<a href="{{ pathFor 'manageAlert' }}/{{_id}}">edit</a>)
+					{{untitled}}{{title}} (<a href="{{ pathFor 'manageAlert' }}">edit</a>)
 				</h2>
 				<p><strong>Showing on these paths:</strong></p>
 				<ul>
