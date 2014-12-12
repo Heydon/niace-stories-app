@@ -3,11 +3,14 @@
  * Move large helpers and stuff into client/features/feature.js
  */
 Handlebars.registerHelper('storyThemes', function(story) {
-	return Themes.find({
-		_id: {
-			$in: story.themes
-		}
-	});
+	if( story ) {
+		return Themes.find({
+			_id: {
+				$in: story.themes
+			}
+		});
+	}
+	return [];
 });
 
 // this should take unsafe strings and make them classy.

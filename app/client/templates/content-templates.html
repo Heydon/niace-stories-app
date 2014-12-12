@@ -41,9 +41,9 @@
 							<a href="{{ pathFor 'manageItem' }}">Edit this story</a>
 						</p>
 					{{/if}}
+					{{> listStoryKeywords}}
 				</div>
 			</li>
-			{{hookOntoRender}}
 		{{/each}}
 	</ul>
 	{{> storyPagination}}
