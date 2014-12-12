@@ -41,13 +41,6 @@ Template.me.helpers({
 			.flatten()
 			.unique()
 			.value();
-	},
-	resources: function( kw ) {
-		return Resources.find({
-			keywords: {
-				$in: _.isArray( kw ) ? kw : this.keywords
-			}
-		});
 	}
 });
 

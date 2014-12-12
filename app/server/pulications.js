@@ -57,8 +57,8 @@ Meteor.publish('alerts', function( query ) {
 	}
 });
 
-Meteor.publish('resources', function() {
-	return Resources.find();
+Meteor.publish('glossary', function() {
+	return Glossary.find();
 });
 
 Meteor.publish('config', function() {

@@ -48,6 +48,9 @@ Router.map(function() {
 
 	this.route('/me');
 
+	this.route('glossary', {
+		path: '/glossary'
+	});
 	this.route('/story/:_id', {
 		name: 'story',
 		data: function() {
@@ -135,21 +138,30 @@ Router.map(function() {
 		name: 'addAlert'
 	});
 
-	this.route('/resources', {
-		name: 'manageResources'
+	this.route('manageglossary', {
+		name: 'manageGlossary'
 	});
 
-	this.route('/resource/:_id', {
-		name: 'manageResource',
+	this.route('manageglossaryterm/:_id', {
+		name: 'manageGlossaryTerm',
 		data: function() {
 			if( this.params._id ) {
-				return Resources.findOne( this.params._id );
+				return Glossary.findOne( this.params._id );
 			}
 		}
 	});
-	this.route('/resource', {
-		template: 'manageResource',
-		name: 'addResource'
+
+	this.route('manageglossaryterm', {
+		template: 'manageGlossaryTerm'
+	});
+
+	this.route('deleteglossaryterm/:_id', {
+		name: 'deleteGlossaryTerm',
+		data: function() {
+			if( this.params._id ) {
+				return Glossary.findOne( this.params._id );
+			}
+		}
 	});
 
 });
@@ -168,7 +180,7 @@ var requireLogin = function() {
 };
 
 Router.onBeforeAction(requireLogin, {
-	only: ['manage', 'manageItem', 'allStories', 'manageAlerts', 'manageResources']
+	only: ['manage', 'manageItem', 'allStories', 'manageAlerts', 'manageGlossary', 'manageGlossaryTerm', 'manageAlerts', 'manageAlert']
 });
 
 if( Meteor.isClient ) {
@@ -179,7 +191,7 @@ if( Meteor.isClient ) {
 			Meteor.subscribe('alerts');
 			Meteor.subscribe('config');
 			Meteor.subscribe('themes');
-			Meteor.subscribe('resources');
+			Meteor.subscribe('glossary');
 
 			sub = true;
 		}
