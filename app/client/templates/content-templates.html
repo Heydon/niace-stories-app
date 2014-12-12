@@ -259,17 +259,6 @@
 					</ul>
 					<h3>Most interesting keywords:</h3>
 					{{> listStoryKeywords keywords=storiesKeywords}}
-					{{#if size resources storiesKeywords}}
-						<h3>Next steps:</h3>
-						<ul class="next-steps">
-							{{#each resources storiesKeywords}}
-								<li>
-									<h4>{{title}}</h4>
-									{{#markdown}}{{content}}{{/markdown}}
-								</li>
-							{{/each}}
-						</ul>
-					{{/if}}
 				</div>
 			</li>
 		{{/each}}
