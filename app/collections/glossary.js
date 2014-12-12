@@ -6,13 +6,16 @@
  * 	keywords: ["money", "family", "relationships"]
  * }
  */
-Resources = new Meteor.Collection('resources');
+Glossary = new Meteor.Collection('glossary');
 
-Resources.allow({
+Glossary.allow({
 	insert: function() {
 		return !!Meteor.user();
 	},
 	update: function() {
+		return !!Meteor.user();
+	},
+	remove: function() {
 		return !!Meteor.user();
 	}
 });

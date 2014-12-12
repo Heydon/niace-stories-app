@@ -1,5 +1,5 @@
 Meteor.subscribe('themes');
 
-Meteor.subscribe('resources');
+Meteor.subscribe('glossary');
 
 Meteor.subscribe('config');
