@@ -30,6 +30,8 @@ var meta = [
 	// }
 ];
 
+// take the template array and add additional javascript to
+// make sure we run this at the right time.
 function finish() {
 	var cordovaCheck = debug ? '&&1' : '&&Meteor.isCordova';
 	template.unshift(
@@ -41,6 +43,9 @@ function finish() {
 	return template.join( debug ? '\n' : '');
 }
 
+// take the object and string representation of the datatype 
+// and construct a useable statement 
+// a la "Stories.insert( {...} );"
 function constructInsertStatement( data, dataType ) {
 	var tab = '';
 	if( debug ) {
