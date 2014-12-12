@@ -59,6 +59,10 @@ Router.map(function() {
 		}
 	});
 
+	this.route('glossary', {
+		path: '/glossary'
+	});
+
 	this.route('story', {
 		path: '/story/:_id',
 		waitOn: waitOnStoryWithID,
@@ -165,19 +169,28 @@ Router.map(function() {
 
 	this.route('manageAlert', { path: '/manageAlert' });
 
-	this.route('manageResources', {
-		path: 'resources'
+	this.route('manageGlossary', {
+		path: 'manageglossary'
 	});
 
-	this.route('manageResource', {
-		path: 'resource/:_id',
+	this.route('manageGlossaryTerm', {
+		path: 'manageglossaryterm/:_id',
 		data: function() {
 			if( this.params._id ) {
-				return Resources.findOne( this.params._id );
+				return Glossary.findOne( this.params._id );
 			}
 		}
 	});
-	this.route('manageResource', {path: 'resource'});
+	this.route('manageGlossaryTerm', {path: 'manageglossaryterm'});
+
+	this.route('deleteGlossaryTerm', {
+		path: 'deleteglossaryterm/:_id',
+		data: function() {
+			if( this.params._id ) {
+				return Glossary.findOne( this.params._id );
+			}
+		}
+	});
 
 });
 
@@ -194,4 +207,4 @@ var requireLogin = function(pause) {
 	}
 };
 
-Router.onBeforeAction(requireLogin, {only: ['manage', 'manageItem', 'allStories', 'manageAlerts', 'manageResources']});
+Router.onBeforeAction(requireLogin, {only: ['manage', 'manageItem', 'allStories', 'manageAlerts', 'manageGlossary', 'manageGlossaryTerm', 'manageAlerts', 'manageAlert']});

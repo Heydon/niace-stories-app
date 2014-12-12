@@ -12,14 +12,16 @@
 			<div class="your-story">
 				<h2>What's <em>your</em> story?</h2>
 				<div class="add-your-story">
-					<p><a href="/add">Add your story!</a></p>
+					<div>
+						<a href="/add" class="button-shaped">Add your story!</a>
+					</div>
 				</div>
 			</div>
 		</li>
 		{{/unless}}
 		{{#each stories}}
 			<li class="teaser {{#if published}}published{{/if}}">
-				<h2><a href="{{pathFor 'story'}}">{{name}}'s story</a>
+				<h2><a href="{{pathFor 'story'}}">{{name}}&#x2019;s story</a>
 					{{#if loggedIn}}
 						<em class="status {{publishedClass}}">
 							{{#if published}}
@@ -82,25 +84,31 @@
 </template>
 
 <template name="story">
-	<h1>{{name}}'s Story</h1>
+	<h1>{{name}}&#x2019;s Story</h1>
 	{{> alertBubbles}}
 	<div class="story-body">
 		{{#markdown}}{{story}}{{/markdown}}
 	</div>
 	{{> inspiringRadios }}
-	<div class="story-meta">
-		<h2>More inspiration</h2>
-		<p>Featured in the {{> strongThemeList}} themes of your pathway.</p>
-		{{#if keywords.length}}
-			<p>Try looking at more stories like {{name}}'s, with the same keywords:</p>
-			{{> listStoryKeywords}}
-		{{/if}}
+	{{#if help}}
+		<div class="next-steps">
+			<h2>Next Steps</h2>
+			<p>If you're feeling inspired, you can take action. Here are some pointers:</p>
+			{{#markdown}}{{#autolink}}{{{help}}}{{/autolink}}{{/markdown}}
+		</div>
+	{{/if}}
+	<div class="more-inspiration">
+		<h2>More Like This Story</h2>
+		<h3>Pathway themes</h3>
+		{{> ThemeList}}
+		<h3>Keywords</h3>
+		{{> listStoryKeywords}}
 	</div>
 </template>
 
 <template name="inspiringRadios">
 	<form action="" id="inspiring">
-		<h3>Did this story inspire you?</h3>
+		<h2>Did this story inspire you?</h2>
 		<div role="status">
 			{{> message}}
 		</div>
@@ -189,6 +197,15 @@
 			<input name="published" type="checkbox" id="published" value="true" class="vh" {{checked}}>
 			<span>Published</span>
 		</label>
+		<label for="help">Help and resources</label>
+		<p>Are there any places to find help regarding issues in this story? Are there any people to contact?</p>
+		<p>Web addresses (eg. www.niace.org.uk) are automatically converted into links. To make a list, use asterisks as in the following example:</p>
+		<p>
+			<span style="display:block">* List item one</span>
+			<span style="display:block; margin-top: 0;">* Item 2: www.niace.org.uk</span>
+			<span style="display:block; margin-top: 0;">* Another item</span>
+		</p>
+		<textarea id="help" name="help" rows="10">{{story.help}}</textarea>
 		<input type="text" style="display: none" aria-hidden="true" id="check" value="" />
 		<div role="alert">
 			{{> errors}}
@@ -271,14 +288,14 @@
 								{{/each}}
 							</ul>
 						{{/if}} -->
-
-<template name="strongThemeList">
-	{{#each storyThemes this}}
-		<strong>
+<template name="ThemeList">
+	<ul class="pathwayThemes">
+		{{#each storyThemes this}}
+		<li>
 			<a href="{{ pathFor 'theme' }}">{{themeName}}</a>
-		</strong>
-		<span class="inline-list-separator">/ </span>
-	{{/each}}
+		</li>
+		{{/each}}
+	</ul>
 </template>
 
 <template name="deleteLocal">
