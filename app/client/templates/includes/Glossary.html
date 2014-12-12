@@ -1,0 +1,41 @@
+<template name="glossary">
+	<h1>Glossary</h1>
+	<p>Explanations for some difficult words and phrases you may have spotted in <i>Inspire Me</i>.</p>
+	<dl class="glossary-list">
+		{{#each terms}}
+			<dt>{{term}}</dt>
+			<dd>{{#markdown}}{{definition}}{{/markdown}}</dd>
+		{{/each}}
+	</dl>
+</template>
+
+<template name="manageGlossary">
+	<h1>Manage glossary</h1>
+	{{> message}}
+	<p class="center"><a class="button-shaped" href="{{pathFor 'manageGlossaryTerm'}}">Add New Term</a></p>
+	<dl class="glossary-list">
+		{{#each terms}}
+			<dt>{{term}} (<a href="{{pathFor 'manageGlossaryTerm'}}/{{_id}}">edit</a>) (<a href="{{pathFor 'deleteGlossaryTerm'}}">delete</a>)</dt>
+			<dd>{{#markdown}}{{definition}}{{/markdown}}</dd>
+		{{/each}}
+	</dl>
+</template>
+
+<template name="manageGlossaryTerm">
+	<h1>Term {{#if term}}&#x201c;{{term}}&#x201d;{{/if}}</h1>
+	<form>
+		<label for="term">Term</label>
+		<input id="term" type="text" name="term" value="{{term}}" />
+		<label for="definition">Definition</label>
+		<textarea id="definition" name="definition">{{definition}}</textarea>
+		<button type="submit">{{#if _id}}Save{{else}}Add{{/if}}</button>
+	</form>
+</template>
+
+<template name="deleteGlossaryTerm">
+	<h1>Delete {{#if term}}&#x201c;{{term}}&#x201d;{{/if}}?</h1>
+	<div class="center">
+		<button class="delete">Delete</button> 
+		<button class="cancel">Cancel</button>
+	</div>
+</template>

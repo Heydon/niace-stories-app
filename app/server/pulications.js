@@ -59,8 +59,8 @@ Meteor.publish('alerts', function( query ) {
 	}
 });
 
-Meteor.publish('resources', function() {
-	return Resources.find();
+Meteor.publish('glossary', function() {
+	return Glossary.find();
 });
 
 Meteor.publish('config', function() {
@@ -98,8 +98,8 @@ if( Themes.find().count() === 0 ) {
 }
 
 // Fixture for resources if database empty
-if( Resources.find().count() === 0 ) {
-	preLoadDatabase('data/resources.json', Resources);
+if( Glossary.find().count() === 0 ) {
+	preLoadDatabase('data/glossary.json', Glossary);
 }
 
 if( Alerts.find().count() === 0 ) {
