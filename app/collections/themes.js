@@ -1,2 +1,2 @@
 Themes = new Meteor.Collection('themes');
-GroundDB( Themes );
+Ground.Collection( Themes );
