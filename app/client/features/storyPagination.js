@@ -1,5 +1,5 @@
 function getCurrentPage() {
-	return parseInt( Router.current().params.page, 10 ) || 0;
+	return parseInt( Router.current().params.query.page, 10 ) || 0;
 }
 
 function arePages() {
