@@ -9,9 +9,9 @@ Router.configure({
 		}, 1000);
 		if( !animating ) {
 			animating = true;
-			// $('body').animate({scrollTop:0}, '400', true, function() {
-			// 	animating = false;
-			// });
+			$('body').animate({scrollTop:0}, '400', function() {
+				animating = false;
+			});
 		}
 		$('main').focus();
 		//
