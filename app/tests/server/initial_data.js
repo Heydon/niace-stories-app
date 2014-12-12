@@ -10,7 +10,7 @@ suite('Database import', function() {
 			var dataTypes = {
 				Stories: Stories,
 				Alerts: Alerts,
-				Resources: Resources,
+				Glossary: Glossary,
 				Themes: Themes
 			};
 
@@ -24,7 +24,7 @@ suite('Database import', function() {
 		var dataTypes = {
 				Stories: 18,
 				Alerts: 4,
-				Resources: 12,
+				Glossary: 1,
 				Themes: 7
 			};
 
