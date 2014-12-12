@@ -1,11 +1,26 @@
 var MongoClient = require('mongodb').MongoClient;
-var hasErrored = 0;
+var template = [
+	'if( Meteor.isClient ) {'
+];
+var meta = {
+	stories: {
+		published: true
+	},
+	alerts: {
+
+	},
+	config: {
+
+	},
+	themes: {
+
+	}
+};
 if( process.env.MONGOHQ_URL ) {
-	process.stdout.write('GroundDB.')
 	MongoClient.connect(process.env.MONGOHQ_URL, function(err, db) {
 		if( err ) throw err;
 
-		var collection = db
+		db
 			.collection('stories')
 			.find({
 				published: true
