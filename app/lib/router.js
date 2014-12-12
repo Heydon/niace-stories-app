@@ -1,3 +1,4 @@
+var animating = false;
 Router.configure({
 	layoutTemplate: 'layout',
 	loadingTemplate: 'loading',
@@ -6,7 +7,12 @@ Router.configure({
 		setTimeout(function () {
 			$('main').removeAttr('class');
 		}, 1000);
-		$('body').animate({scrollTop:0}, '400');
+		if( !animating ) {
+			animating = true;
+			// $('body').animate({scrollTop:0}, '400', true, function() {
+			// 	animating = false;
+			// });
+		}
 		$('main').focus();
 		//
 		this.next();
@@ -23,14 +29,6 @@ function pageQuery( page, conf ) {
 
 function dataStories() {
 	return Stories.find( pageQuery( this.params.query.page ) );
-}
-
-function dataStoryWithID() {
-	return Stories.findOne( this.params._id );
-}
-
-function dataStory() {
-	return Stories.find();
 }
 
 Router.map(function() {
@@ -75,7 +73,9 @@ Router.map(function() {
 	});
 	this.route('/manageItem/:_id', {
 		name: 'manageItem',
-		data: dataStoryWithID
+		data: function() {
+			return Stories.findOne( this.params._id );
+		}
 	});
 
 	this.route('/keyword/:keyword', {
@@ -108,7 +108,9 @@ Router.map(function() {
 	});
 
 	this.route('allStories', {
-		data: dataStory
+		data: function() {
+			return Stories.find();
+		}
 	});
 
 	this.route('/manageAlerts', {
