@@ -23,6 +23,9 @@
 			<li class="teaser {{#if published}}published{{/if}}">
 				<h2>
 					<a href="{{pathFor 'story'}}">{{name}}&#x2019;s story</a>
+					{{#if audio}}
+						<span class="has-audio"></span>
+					{{/if}}
 					{{#if loggedIn}}
 						<em class="status {{publishedClass}}">
 							{{#if published}}
@@ -31,9 +34,6 @@
 								not published
 							{{/if}}
 						</em>
-					{{/if}}
-					{{#if audio}}
-
 					{{/if}}
 				</h2>
 				<div class="story-body">

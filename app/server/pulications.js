@@ -1,5 +1,3 @@
-'use strict';
-
 // default config options
 if( !Config.find().count() ) {
 	Config.insert({

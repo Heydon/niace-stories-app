@@ -247,7 +247,7 @@ span[aria-hidden] {
 	padding: 0.5em;
 }
 
-[aria-label="submenu"] a:hover, 
+[aria-label="submenu"] a:hover,
 [aria-label="submenu"] a:focus {
 	background: #5F2167;
 }
@@ -271,7 +271,7 @@ nav a[href="/me"] {
 	border-left: 15px solid #55175d;
 }
 
-nav a[href="/add"]:hover, nav a[href="/add"]:focus, 
+nav a[href="/add"]:hover, nav a[href="/add"]:focus,
 nav a[href="/me"]:hover, nav a[href="/me"]:focus {
 	border-color: #111;
 }
@@ -283,7 +283,7 @@ li.home {
 /**************************************************************
 
 GRIDS
-Here, we generate flexible and self-correcting grids based on a 
+Here, we generate flexible and self-correcting grids based on a
 list of column variants
 
 Example markup (a three column grid):
@@ -412,7 +412,7 @@ button, .button-shaped {
   cursor: pointer;
 }
 
-button:hover, 
+button:hover,
 button:focus,
 .button-shaped:hover,
 .button-shaped:focus {
@@ -587,7 +587,7 @@ legend + * {
 
 [type="checkbox"][disabled] + span:before {
   box-shadow: 0 0 0 2px #888;
-} 
+}
 
 [for="help"] {
   margin-top: 2.25em;
@@ -789,6 +789,15 @@ h4 { font-size: 1em; }
   text-align: center;
 }
 
+.has-audio {
+  background-image: url('/speaker.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 1em;
+  width: 1em;
+  display: inline-block;
+}
+
 /**************************************************************
 
 ARCHIVE PAGES
@@ -829,9 +838,9 @@ ARCHIVE PAGES
   padding: 0.25em 0.5em;
   display: block;
   border: 0;
-} 
+}
 
-.keywords a:hover, .keywords a:focus, 
+.keywords a:hover, .keywords a:focus,
 .pathwayThemes a:hover, .pathwayThemes a:focus {
   background: #111;
 }
@@ -937,7 +946,7 @@ MESSAGES
   font-style: normal;
 }
 
-[aria-label="close"]:hover, 
+[aria-label="close"]:hover,
 [aria-label="close"]:focus {
   background: transparent;
   color: #459F51;
@@ -982,7 +991,7 @@ MESSAGES
 ------------------------------------------------------- */
 
 @media all and (max-width: 700px) {
-  
+
   .teaser {
     margin-left: 0;
     margin-right: 0;
