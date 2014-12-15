@@ -21,7 +21,8 @@
 		{{/unless}}
 		{{#each stories}}
 			<li class="teaser {{#if published}}published{{/if}}">
-				<h2><a href="{{pathFor 'story'}}">{{name}}&#x2019;s story</a>
+				<h2>
+					<a href="{{pathFor 'story'}}">{{name}}&#x2019;s story</a>
 					{{#if loggedIn}}
 						<em class="status {{publishedClass}}">
 							{{#if published}}
@@ -30,6 +31,9 @@
 								not published
 							{{/if}}
 						</em>
+					{{/if}}
+					{{#if audio}}
+
 					{{/if}}
 				</h2>
 				<div class="story-body">
@@ -191,6 +195,8 @@
 				</div>
 			</fieldset>
 		{{/each}}
+		<label for="audio">Soundcloud audio url</label>
+		<input id="audio" name="audio" type="text" value="{{story.audio}}" />
 		<h2>Published?</h2>
 		<p>Is the story ready to be shown in the app?</p>
 		<label>
