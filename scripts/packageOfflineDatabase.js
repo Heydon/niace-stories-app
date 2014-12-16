@@ -25,9 +25,9 @@ var meta = [
 	{
 		name: 'themes'
 	},
-	// {
-	// 	name: 'glossary'
-	// }
+	{
+		name: 'glossary'
+	}
 ];
 
 // take the template array and add additional javascript to
