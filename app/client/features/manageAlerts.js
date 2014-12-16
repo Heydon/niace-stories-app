@@ -83,7 +83,7 @@ Template.manageAlert.events({
 			Alerts.insert( constructAlertObjectFromForm( $form ) );
 		}
 
-		Session.set('message', 'Alert saved!');
+		Session.set('message', 'Intro saved!');
 		Router.go('/manageAlerts');
 	}
 });
