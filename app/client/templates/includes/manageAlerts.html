@@ -1,8 +1,8 @@
 <template name="manageAlerts">
 	{{> message}}
-	<p>These tutorial boxes will appear at the top of pages which match the paths shown below.</p>
-	<p>NB. They will not appear if you are logged in!</p>
-	<p><a class="larger" href="{{pathFor 'manageAlert' _id=''}}">Add new helper bubble</a></p>
+	<h1>Tutorial boxes</h1>
+	<p>These tutorial boxes are used to introduce users to the app. They will appear at the top of pages which match the paths listed. <strong>Note:</strong> They will not appear if you are logged in!</p>
+	<p><a class="button-shaped" href="{{pathFor 'manageAlert' _id=''}}">Add new tutorial box</a></p>
 	<ul class="alerts-list">
 		{{#each alerts}}
 			<li>
@@ -21,7 +21,7 @@
 </template>
 
 <template name="manageAlert">
-	<h1>Manage tutorials: {{title}}</h1>
+	<h1>Manage tutorial box: {{title}}</h1>
 	<form name="manageAlert" tabindex="-1">
 		<div>
 			<label for="title">Title (for your reference only):</label>
@@ -43,10 +43,7 @@
 					<span>{{name}} - {{originalPath}}</span>
 				</label>
 			{{/each}}
-			<label for="custom-path">custom paths ( separated with commas )</label>
-			<input id="custom-path" type="text" name="custom-paths" value="{{notAccountedFor}}" />
-			{{reactivePaths}}
 		</div>
-		<button>Save</button>
+		<button type="submit">Save</button>
 	</form>
 </template>

@@ -196,7 +196,6 @@ span[aria-hidden] {
 	outline:none;
 	background: #111;
 	border-color: #111 !important;
-	border-radius: 100% 100% 0 0;
 }
 
 [role="banner"] .info {
@@ -1019,8 +1018,30 @@ MESSAGES
   border-top: 2px solid #007FA3;
 }
 
+.alerts-list {
+  margin-left: 0;
+}
+
+.alerts-list > li {
+  list-style: none;
+}
+
+.alerts-list > li + li {
+  margin-top: 1.5em;
+  padding-top: 1.5em;
+  border-top: 2px solid #ccc;
+}
+
 /* BREAK POINTS
 ------------------------------------------------------- */
+
+@media all and (max-width: 950px) {
+
+  [aria-label="submenu"] {
+    top: 70%;
+  }
+
+}
 
 @media all and (max-width: 700px) {
   
@@ -1088,6 +1109,16 @@ MESSAGES
 	h2 { font-size: 2.125em; }
 	h3 { font-size: 1.25em; }
 	h4 { font-size: 1em; }
+
+  #add .middle > * {
+    display: block;
+    width: 100%;
+    padding: 0;
+  }
+  
+  #add .middle button {
+    margin-top: 0.75em
+  }
 
 }
 
