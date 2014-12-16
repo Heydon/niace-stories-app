@@ -1,3 +1,9 @@
+function alertsIn() {
+	var activeRoute = Router.current();
+
+	return [activeRoute.route._path, activeRoute.location.get().path];
+}
+
 Template.alertBubbles.helpers({
 	alerts: function() {
 		if( Meteor.user() ) {
@@ -5,7 +11,8 @@ Template.alertBubbles.helpers({
 		}
 		return Alerts.find({
 			_id: {
-				$nin: ReactiveStore.get('viewedAlerts') || []
+				'$in': alertsIn(),
+				'$nin': ReactiveStore.get('viewedAlerts') || []
 			}
 		});
 	}

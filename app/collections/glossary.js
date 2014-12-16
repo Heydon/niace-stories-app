@@ -7,6 +7,7 @@
  * }
  */
 Glossary = new Meteor.Collection('glossary');
+Ground.Collection( Glossary );
 
 Glossary.allow({
 	insert: function() {

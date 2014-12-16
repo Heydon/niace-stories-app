@@ -3,7 +3,11 @@ function getCurrentPage() {
 }
 
 function arePages() {
-	return Stories.find().count() === Config.findOne('pageSize').value;
+	if( Config.findOne('pageSize') ) {
+		return Stories.find().count() === Config.findOne('pageSize').value;
+	} else {
+		return Stories.find().count() === 10;
+	}		
 }
 
 Handlebars.registerHelper('page', getCurrentPage );
