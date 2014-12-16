@@ -1,39 +1,34 @@
-Router.configure({  
-	layoutTemplate: 'layout',  
+var animating = false;
+Router.configure({
+	layoutTemplate: 'layout',
 	loadingTemplate: 'loading',
-	waitOn: function() {
-		return Meteor.subscribe('alerts', {
-			paths: {
-				$in: [this.route._path, this.location.get().path]
-			}
-		});
-	},
 	onRun: function() {
 		$('main').attr('class', 'loaded');
 		setTimeout(function () {
 			$('main').removeAttr('class');
 		}, 1000);
-		$('html, body').animate({scrollTop:0}, '400');
+		if( !animating ) {
+			animating = true;
+			$('body').animate({scrollTop:0}, '400', function() {
+				animating = false;
+			});
+		}
 		$('main').focus();
 		//
 		this.next();
 	}
 });
 
-function waitOnStories() {
-	return Meteor.subscribe('stories', Meteor.user(), {}, {
-		page: this.params.query.page
-	});
+function pageQuery( page, conf ) {
+	var pageSize = Config.findOne('pageSize') ? Config.findOne('pageSize').value : 10;
+	return _.extend({
+		skip: page * pageSize,
+		limit: pageSize
+	}, conf);
 }
 
-function waitOnStoryWithID() {
-	return Meteor.subscribe('stories', Meteor.user(), {
-		_id: this.params._id
-	});
-}
-
-function waitOnStory() {
-	return Meteor.subscribe('stories', Meteor.user());
+function dataStories() {
+	return Stories.find( pageQuery( this.params.query.page ) );
 }
 
 Router.map(function() {
@@ -49,26 +44,15 @@ Router.map(function() {
 	this.route('/login');
 	this.route('/register');
 
-	this.route('/manage', {
-		waitOn: waitOnStories
-	});
+	this.route('/manage');
 
-	this.route('/me', {
-		waitOn: function() {
-			return Meteor.subscribe('stories', Meteor.user(), {
-				_id: {
-					$in: ReactiveStore.get('inspiring') || []
-				}
-			});
-		}
-	});
+	this.route('/me');
 
 	this.route('glossary', {
 		path: '/glossary'
 	});
 	this.route('/story/:_id', {
 		name: 'story',
-		waitOn: waitOnStoryWithID,
 		data: function() {
 			return Stories.findOne(this.params._id);
 		}
@@ -82,9 +66,9 @@ Router.map(function() {
 			};
 		}
 	});
+
 	this.route('/random', {
 		name: 'random',
-		waitOn: waitOnStory,
 		action: function() {
 			var random = _.sample( Stories.find().fetch() );
 			Router.go( 'story', {_id: random._id} );
@@ -92,61 +76,48 @@ Router.map(function() {
 	});
 	this.route('/manageItem/:_id', {
 		name: 'manageItem',
-		waitOn: waitOnStoryWithID,
 		data: function() {
-			return {
-				story: Stories.findOne( this.params._id )
-			};
+			return Stories.findOne( this.params._id );
 		}
 	});
 
 	this.route('/keyword/:keyword', {
 		name: 'keyword',
-		waitOn: function() {
-			return Meteor.subscribe('stories', Meteor.user(), {
-				keywords: {
-					'$in': [this.params.keyword]
-				}
-			}, {
-				page: this.params.query.page
-			});
-		},
 		data: function() {
 			return {
-				stories: Stories.find(),
-				keyword: this.params.query.keyword
+				stories: Stories.find( pageQuery(this.params.query.page, {
+					keywords: {
+						'$in': [this.params.keyword]
+					}
+				})),
+				keyword: this.params.keyword
 			};
 		}
 	});
 
 	this.route('/theme/:_id', {
 		name: 'theme',
-		waitOn: function() {
-			var themes = this.params._id && this.params._id.split(',');
-			return Meteor.subscribe('stories', Meteor.user(), {
-				themes: {
-					$in: themes
-				}
-			}, {
-				page: this.params.page
-			});
-		},
 		data: function() {
+			var themes = this.params._id && this.params._id.split(',');
 			return {
-				ids: this.params._id && this.params._id.split(',')
+				stories: Stories.find( pageQuery(this.params.query.page, {
+					themes: {
+						'$in': themes
+					}
+				})),
+				ids: themes
 			};
 		}
 	});
 
 	this.route('allStories', {
-		waitOn: waitOnStory
+		data: function() {
+			return Stories.find();
+		}
 	});
 
 	this.route('/manageAlerts', {
 		name: 'manageAlerts',
-		waitOn: function() {
-			return Meteor.subscribe('alerts');
-		},
 		data: function() {
 			return Alerts.find();
 		}
@@ -154,14 +125,6 @@ Router.map(function() {
 
 	this.route('/manageAlert/:_id', {
 		name: 'manageAlert',
-		waitOn: function() {
-			if( this.params._id ) {
-				return Meteor.subscribe('alerts', {
-					_id: this.params._id
-				});
-			}
-			return {};
-		},
 		data: function() {
 			if( this.params._id ) {
 				return Alerts.findOne( this.params._id );
@@ -189,7 +152,7 @@ Router.map(function() {
 	});
 
 	this.route('manageglossaryterm', {
-		nametemplate: 'manageGlossaryTerm'
+		template: 'manageGlossaryTerm'
 	});
 
 	this.route('deleteglossaryterm/:_id', {
@@ -219,3 +182,18 @@ var requireLogin = function() {
 Router.onBeforeAction(requireLogin, {
 	only: ['manage', 'manageItem', 'allStories', 'manageAlerts', 'manageGlossary', 'manageGlossaryTerm', 'manageAlerts', 'manageAlert']
 });
+
+if( Meteor.isClient ) {
+	var sub = false;
+	Tracker.autorun(function() {
+		if( !sub ) {
+			Meteor.subscribe('stories');
+			Meteor.subscribe('alerts');
+			Meteor.subscribe('config');
+			Meteor.subscribe('themes');
+			Meteor.subscribe('glossary');
+
+			sub = true;
+		}
+	});
+}

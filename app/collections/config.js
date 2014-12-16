@@ -7,6 +7,7 @@
  * }
  */
 Config = new Meteor.Collection('config');
+Ground.Collection( Config );
 
 Config.allow({
 	insert: function() {

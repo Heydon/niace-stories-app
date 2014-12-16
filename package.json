@@ -1,5 +1,5 @@
 {
-  "name": "niace-stories-app",
+  "name": "niace-pstories-app",
   "version": "0.0.1",
   "description": "The alpha application for NIACE, running on Meteor.",
   "main": "",
@@ -21,12 +21,13 @@
   },
   "homepage": "https://github.com/Heydon/niace-stories-app",
   "dependencies": {
-    "body-parser": "^1.10.0",
-    "mongoose": "^3.8.16"
+    "mongodb": "^1.4.23",
+    "body-parser": "^1.10.0"
   },
   "devDependencies": {
     "jshint": "^2.5.5",
     "laika": "^0.3.10",
-    "phantomjs": "^1.9.10"
+    "phantomjs": "^1.9.10",
+    "mongoose": "^3.8.16"
   }
 }

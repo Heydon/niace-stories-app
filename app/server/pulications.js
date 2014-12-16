@@ -1,5 +1,3 @@
-'use strict';
-
 // default config options
 if( !Config.find().count() ) {
 	Config.insert({
@@ -12,12 +10,13 @@ if( !Config.find().count() ) {
 	});
 }
 
-Meteor.publish('stories', function( loggedIn, query, options ) {
+Meteor.publish('stories', function( query, options ) {
 	var pageSize = Config.findOne('pageSize').value;
 
 	var page = options && options.page || 0;
 	query = query || {};
-	if( !loggedIn ) {
+
+	if( !this.userId || !Meteor.users.findOne( this.userId ) ) {
 		query.published = true;
 	}
 
@@ -43,7 +42,6 @@ Meteor.publish('stories', function( loggedIn, query, options ) {
 			}
 		};
 	}
-
 	return Stories.find(query, options);
 });
 
@@ -66,42 +64,3 @@ Meteor.publish('glossary', function() {
 Meteor.publish('config', function() {
 	return Config.find();
 });
-
-/**
- * TODO: Move this to an import button, so we don't _always_ mess with the database
- * This function takes a file and a datatype and imports the file into the datatype
- * @param  {string} file the file path from app/private/
- * @param  {Collection} Type the collection constructor
- */
-function preLoadDatabase( file, Type ) {
-	try { //
-		console.log( 'Attempting to import database entries from private/' + file );
-		var entries = JSON.parse( Assets.getText( file ) );
-		_.each( entries, function( data, i ) {
-			console.log( 'Importing data from ' + file + ' ' + (i + 1) + '/' + entries.length );
-			Type.insert( data );
-		});
-	} catch(e) {
-		console.log( 'couldn\'t load private/' + file );
-	}
-}
-
-// Perhaps look to remove these fixture blocks when releasing?..
-if( Stories.find().count() === 0 ) {
-	preLoadDatabase('data/stories.json', Stories);
-	preLoadDatabase('data/real_stories.json', Stories);
-}
-
-// Fixture for themes if database empty
-if( Themes.find().count() === 0 ) {
-	preLoadDatabase('data/themes.json', Themes);
-}
-
-// Fixture for resources if database empty
-if( Glossary.find().count() === 0 ) {
-	preLoadDatabase('data/glossary.json', Glossary);
-}
-
-if( Alerts.find().count() === 0 ) {
-	preLoadDatabase('data/alerts.json', Alerts);
-}
