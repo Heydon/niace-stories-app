@@ -236,40 +236,33 @@
 	{{#if noInspiration}}
 		<p>Looks like you haven't found any inspiring stories yet. Let's help you <a href="/">find an inspiring story</a>.</p>
 	{{/if}}
-	<ul class="inspiring-me-themes">
+	<ul class="inspiring-me-themes theme-list">
 		{{#each themes}}
 			<li class="expando-parent collapsed {{#if size stories}}has-stories{{else}}no-stories{{/if}}">
-				<div>
-					<h2>
-						<button class="expando-controls" aria-expanded="false" {{disabled stories}} aria-controls="expando-{{_id}}">
-							{{themeName}}
-						</button>
-						{{#if size stories}}
-							<span class="count">({{size stories}} saved)</span>
-						{{else}}
-							<span class="count">(None. <a href="{{pathFor 'theme'}}">Find some!</a>)</span>
-						{{/if}}
-					</h2>
-				</div>
-				<div class="expando" id="expando-{{_id}}" tabindex="-1">
-					<h3>About {{themeName}}:</h3>
-					<p>{{description}}</p>
-					<h3>Stories that inspired me:</h3>
+				<h2>{{themeName}} 
+					{{#if size stories}}
+						<span class="count">({{size stories}} saved)</span>
+					{{/if}}
+				</h2>
+				<h3>Saved stories:</h3>
+				{{#if size stories}}
 					<ul class="inspiring-me-stories">
 						{{#each stories}}
 							<li>
 								<div>
-									<p><a href="{{ pathFor 'story' }}">{{this.name}}'s Story</a></p>
+									<p><a href="{{ pathFor 'story' }}">{{this.name}}&#x2019;s Story</a></p>
 								</div>
-								<div>
-									<a aria-label="delete" href="{{pathFor 'deleteLocal'}}">&#x2716;</a>
-								</div>
+								<a aria-label="delete from collection" href="{{pathFor 'deleteLocal'}}">&#x2716;</a>
 							</li>
 						{{/each}}
 					</ul>
-					<h3>Most interesting keywords:</h3>
+				{{else}}
+					<p>Looks like you haven&#x2019;t been inspired by anything in <strong>{{themeName}}</strong> yet. <a href="{{pathFor 'theme'}}">Find some inspiring stories!</a>.</p>
+				{{/if}}
+				{{#if storiesKeywords}}
+					<h3>Inspiring keywords:</h3>
 					{{> listStoryKeywords keywords=storiesKeywords}}
-				</div>
+				{{/if}}
 			</li>
 		{{/each}}
 	</ul>
@@ -300,7 +293,7 @@
 <template name="deleteLocal">
 	<h1>Delete story</h1>
 	<p>Are you sure you want to delete {{this.name}}'s story from your <strong>Inspiring Me</strong> collection?</p>
-	<p><button class="delete">Confirm</button> <button class="cancel">Cancel</button></p>
+	<p class="center"><button class="delete">Confirm</button> <button class="cancel">Cancel</button></p>
 </template>
 
 <template name="keyword">
