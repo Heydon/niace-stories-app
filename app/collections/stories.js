@@ -1,4 +1,5 @@
 Stories = new Meteor.Collection('stories');
+Ground.Collection( Stories );
 
 Meteor.methods({
 	share: function( story ) {
@@ -93,4 +94,3 @@ Stories.allow({
 		return true;
 	}
 });
-

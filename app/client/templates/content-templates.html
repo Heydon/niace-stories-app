@@ -45,8 +45,8 @@
 							<a href="{{ pathFor 'manageItem' }}">Edit this story</a>
 						</p>
 					{{/if}}
+					{{> listStoryKeywords}}
 				</div>
-				{{> listStoryKeywords}}
 			</li>
 		{{/each}}
 	</ul>
@@ -89,6 +89,9 @@
 
 <template name="story">
 	<h1>{{name}}&#x2019;s Story</h1>
+	{{#if recording}}
+		<iframe width="100%" height="170" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url={{recording}}&amp;auto_play=false&amp;hide_related=true&amp;show_reposts=false&amp;visual=false&amp;color=007FA3&amp;theme_color=007FA3&amp;sharing=false&amp;show_artwork=false&amp;show_user=false"></iframe>
+	{{/if}}
 	{{> alertBubbles}}
 	<div class="story-body">
 		{{#markdown}}{{story}}{{/markdown}}
@@ -143,6 +146,9 @@
 			</div>
 		</div>
 		<input id="name" type="text" aria-live="polite" role="status" placeholder="Type or hit 'generate a name'" />
+		<!--<label for="recording">Recording</label>
+		<p>Have you tried recording your story? You could use your phone's voice recorder then upload the file below.</p>
+		<input type="file" name="recording" id="recording" />-->
 		<input type="text" style="display: none" aria-hidden="true" id="check" value="" />
 		<div role="alert">
 			{{> errors}}
@@ -195,15 +201,16 @@
 				</div>
 			</fieldset>
 		{{/each}}
-		<label for="audio">Soundcloud audio url</label>
-		<input id="audio" name="audio" type="text" value="{{story.audio}}" />
+		<h2>Audio Recording</h2>
+		<label for="soundcloud">Soundcloud link for the recording (optional)</label>
+		<input placeholder="A web address starting https://" type="text" name="audio" id="soundcloud" value="{{story.audio}}">
 		<h2>Published?</h2>
 		<p>Is the story ready to be shown in the app?</p>
 		<label>
 			<input name="published" type="checkbox" id="published" value="true" class="vh" {{checked}}>
 			<span>Published</span>
 		</label>
-		<label for="help">Help and resources</label>
+		<h2>Help &amp; Resources</h2>
 		<p>Are there any places to find help regarding issues in this story? Are there any people to contact?</p>
 		<p>Web addresses (eg. www.niace.org.uk) are automatically converted into links. To make a list, use asterisks as in the following example:</p>
 		<p>
@@ -211,6 +218,7 @@
 			<span style="display:block; margin-top: 0;">* Item 2: www.niace.org.uk</span>
 			<span style="display:block; margin-top: 0;">* Another item</span>
 		</p>
+		<label for="help">Help and resources (optional)</label>
 		<textarea id="help" name="help" rows="10">{{story.help}}</textarea>
 		<input type="text" style="display: none" aria-hidden="true" id="check" value="" />
 		<div role="alert">
@@ -232,40 +240,33 @@
 	{{#if noInspiration}}
 		<p>Looks like you haven't found any inspiring stories yet. Let's help you <a href="/">find an inspiring story</a>.</p>
 	{{/if}}
-	<ul class="inspiring-me-themes">
+	<ul class="inspiring-me-themes theme-list">
 		{{#each themes}}
 			<li class="expando-parent collapsed {{#if size stories}}has-stories{{else}}no-stories{{/if}}">
-				<div>
-					<h2>
-						<button class="expando-controls" aria-expanded="false" {{disabled stories}} aria-controls="expando-{{_id}}">
-							{{themeName}}
-						</button>
-						{{#if size stories}}
-							<span class="count">({{size stories}} saved)</span>
-						{{else}}
-							<span class="count">(None. <a href="{{pathFor 'theme'}}">Find some!</a>)</span>
-						{{/if}}
-					</h2>
-				</div>
-				<div class="expando" id="expando-{{_id}}" tabindex="-1">
-					<h3>About {{themeName}}:</h3>
-					<p>{{description}}</p>
-					<h3>Stories that inspired me:</h3>
+				<h2>{{themeName}} 
+					{{#if size stories}}
+						<span class="count">({{size stories}} saved)</span>
+					{{/if}}
+				</h2>
+				<h3>Saved stories:</h3>
+				{{#if size stories}}
 					<ul class="inspiring-me-stories">
 						{{#each stories}}
 							<li>
 								<div>
-									<p><a href="{{ pathFor 'story' }}">{{this.name}}'s Story</a></p>
+									<p><a href="{{ pathFor 'story' }}">{{this.name}}&#x2019;s Story</a></p>
 								</div>
-								<div>
-									<a aria-label="delete" href="{{pathFor 'deleteLocal'}}">&#x2716;</a>
-								</div>
+								<a aria-label="delete from collection" href="{{pathFor 'deleteLocal'}}">&#x2716;</a>
 							</li>
 						{{/each}}
 					</ul>
-					<h3>Most interesting keywords:</h3>
+				{{else}}
+					<p>Looks like you haven&#x2019;t been inspired by anything in <strong>{{themeName}}</strong> yet. <a href="{{pathFor 'theme'}}">Find some inspiring stories!</a>.</p>
+				{{/if}}
+				{{#if storiesKeywords}}
+					<h3>Inspiring keywords:</h3>
 					{{> listStoryKeywords keywords=storiesKeywords}}
-				</div>
+				{{/if}}
 			</li>
 		{{/each}}
 	</ul>
@@ -296,7 +297,7 @@
 <template name="deleteLocal">
 	<h1>Delete story</h1>
 	<p>Are you sure you want to delete {{this.name}}'s story from your <strong>Inspiring Me</strong> collection?</p>
-	<p><button class="delete">Confirm</button> <button class="cancel">Cancel</button></p>
+	<p class="center"><button class="delete">Confirm</button> <button class="cancel">Cancel</button></p>
 </template>
 
 <template name="keyword">

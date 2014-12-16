@@ -1,3 +1,7 @@
+/**
+ * TODO:
+ * Look into re-writing to use mongodb, or delete this file
+ */
 var mongoose = require('mongoose');
 var hasErrored = 0;
 if( process.env.MONGOHQ_URL ) {

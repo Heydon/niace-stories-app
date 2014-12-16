@@ -3,11 +3,14 @@
  * Move large helpers and stuff into client/features/feature.js
  */
 Handlebars.registerHelper('storyThemes', function(story) {
-	return Themes.find({
-		_id: {
-			$in: story.themes
-		}
-	});
+	if( story ) {
+		return Themes.find({
+			_id: {
+				$in: story.themes
+			}
+		});
+	}
+	return [];
 });
 
 // this should take unsafe strings and make them classy.
@@ -41,14 +44,14 @@ Template.storiesList.helpers({
 		return Stories.find().count() === 0;
 	},
 	publishedClass: function() {
-		if (!this.published) {
+		if( !this.published ) {
 			return 'not-published';
 		}
 	}
 });
 
 Template.storiesList.rendered = function() {
-	$('.truncated').trunk8({ lines: 5});
+	this.$('.truncated').trunk8({ lines: 5});
 };
 
 /**

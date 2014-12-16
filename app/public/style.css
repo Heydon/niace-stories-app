@@ -597,6 +597,10 @@ form h2 + p, form label + p {
   margin-top: 0;
 }
 
+label + h2 {
+  margin-top: 1.5em;
+}
+
 /**************************************************************
 
 THEMABLE RADIO BUTTON PATTERN
@@ -857,13 +861,13 @@ ARCHIVE PAGES
   border: 0;
 }
 
-.theme-list li {
+.theme-list > li {
   list-style: none;
   background: #B9DFE9;
   padding: 1.5em;
 }
 
-.theme-list li + li {
+.theme-list > li + li {
   margin-top: 1.5em
 }
 
@@ -985,6 +989,43 @@ MESSAGES
 .admin button:hover, .admin button:focus {
   background: #fff;
   color: #111;
+}
+
+/* INSPIRING ME
+------------------------------------------------------- */
+
+.inspiring-me-themes h3 + * {
+  margin-top: 0.75em;
+}
+
+.inspiring-me-stories {
+  margin: 0;
+  margin-top: 0.75em;
+}
+
+.inspiring-me-stories li {
+  padding: 0;
+  position: relative;
+  font-size: 1.5em;
+  list-style: none;
+  padding-right: 1.5em;
+}
+
+.inspiring-me-stories li div {
+  display: inline-block;
+  margin: 0;
+}
+
+.inspiring-me-stories [aria-label^="delete"] {
+  position: absolute;
+  right: 0;
+  margin-top: 0.25em;
+}
+
+.inspiring-me-stories li + li {
+  padding-top: 0.5em;
+  margin-top: 0.5em;
+  border-top: 2px solid #007FA3;
 }
 
 /* BREAK POINTS
