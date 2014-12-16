@@ -600,6 +600,22 @@ label + h2 {
   margin-top: 1.5em;
 }
 
+/* initial file input styling */
+input[type="file"] {
+  border: none;
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+  line-height: 1;
+  display: inline-block;
+  width: 74%;
+}
+
+input[type="file"] + button {
+  display: inline-block;
+  width: 25%;
+}
+
 /**************************************************************
 
 THEMABLE RADIO BUTTON PATTERN

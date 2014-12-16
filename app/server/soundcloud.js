@@ -9,10 +9,8 @@ if( process.env.SC_CLIENT_ID && process.env.SC_CLIENT_SECRET ) {
 	var sc = false;
 }
 
-Meteor.methods({
-	uploadToNiaceSoundcloud: function() {
-		if( !sc ) {
-			throw new Meteor.error(['Unable to connect to soundcloud']);
-		}
-	}
-});
+Router.route('/audio', { where: 'server' })
+	.post(function() {
+		debugger;
+		this.response.end('somestuff');
+	});

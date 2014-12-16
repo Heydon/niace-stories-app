@@ -204,6 +204,7 @@
 		<h2>Audio Recording</h2>
 		<label for="soundcloud">Soundcloud link for the recording (optional)</label>
 		<input placeholder="A web address starting https://" type="text" name="audio" id="soundcloud" value="{{audio}}">
+		{{> audioUpload}}
 		<label>
 			<input name="enableAudio" type="checkbox" id="enableAudio" value="true" class="vh" {{checked}}>
 			<span>enable audio</span>

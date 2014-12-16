@@ -3,18 +3,20 @@ Router.configure({
 	layoutTemplate: 'layout',
 	loadingTemplate: 'loading',
 	onRun: function() {
-		$('main').attr('class', 'loaded');
-		setTimeout(function () {
-			$('main').removeAttr('class');
-		}, 1000);
-		if( !animating ) {
-			animating = true;
-			$('body').animate({scrollTop:0}, '400', function() {
-				animating = false;
-			});
+		if( Meteor.isClient ) {
+			$('main').attr('class', 'loaded');
+			setTimeout(function () {
+				$('main').removeAttr('class');
+			}, 1000);
+			if( !animating ) {
+				animating = true;
+				$('body').animate({scrollTop:0}, '400', function() {
+					animating = false;
+				});
+			}
+			$('main').focus();
+			//
 		}
-		$('main').focus();
-		//
 		this.next();
 	}
 });
