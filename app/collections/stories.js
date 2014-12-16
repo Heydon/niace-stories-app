@@ -33,7 +33,7 @@ Meteor.methods({
 			// http://en.wikipedia.org/wiki/List_of_HTTP_status_codes#400
 			throw new Meteor.Error( 400, errors );
 		}
-		
+
 		return output;
 
 	},

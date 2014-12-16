@@ -74,7 +74,7 @@ Meteor.publish('config', function() {
  * @param  {Collection} Type the collection constructor
  */
 function preLoadDatabase( file, Type ) {
-	try { // 
+	try { //
 		console.log( 'Attempting to import database entries from private/' + file );
 		var entries = JSON.parse( Assets.getText( file ) );
 		_.each( entries, function( data, i ) {
