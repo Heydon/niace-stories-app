@@ -169,13 +169,13 @@
 </template>
 
 <template name="manageItem">
-	<h1>Manage {{story.name}}'s story</h1>
+	<h1>Manage {{name}}'s story</h1>
 	{{> alertBubbles}}
 	<form>
-		<label for="name">Name</label>
-		<input id="name" name="name" type="text" value="{{story.name}}" />
+		<!-- <label for="name">Name</label>
+		<input id="name" name="name" type="text" value="{{name}}" />
 		<label for="story">Story</label>
-		<textarea id="story" name="story" rows="10">{{story.story}}</textarea>
+		<textarea id="story" name="story" rows="10">{{story}}</textarea>
 		<h2>Set themes and keywords</h2>
 		{{#each themes}}
 			<fieldset name="themes" class="theme-{{enableThemeForm selectedThemes .}}">
@@ -200,10 +200,14 @@
 					{{/each}}
 				</div>
 			</fieldset>
-		{{/each}}
+		{{/each}} -->
 		<h2>Audio Recording</h2>
 		<label for="soundcloud">Soundcloud link for the recording (optional)</label>
-		<input placeholder="A web address starting https://" type="text" name="audio" id="soundcloud" value="{{story.audio}}">
+		<input placeholder="A web address starting https://" type="text" name="audio" id="soundcloud" value="{{audio}}">
+		<label>
+			<input name="enableAudio" type="checkbox" id="enableAudio" value="true" class="vh" {{checked}}>
+			<span>enable audio</span>
+		</label>
 		<h2>Published?</h2>
 		<p>Is the story ready to be shown in the app?</p>
 		<label>
@@ -219,7 +223,7 @@
 			<span style="display:block; margin-top: 0;">* Another item</span>
 		</p>
 		<label for="help">Help and resources (optional)</label>
-		<textarea id="help" name="help" rows="10">{{story.help}}</textarea>
+		<textarea id="help" name="help" rows="10">{{help}}</textarea>
 		<input type="text" style="display: none" aria-hidden="true" id="check" value="" />
 		<div role="alert">
 			{{> errors}}

@@ -1,6 +1,8 @@
 Template.manageItem.created = function() {
+	var initialVal = this.data && this.data.story && this.data.themes;
+
 	this.selectedThemes = new ReactiveVar();
-	this.selectedThemes.set( this.data.story.themes || [] );
+	this.selectedThemes.set( initialVal || [] );
 };
 
 Template.manageItem.rendered = function() {
@@ -46,7 +48,7 @@ Template.manageItem.events({
 		if( $('#check').val() !== '' ) {
 			return;
 		} else {
-			Meteor.call('modifyStory', {_id: this.story._id}, story, function( errors ) {
+			Meteor.call('modifyStory', {_id: this._id}, story, function( errors ) {
 				if( errors ) {
 					Session.set( 'errors', errors.reason );
 				} else {
@@ -67,10 +69,10 @@ Template.manageItem.helpers({
 		return search ? search.keywords : [];
 	},
 	currentTheme: function() {
-		return this.story.theme;
+		return this.theme;
 	},
 	checked: function() {
-		return this.story.published ? 'checked': '';
+		return this.published ? 'checked': '';
 	},
 	themeEnabled: function() {
 		var selectedThemes = Template.instance().selectedThemes.get();

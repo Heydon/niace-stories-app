@@ -55,10 +55,7 @@ mobile-status-bar@1.0.1
 mongo@1.0.9
 mrt:animation-helper@0.1.9
 mrt:reactive-store@0.0.1
-mrt:soundcloud@0.1.1
 npm-bcrypt@0.7.7
-oauth2@1.1.1
-oauth@1.1.2
 observe-sequence@1.0.3
 ordered-dict@1.0.1
 raix:eventemitter@0.0.2
