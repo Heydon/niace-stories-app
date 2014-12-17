@@ -855,12 +855,20 @@ h4 { font-size: 1em; }
 }
 
 .has-audio {
-  background-image: url('/speaker.svg');
-  background-size: contain;
-  background-repeat: no-repeat;
-  height: 1em;
-  width: 1em;
+  margin-top: 0;
   display: inline-block;
+  font-size: 0.75em;
+  padding: 0 0.5em;
+  background: #C3B9D6;
+  white-space: nowrap;
+  margin-left: 0.25em;
+}
+
+.has-audio svg, .has-audio img {
+  vertical-align: -0.125em;
+  display: inline-block;
+  width: 1em;
+  height: 1em;
 }
 
 /**************************************************************
