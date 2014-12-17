@@ -1,6 +1,6 @@
 Template.manageItem.created = function() {
 	this.selectedThemes = new ReactiveVar();
-	this.selectedThemes.set( this.data.themes || [] );
+	this.selectedThemes.set( (this.data && this.data.themes) || [] );
 };
 
 Template.manageItem.rendered = function() {
