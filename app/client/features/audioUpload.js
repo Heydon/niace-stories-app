@@ -19,6 +19,10 @@ Template.audioUpload.rendered = function () {
 		},
 		done: function() {
 			debugger;
+		},
+		progress: function( evt, data ) {
+			var progress = parseInt(data.loaded / data.total * 100, 10);
+			template.$('.progress .bar').css('width', progress + '%');
 		}
 	});
 };
