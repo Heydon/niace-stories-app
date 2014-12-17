@@ -606,14 +606,60 @@ input[type="file"] {
   background: none;
   border-radius: 0;
   box-shadow: none;
-  line-height: 1;
+  line-height: 1.5;
   display: inline-block;
   width: 74%;
+  padding: 0;
 }
 
 input[type="file"] + button {
   display: inline-block;
   width: 25%;
+  margin-top: 0.25em;
+  font-size: 1em;
+}
+
+.upload:after {
+  content: '\0020\2b06';
+}
+
+.upload-container {
+  padding: 1.5em;
+  border: 1px solid #111;
+}
+
+.progress > div {
+  padding: 0.75em;
+  background: #EFE468;
+  font-weight: bold;
+}
+
+.uploading span {
+  -webkit-animation: progress steps(1) 0.5s infinite;
+  -o-animation: progress steps(1) 0.5s infinite;
+  animation: progress steps(1) 0.5s infinite;
+}
+
+.uploaded {
+  background: #44881A;
+  color: #fff;
+}
+
+@-webkit-keyframes progress {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@-moz-keyframes progress {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@-o-keyframes progress {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes progress {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
 }
 
 /**************************************************************
