@@ -7,7 +7,7 @@ if( !Config.find().count() ) {
 	Config.insert({
 		_id: 'fixture',
 		value: false
-	});1
+	});
 }
 
 Meteor.publish('stories', function( query, options ) {

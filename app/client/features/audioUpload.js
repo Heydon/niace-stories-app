@@ -2,16 +2,23 @@
 // shims are possible using iframes(ick) or silverlight(double ick)
 Template.audioUpload.events({
 	'click button': function( evt, template ) {
-		var file = template.$('input');
-		var reader = new FileReader();
+		evt.preventDefault();
 	}
 });
 
 // fileupload shim
 Template.audioUpload.rendered = function () {
-	this.$('[type="file"]').fileUpload({
-		add: function() {
-			
+	var template = this;
+	template.$('[type="file"]').fileupload({
+		url: '/audio',
+		autoUpload: false,
+		replaceFileInput: false,
+		add: function( evt, data ) {
+			template.data = data;
+			data.submit();
+		},
+		done: function() {
+			debugger;
 		}
 	});
 };
