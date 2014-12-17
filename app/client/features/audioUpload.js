@@ -3,6 +3,12 @@
 Template.audioUpload.events({
 	'click button': function( evt, template ) {
 		evt.preventDefault();
+	},
+	'fileuploadstarted' : function() {
+		Session.set('uploadstatus', 'Uploading...');
+	},
+	'fileuploadfinished' : function() {
+		Session.set('uploadstatus', 'Uploaded!');
 	}
 });
 
@@ -26,6 +32,21 @@ Template.audioUpload.rendered = function () {
 		}
 	});
 };
+
+Template.audioUpload.helpers({
+	status: function() {
+		return Session.get('uploadstatus');
+	},
+	statusClass: function() {
+		var status = Session.get('uploadstatus');
+		if (status === 'Uploading...') {
+			return 'uploading';
+		}
+		if (status === 'Uploaded!') {
+			return 'uploaded';
+		}
+	}
+});
 
 // our blob file with the contents of the file chosen
 // var file = $('[name="uploadSound"]').get(0).files[0];
