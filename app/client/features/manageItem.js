@@ -1,8 +1,6 @@
 Template.manageItem.created = function() {
-	var initialVal = this.data && this.data.story && this.data.themes;
-
 	this.selectedThemes = new ReactiveVar();
-	this.selectedThemes.set( initialVal || [] );
+	this.selectedThemes.set( this.data.themes || [] );
 };
 
 Template.manageItem.rendered = function() {
@@ -68,15 +66,11 @@ Template.manageItem.helpers({
 		var search = Themes.findOne( this._id );
 		return search ? search.keywords : [];
 	},
-	currentTheme: function() {
-		return this.theme;
-	},
 	checked: function() {
 		return this.published ? 'checked': '';
 	},
 	themeEnabled: function() {
 		var selectedThemes = Template.instance().selectedThemes.get();
-
 		return _.indexOf( selectedThemes, this._id ) > -1 ? 'checked' : '';
 	},
 	hasThemeKeyword: function( parentContext ) {
@@ -84,9 +78,13 @@ Template.manageItem.helpers({
 		var selectedThemes = Template.instance().selectedThemes.get();
 
 		if( _.indexOf( selectedThemes, parentContext._id ) > -1 ) {
-			return _.indexOf( Template.instance().data.story.keywords || [], keyword ) > -1 ? 'checked' : '';
+			return _.indexOf( Template.instance().data.keywords || [], keyword ) > -1 ? 'checked' : '';
 		}
 		return '';
+	},
+	// template hack to update selected themes when we hear back from the mongo db
+	update: function( themes ) {
+		Template.instance().selectedThemes.set( _.unique( themes ) );
 	},
 	selectedThemes: function() {
 		return Template.instance().selectedThemes.get();
