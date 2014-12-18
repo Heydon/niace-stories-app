@@ -9,7 +9,7 @@ Router.configure({
 		}, 1000);
 		if( !animating ) {
 			animating = true;
-			$('body').animate({scrollTop:0}, '400', function() {
+			$('body').animate({scrollTop:0}, '600', function() {
 				animating = false;
 			});
 		}
@@ -50,6 +50,9 @@ Router.map(function() {
 
 	this.route('glossary', {
 		path: '/glossary'
+	});
+	this.route('about', {
+		path: '/about'
 	});
 	this.route('/story/:_id', {
 		name: 'story',
