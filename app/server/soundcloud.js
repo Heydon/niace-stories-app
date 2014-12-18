@@ -2,6 +2,7 @@
 if( process.env.SC_CLIENT_ID && process.env.SC_CLIENT_SECRET && process.env.SC_USERNAME && process.env.SC_PASSWORD ) {
 
 	var request = Npm.require('request');
+	var Busboy = Npm.require('busboy');
 	function Soundcloud( clientID, clientSecret, clientUsername, clientPassword ) {
 		if( !(this instanceof Soundcloud) ) return new Soundcloud( clientID, clientSecret, clientUsername, clientPassword );
 
@@ -16,6 +17,7 @@ if( process.env.SC_CLIENT_ID && process.env.SC_CLIENT_SECRET && process.env.SC_U
 		return this;
 	}
 	Soundcloud.prototype.url = 'https://api.soundcloud.com';
+
 	Soundcloud.prototype.authed = false;
 
 	// just fucking auth us using https://developers.soundcloud.com/docs/api/guide#user-credentials
@@ -58,23 +60,21 @@ if( process.env.SC_CLIENT_ID && process.env.SC_CLIENT_SECRET && process.env.SC_U
 
 	Soundcloud.prototype.uploadTrackPipe = function( title, contentLength ) {
 		if( this.authed ) {
-			var params = {
-				client_id: this.options.clientID,
-				sharing: 'public'
-			};
 			var bodyContents = 'track[title]=' + title + '&track[asset_data]=';
-			var headers = {
-				'Authorization': 'OAuth ' + this.authData.access_token,
-				'content-length': bodyContents + contentLength
+			var postOptions = {
+				url: this.url + '/tracks',
+				headers: {
+					'Authorization': 'OAuth ' + this.authData.access_token,
+					'content-length': bodyContents.length + contentLength
+				},
+				qs: {
+					client_id: this.options.clientID,
+					sharing: 'public'
+				}
 			};
 			console.log('posting datas');
-			console.log( params );
-			console.log( this.authData );
-			var postStream = request.post({
-				url: this.url + '/tracks',
-				headers: headers,
-				qs: params
-			});
+			console.log( postOptions );
+			var postStream = request.post( postOptions );
 
 			// start the stream by sending body containing track[title] and the starts of the
 			// asset_data post
@@ -89,8 +89,7 @@ if( process.env.SC_CLIENT_ID && process.env.SC_CLIENT_SECRET && process.env.SC_U
 	var sc = new Soundcloud( process.env.SC_CLIENT_ID, process.env.SC_CLIENT_SECRET, process.env.SC_USERNAME, process.env.SC_PASSWORD );
 	sc.auth();
 
-	var maxFileUpload = 500 * 1024 * 1024;// 500mb
-	//sc.init( process.env.SC_CLIENT_ID, process.env.SC_CLIENT_SECRET, 'http://somefakepath.not-a-domain' );
+	var maxFileUpload = 500 * 1024 * 1024;// 500mb in bytes
 
 } else {
 	console.warn( 'Soundcloud connectevity requires SC_CLIENT_ID, SC_CLIENT_SECRET, SC_USERNAME and SC_PASSWORD in the application\'s environment' );
@@ -130,29 +129,35 @@ Router.route('/audio', { where: 'server' })
 			var statusCode = 200;
 			var scResponse = '';
 			var audioRequest = this;
+			// TODO move max file size and other opts here
+			var busboy = new Busboy({
+				headers: this.request.headers
+			});
 			//var audioData = new Buffer(0);
 
 			if( contentSize && contentSize < maxFileUpload ) {
-
-				this.request.pipe(
-					sc.uploadTrackPipe( 'testtrack', contentSize )
-						.on('error', function() {
-							console.error('error!');
-							console.error.apply(console, arguments);
-						})
-						.on('data', function(d) {
-							scResponse += d.toString();
-						})
-						.on('end', function() {
-							console.log('finished request with (' + this.response.statusCode + ')');
-							console.log(scResponse);
-						})
-					);
-				// this.request.on('data', function( datas ) {
-				// 	audioData = Buffer.concat( [datas, audioData] );
-				// });
-				// this.request.on('end', function() {
-				// 	sc.uploadTrackPipe( audioData, 'testtrack' )
+				busboy.on('file', function( fieldName, file, fileName ) {
+					file.setEncoding('utf8');
+					file.pipe(
+						// 512bytes is form multipart upload overhead
+						sc.uploadTrackPipe( 'testtrack', contentSize - 512 )
+							.on('error', function() {
+								console.error('error!');
+								console.error.apply(console, arguments);
+							})
+							.on('data', function(d) {
+								scResponse += d.toString();
+							})
+							.on('end', function() {
+								console.log('finished request with (' + this.response.statusCode + ')');
+								console.log(scResponse);
+							})
+					)
+					.pipe( audioRequest.response )
+				});
+				this.request.pipe( busboy );
+				// this.request.pipe(
+				// 	sc.uploadTrackPipe( 'testtrack', contentSize )
 				// 		.on('error', function() {
 				// 			console.error('error!');
 				// 			console.error.apply(console, arguments);
@@ -164,8 +169,8 @@ Router.route('/audio', { where: 'server' })
 				// 			console.log('finished request with (' + this.response.statusCode + ')');
 				// 			console.log(scResponse);
 				// 		})
-				// 		.pipe(audioRequest.response);
-				// });
+				// )
+				// .pipe( this.response );
 
 			} else {
 				// er

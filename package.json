@@ -21,8 +21,9 @@
   },
   "homepage": "https://github.com/Heydon/niace-stories-app",
   "dependencies": {
-    "mongodb": "^1.4.23",
-    "body-parser": "^1.10.0"
+    "body-parser": "^1.10.0",
+    "busboy": "^0.2.9",
+    "mongodb": "^1.4.23"
   },
   "devDependencies": {
     "soundclouder": "^0.8.1",
