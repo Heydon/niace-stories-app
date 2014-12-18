@@ -61,13 +61,13 @@
 			<ul>
 				{{#if showPrev}}
 					<li>
-						<a rel="prev" href="?page={{prev}}"><span aria-hidden>&#x2190;</span> Previous (page {{humanizePage prev}})</a>
+						<a rel="prev" href="{{pageUrl}}?page={{prev}}"><span aria-hidden>&#x2190;</span> Previous (page {{humanizePage prev}})</a>
 					</li>
 				{{/if}}
 				{{humanizePage}}
 				{{#if showNext}}
 					<li>
-						<a rel="next" href="?page={{next}}">Next (page {{humanizePage next}}) <span aria-hidden>&#x2192;</span></a>
+						<a rel="next" href="{{pageUrl}}?page={{next}}">Next (page {{humanizePage next}}) <span aria-hidden>&#x2192;</span></a>
 					</li>
 				{{/if}}
 			</ul>

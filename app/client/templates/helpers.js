@@ -44,12 +44,15 @@ Template.storiesList.helpers({
 		if( !this.published ) {
 			return 'not-published';
 		}
+	},
+	name: function() {
+		var template = Template.instance();
+		Meteor.defer(function() {
+			template.$('.truncated').trunk8({ lines: 5});
+		});
+		return this.name;
 	}
 });
-
-Template.storiesList.rendered = function() {
-	this.$('.truncated').trunk8({ lines: 5});
-};
 
 /**
  * themes helpers

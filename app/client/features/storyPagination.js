@@ -10,11 +10,16 @@ function arePages() {
 	}
 }
 
-Handlebars.registerHelper('page', getCurrentPage );
+function humanizePage( page ) {
+	if( typeof page === 'number' ) {
+		return (isNaN( page ) ? getCurrentPage() : page) + 1;
+	} else {
+		return ( typeof page === 'string' ? parseInt( page, 10 ) : getCurrentPage() ) + 1;
+	}
+}
 
-Handlebars.registerHelper('humanizePage', function( page ) {
-	return ( typeof page === 'string' ? parseInt( page, 10 ) : getCurrentPage() ) + 1;
-});
+Handlebars.registerHelper('page', getCurrentPage );
+Handlebars.registerHelper('humanizePage', humanizePage );
 
 Template.storyPagination.helpers({
 	showNext: arePages,
@@ -29,5 +34,8 @@ Template.storyPagination.helpers({
 	},
 	paged: function() {
 		return !(getCurrentPage() === 0 && !arePages.call( this ));
+	},
+	pageUrl: function() {
+		return Router.current().route.url();
 	}
 });
