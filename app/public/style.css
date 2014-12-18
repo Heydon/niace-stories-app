@@ -81,6 +81,7 @@ img {
 h1, h2, h3, h4 {
 	font-family: Lato, sans-serif;
 	font-weight: 900;
+  line-height: 1.125;
 }
 
 main ul {
@@ -1070,6 +1071,7 @@ MESSAGES
 .inspiring-me-stories {
   margin: 0;
   margin-top: 0.75em;
+  border: 2px solid #007FA3;
 }
 
 .inspiring-me-stories li {
@@ -1078,6 +1080,11 @@ MESSAGES
   font-size: 1.5em;
   list-style: none;
   padding-right: 1.5em;
+  padding: 0.25em;
+}
+
+.inspiring-me-stories li + li {
+  border-top: 2px solid #007FA3;
 }
 
 .inspiring-me-stories li div {
@@ -1087,14 +1094,8 @@ MESSAGES
 
 .inspiring-me-stories [aria-label^="delete"] {
   position: absolute;
-  right: 0;
+  right: 0.25em;
   margin-top: 0.25em;
-}
-
-.inspiring-me-stories li + li {
-  padding-top: 0.5em;
-  margin-top: 0.5em;
-  border-top: 2px solid #007FA3;
 }
 
 .alerts-list {
