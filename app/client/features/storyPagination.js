@@ -4,17 +4,22 @@ function getCurrentPage() {
 
 function arePages() {
 	if( Config.findOne('pageSize') ) {
-		return Stories.find().count() === Config.findOne('pageSize').value;
+		return this.stories.count() === Config.findOne('pageSize').value;
 	} else {
-		return Stories.find().count() === 10;
-	}		
+		return this.stories.count() === 10;
+	}
+}
+
+function humanizePage( page ) {
+	if( typeof page === 'number' ) {
+		return (isNaN( page ) ? getCurrentPage() : page) + 1;
+	} else {
+		return ( typeof page === 'string' ? parseInt( page, 10 ) : getCurrentPage() ) + 1;
+	}
 }
 
 Handlebars.registerHelper('page', getCurrentPage );
-
-Handlebars.registerHelper('humanizePage', function( page ) {
-	return ( typeof page === 'string' ? parseInt( page, 10 ) : getCurrentPage() ) + 1;
-});
+Handlebars.registerHelper('humanizePage', humanizePage );
 
 Template.storyPagination.helpers({
 	showNext: arePages,
@@ -28,6 +33,9 @@ Template.storyPagination.helpers({
 		return getCurrentPage() - 1;
 	},
 	paged: function() {
-		return !(getCurrentPage() === 0 && !arePages());
+		return !(getCurrentPage() === 0 && !arePages.call( this ));
+	},
+	pageUrl: function() {
+		return Router.current().route.url();
 	}
 });

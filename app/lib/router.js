@@ -19,16 +19,17 @@ Router.configure({
 	}
 });
 
-function pageQuery( page, conf ) {
+function pageQuery() {
+	var page = Router.current().params.query.page;
 	var pageSize = Config.findOne('pageSize') ? Config.findOne('pageSize').value : 10;
+	var parsedPage = page ? parseInt(page, 10) : 0;
+	if( isNaN( parsedPage ) ) {
+		parsedPage = 0;
+	}
 	return _.extend({
-		skip: page * pageSize,
+		skip: parsedPage * pageSize,
 		limit: pageSize
-	}, conf);
-}
-
-function dataStories() {
-	return Stories.find( pageQuery( this.params.query.page ) );
+	});
 }
 
 Router.map(function() {
@@ -44,7 +45,13 @@ Router.map(function() {
 	this.route('/login');
 	this.route('/register');
 
-	this.route('/manage');
+	this.route('/manage', {
+		data: function() {
+			return {
+				stories: Stories.find({}, pageQuery())
+			};
+		}
+	});
 
 	this.route('/me');
 
@@ -88,11 +95,11 @@ Router.map(function() {
 		name: 'keyword',
 		data: function() {
 			return {
-				stories: Stories.find( pageQuery(this.params.query.page, {
+				stories: Stories.find({
 					keywords: {
 						'$in': [this.params.keyword]
 					}
-				})),
+				}, pageQuery()),
 				keyword: this.params.keyword
 			};
 		}
@@ -103,11 +110,11 @@ Router.map(function() {
 		data: function() {
 			var themes = this.params._id && this.params._id.split(',');
 			return {
-				stories: Stories.find( pageQuery(this.params.query.page, {
+				stories: Stories.find({
 					themes: {
 						'$in': themes
 					}
-				})),
+				}, pageQuery()),
 				ids: themes
 			};
 		}
@@ -115,7 +122,9 @@ Router.map(function() {
 
 	this.route('allStories', {
 		data: function() {
-			return Stories.find();
+			return {
+				stories: Stories.find()
+			};
 		}
 	});
 
