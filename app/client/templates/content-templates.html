@@ -10,7 +10,7 @@
 		{{#unless loggedIn}}
 		<li class="teaser">
 			<div class="your-story">
-				<h2>What's <em>your</em> story?</h2>
+				<h2>What&#x2019;s <em>your</em> story?</h2>
 				<div class="add-your-story">
 					<div>
 						<a href="/add" class="button-shaped">Add your story!</a>
@@ -21,7 +21,8 @@
 		{{/unless}}
 		{{#each stories}}
 			<li class="teaser {{#if published}}published{{/if}}">
-				<h2><a href="{{pathFor 'story'}}">{{name}}&#x2019;s story</a>
+				<h2>
+					<a href="{{pathFor 'story'}}">{{name}}&#x2019;s story</a>
 					{{#if loggedIn}}
 						<em class="status {{publishedClass}}">
 							{{#if published}}
@@ -29,7 +30,21 @@
 							{{else}}
 								not published
 							{{/if}}
-						</em>
+						</em> 
+					{{/if}}
+					{{#if audio}}
+						<span class="has-audio">
+							<svg viewBox="0 0 128 128" version="1.1" y="0px" x="0px">
+								<switch>
+									<g>
+										<path d="M96.562,12.781c-1.774-0.012-3.568,0.681-4.968,2.031-2.7,2.7-2.7,7.176,0,9.876,10.496,10.5,16.316,24.412,16.316,39.312s-5.82,28.812-16.316,39.31c-2.7,2.7-2.7,7.18,0,9.88,1.4,1.4,3.206,2.12,4.906,2.12,1.8,0,3.61-0.7,4.91-2,13.1-13.1,20.4-30.616,20.4-49.216s-7.2-35.988-20.4-49.188c-1.3-1.4-3.072-2.112-4.848-2.125zm-39.031,6.688c-1.083,0.081-2.15,0.469-3.125,1.219l-21.906,16.406h-20c-3.3,0-6,2.7-6,6v41.812c0,3.3,2.7,6,6,6h20l21.906,16.404c4,3,9.594,0.19,9.594-4.81v-77c0-3.75-3.22-6.275-6.469-6.031zm21.313,9c-1.8,0-3.588,0.681-4.938,2.031-2.7,2.7-2.7,7.206,0,9.906,13,13,13,34.094,0,47.094-2.7,2.7-2.7,7.206,0,9.906,1.4,1.4,3.206,2,4.906,2s3.576-0.694,4.876-2.094c18.602-18.3,18.622-48.312,0.124-66.812-1.35-1.35-3.168-2.031-4.968-2.031z"/>
+									</g>
+									<foreignObject>
+										<img src="/speaker.png" alt="" />
+									</foreignObject>
+								</switch>
+							</svg> listen!
+						</span>
 					{{/if}}
 				</h2>
 				<div class="story-body">
@@ -85,10 +100,10 @@
 
 <template name="story">
 	<h1>{{name}}&#x2019;s Story</h1>
+	{{> alertBubbles}}
 	{{#if recording}}
 		<iframe width="100%" height="170" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url={{recording}}&amp;auto_play=false&amp;hide_related=true&amp;show_reposts=false&amp;visual=false&amp;color=007FA3&amp;theme_color=007FA3&amp;sharing=false&amp;show_artwork=false&amp;show_user=false"></iframe>
 	{{/if}}
-	{{> alertBubbles}}
 	<div class="story-body">
 		{{#markdown}}{{story}}{{/markdown}}
 	</div>
@@ -101,8 +116,8 @@
 		</div>
 	{{/if}}
 	<div class="more-inspiration">
-		<h2>More Like This Story</h2>
-		<h3>Pathway themes</h3>
+		<h2>More like this</h2>
+		<h3>Pathway plan themes</h3>
 		{{> ThemeList}}
 		<h3>Keywords</h3>
 		{{> listStoryKeywords}}
@@ -117,7 +132,7 @@
 		</div>
 		<label>
 			<input type="radio" value="true" class="vh" name="inspiring" {{checked}}>
-			<span>Yes! Save it in <strong>"Inspiring Me"</strong> to read again later</span>
+			<span>Yes! Keep it in <strong>My Favourites</strong> to read again later</span>
 		</label>
 		<label>
 			<input type="radio" value="false" class="vh" name="inspiring" {{notChecked}}>
@@ -155,7 +170,7 @@
 
 <template name="thanks">
 	<h1>Thanks!</h1>
-	<p>Thank you for posting a story to inspire people. We'll just check it then publish it in the app. Do you have <a href="/add">another story</a> to tell?</p>
+	<p>Thank you for posting a story to inspire people. We&#x2019;ll just check it before we publish it in the app. Do you have <a href="/add">another story</a> to tell?</p>
 </template>
 
 <template name="manage">
@@ -199,7 +214,12 @@
 		{{/each}}
 		<h2>Audio Recording</h2>
 		<label for="soundcloud">Soundcloud link for the recording (optional)</label>
-		<input placeholder="A web address starting https://" type="text" name="soundcloud" id="soundcloud" value="{{recording}}">
+		<input placeholder="A web address starting https://" type="text" name="audio" id="soundcloud" value="{{audio}}">
+		{{> audioUpload}}
+		<label>
+			<input name="enableAudio" type="checkbox" id="enableAudio" value="true" class="vh" {{checked}}>
+			<span>enable audio</span>
+		</label>
 		<h2>Published?</h2>
 		<p>Is the story ready to be shown in the app?</p>
 		<label>
@@ -230,11 +250,11 @@
 </template>
 
 <template name="me">
-	<h1>Inspiring Me</h1>
+	<h1>My Favourite Stories</h1>
 	{{> alertBubbles}}
 	{{> message}}
 	{{#if noInspiration}}
-		<p>Looks like you haven't found any inspiring stories yet. Let's help you <a href="/">find an inspiring story</a>.</p>
+		<p>Looks like you haven&#x2019;t found any inspiring stories yet. Let's help you <a href="/">find an inspiring story</a>.</p>
 	{{/if}}
 	<ul class="inspiring-me-themes theme-list">
 		{{#each themes}}
@@ -320,7 +340,7 @@
 </template>
 
 <template name="themes">
-	<h1>Find an inspiring story&hellip;</h1>
+	<h1>Be inspired by care leaver stories&hellip;</h1>
 	{{> alertBubbles}}
 	<ul class="theme-list">
 		{{#each themes}}
@@ -360,4 +380,9 @@
 <template name="register">
 	<h1>Make an account</h1>
 	{{> registerForm}}
+</template>
+
+<template name="about">
+	<h1>About &#x201c;Inspire Me&#x201d;</h1>
+	<p>This app has been developed by care leavers working collaboratively with <a href="http://www.niace.org.uk"><abbr title="National Institute of Adult Continuing Education">NIACE</abbr></a> and <a href="http://www.neontribe.co.uk">Neontribe Ltd</a>. The stories have been written by young people who have left care, are living independently and have taken first steps into learning and work.</p>
 </template>

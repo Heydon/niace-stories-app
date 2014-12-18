@@ -14,10 +14,8 @@ function scrapeStoryData( $form ) {
 
 	story.themes = _.map( $form.find('[name="themes"] .enable-theme:checked'), val );
 	story.keywords = _.map( $form.find('[name="themes"] .keywords :checked'), val );
-	story.help = $form.find('#help').val();
-	story.recording = $form.find('#soundcloud').val();
 
-	_.each( ['name', 'story'], function( prop ) {
+	_.each( ['name', 'story', 'help', 'audio'], function( prop ) {
 		story[ prop ] = $form.find('[name="' + prop + '"]').val();
 	});
 
