@@ -34,14 +34,11 @@ Handlebars.registerHelper('classify', function( str, prefix ) {
 });
 
 Template.storiesList.helpers({
-	stories: function() {
-		return Stories.find();
-	},
 	loggedIn: function() {
 		return !!Meteor.user();
 	},
 	empty: function() {
-		return Stories.find().count() === 0;
+		return this.stories.count() === 0;
 	},
 	publishedClass: function() {
 		if( !this.published ) {
@@ -65,7 +62,7 @@ Template.themes.helpers({
 
 Template.theme.helpers({
 	empty: function() {
-		return Stories.find().count() === 0;
+		return this.stories.count() === 0;
 	},
 	names: function() {
 		return Themes.find({
@@ -102,7 +99,7 @@ Template.message.destroyed = function(){
 
 Template.allStories.helpers({
 	formatForDownload: function() {
-		return JSON.stringify( _.map( Stories.find().fetch(), function( story ) {
+		return JSON.stringify( _.map( this.stories.fetch(), function( story ) {
 			return _.omit( story, '_id' );
 		}));
 	}

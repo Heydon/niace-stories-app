@@ -4,10 +4,10 @@ function getCurrentPage() {
 
 function arePages() {
 	if( Config.findOne('pageSize') ) {
-		return Stories.find().count() === Config.findOne('pageSize').value;
+		return this.stories.count() === Config.findOne('pageSize').value;
 	} else {
-		return Stories.find().count() === 10;
-	}		
+		return this.stories.count() === 10;
+	}
 }
 
 Handlebars.registerHelper('page', getCurrentPage );
@@ -28,6 +28,6 @@ Template.storyPagination.helpers({
 		return getCurrentPage() - 1;
 	},
 	paged: function() {
-		return !(getCurrentPage() === 0 && !arePages());
+		return !(getCurrentPage() === 0 && !arePages.call( this ));
 	}
 });
