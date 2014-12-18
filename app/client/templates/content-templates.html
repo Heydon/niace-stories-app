@@ -76,13 +76,13 @@
 			<ul>
 				{{#if showPrev}}
 					<li>
-						<a rel="prev" href="?page={{prev}}"><span aria-hidden>&#x2190;</span> Previous (page {{humanizePage prev}})</a>
+						<a rel="prev" href="{{pageUrl}}?page={{prev}}"><span aria-hidden>&#x2190;</span> Previous (page {{humanizePage prev}})</a>
 					</li>
 				{{/if}}
 				{{humanizePage}}
 				{{#if showNext}}
 					<li>
-						<a rel="next" href="?page={{next}}">Next (page {{humanizePage next}}) <span aria-hidden>&#x2192;</span></a>
+						<a rel="next" href="{{pageUrl}}?page={{next}}">Next (page {{humanizePage next}}) <span aria-hidden>&#x2192;</span></a>
 					</li>
 				{{/if}}
 			</ul>
@@ -100,10 +100,10 @@
 
 <template name="story">
 	<h1>{{name}}&#x2019;s Story</h1>
+	{{> alertBubbles}}
 	{{#if recording}}
 		<iframe width="100%" height="170" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url={{recording}}&amp;auto_play=false&amp;hide_related=true&amp;show_reposts=false&amp;visual=false&amp;color=007FA3&amp;theme_color=007FA3&amp;sharing=false&amp;show_artwork=false&amp;show_user=false"></iframe>
 	{{/if}}
-	{{> alertBubbles}}
 	<div class="story-body">
 		{{#markdown}}{{story}}{{/markdown}}
 	</div>
@@ -116,8 +116,8 @@
 		</div>
 	{{/if}}
 	<div class="more-inspiration">
-		<h2>More Like This Story</h2>
-		<h3>Pathway themes</h3>
+		<h2>More like this</h2>
+		<h3>Pathway plan themes</h3>
 		{{> ThemeList}}
 		<h3>Keywords</h3>
 		{{> listStoryKeywords}}
@@ -132,7 +132,7 @@
 		</div>
 		<label>
 			<input type="radio" value="true" class="vh" name="inspiring" {{checked}}>
-			<span>Yes! Save it in <strong>"Inspiring Me"</strong> to read again later</span>
+			<span>Yes! Keep it in <strong>My Favourites</strong> to read again later</span>
 		</label>
 		<label>
 			<input type="radio" value="false" class="vh" name="inspiring" {{notChecked}}>
@@ -170,7 +170,7 @@
 
 <template name="thanks">
 	<h1>Thanks!</h1>
-	<p>Thank you for posting a story to inspire people. We'll just check it then publish it in the app. Do you have <a href="/add">another story</a> to tell?</p>
+	<p>Thank you for posting a story to inspire people. We&#x2019;ll just check it before we publish it in the app. Do you have <a href="/add">another story</a> to tell?</p>
 </template>
 
 <template name="manage">
@@ -250,11 +250,11 @@
 </template>
 
 <template name="me">
-	<h1>Inspiring Me</h1>
+	<h1>My Favourite Stories</h1>
 	{{> alertBubbles}}
 	{{> message}}
 	{{#if noInspiration}}
-		<p>Looks like you haven't found any inspiring stories yet. Let's help you <a href="/">find an inspiring story</a>.</p>
+		<p>Looks like you haven&#x2019;t found any inspiring stories yet. Let's help you <a href="/">find an inspiring story</a>.</p>
 	{{/if}}
 	<ul class="inspiring-me-themes theme-list">
 		{{#each themes}}
@@ -340,7 +340,7 @@
 </template>
 
 <template name="themes">
-	<h1>Find an inspiring story&hellip;</h1>
+	<h1>Be inspired by care leaver stories&hellip;</h1>
 	{{> alertBubbles}}
 	<ul class="theme-list">
 		{{#each themes}}
@@ -380,4 +380,9 @@
 <template name="register">
 	<h1>Make an account</h1>
 	{{> registerForm}}
+</template>
+
+<template name="about">
+	<h1>About &#x201c;Inspire Me&#x201d;</h1>
+	<p>This app has been developed by care leavers working collaboratively with <a href="http://www.niace.org.uk"><abbr title="National Institute of Adult Continuing Education">NIACE</abbr></a> and <a href="http://www.neontribe.co.uk">Neontribe Ltd</a>. The stories have been written by young people who have left care, are living independently and have taken first steps into learning and work.</p>
 </template>
