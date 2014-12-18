@@ -15,23 +15,24 @@ if( process.env.SC_CLIENT_ID && process.env.SC_CLIENT_SECRET && process.env.SC_U
 
 		return this;
 	}
-	Soundcloud.url = 'https://api.soundcloud.com';
+	Soundcloud.prototype.url = 'https://api.soundcloud.com';
 	Soundcloud.prototype.authed = false;
 
 	// just fucking auth us using https://developers.soundcloud.com/docs/api/guide#user-credentials
 	Soundcloud.prototype.auth = function() {
 		var sc = this;
 		var postData = {
-            'client_id': this.options.clientID,
-            'client_secret': this.options.clientSecret,
-            'username': this.options.clientUsername,
-            'password': this.options.clientPassword,
-            'grant_type': 'password',
-            'scope': 'non-expiring'
+			'client_id': this.options.clientID,
+			'client_secret': this.options.clientSecret,
+			'username': this.options.clientUsername,
+			'password': this.options.clientPassword,
+			'grant_type': 'password'
+			// TODO: Re-auth when we expire
+			//'scope': 'non-expiring'
 		};
 		var authDataString = '';
 		request.post({
-			url: Soundcloud.url + '/oauth2/token',
+			url: this.url + '/oauth2/token',
 			qs: postData
 		})
 			.on('error', function() {
@@ -55,19 +56,31 @@ if( process.env.SC_CLIENT_ID && process.env.SC_CLIENT_SECRET && process.env.SC_U
 			});
 	};
 
-	Soundcloud.prototype.uploadTrackPipe = function() {
+	Soundcloud.prototype.uploadTrackPipe = function( title, contentLength ) {
 		if( this.authed ) {
 			var params = {
 				client_id: this.options.clientID,
-				access_token: this.authData.access_token
+				sharing: 'public'
+			};
+			var bodyContents = 'track[title]=' + title + '&track[asset_data]=';
+			var headers = {
+				'Authorization': 'OAuth ' + this.authData.access_token,
+				'content-length': bodyContents + contentLength
 			};
 			console.log('posting datas');
 			console.log( params );
 			console.log( this.authData );
-			return request.post({
-				url: Soundcloud.url + '/tracks',
+			var postStream = request.post({
+				url: this.url + '/tracks',
+				headers: headers,
 				qs: params
 			});
+
+			// start the stream by sending body containing track[title] and the starts of the
+			// asset_data post
+			postStream.write( bodyContents );
+
+			return postStream;
 		} else {
 			console.error('Unable to upload track, not authed yet!');
 		}
@@ -117,25 +130,42 @@ Router.route('/audio', { where: 'server' })
 			var statusCode = 200;
 			var scResponse = '';
 			var audioRequest = this;
+			//var audioData = new Buffer(0);
 
 			if( contentSize && contentSize < maxFileUpload ) {
 
-				this.request
-					.pipe(
-						sc.uploadTrackPipe()
-							.on('error', function() {
-								console.error('error!');
-								console.error.apply(console, arguments);
-							})
-							.on('data', function(d) {
-								scResponse += d.toString();
-							})
-							.on('end', function() {
-								console.log('finished request with (' + this.response.statusCode + ')');
-								console.log(scResponse);
-							})
-					)
-					.pipe(this.response);
+				this.request.pipe(
+					sc.uploadTrackPipe( 'testtrack', contentSize )
+						.on('error', function() {
+							console.error('error!');
+							console.error.apply(console, arguments);
+						})
+						.on('data', function(d) {
+							scResponse += d.toString();
+						})
+						.on('end', function() {
+							console.log('finished request with (' + this.response.statusCode + ')');
+							console.log(scResponse);
+						})
+					);
+				// this.request.on('data', function( datas ) {
+				// 	audioData = Buffer.concat( [datas, audioData] );
+				// });
+				// this.request.on('end', function() {
+				// 	sc.uploadTrackPipe( audioData, 'testtrack' )
+				// 		.on('error', function() {
+				// 			console.error('error!');
+				// 			console.error.apply(console, arguments);
+				// 		})
+				// 		.on('data', function(d) {
+				// 			scResponse += d.toString();
+				// 		})
+				// 		.on('end', function() {
+				// 			console.log('finished request with (' + this.response.statusCode + ')');
+				// 			console.log(scResponse);
+				// 		})
+				// 		.pipe(audioRequest.response);
+				// });
 
 			} else {
 				// er

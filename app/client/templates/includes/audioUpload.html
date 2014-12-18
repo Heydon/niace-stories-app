@@ -1,14 +1,16 @@
 <template name="audioUpload">
 	<div class="upload-container">
-		<label for="uploadSound">Upload a sound</label>
-		<input type="file" name="uploadSound" id="uploadSound" accept="audio/*" />
-		<button type="button" class="upload">upload</button>
-		<div class="progress" role="alert">
-			{{#if status}}
-				<div class="status {{statusClass}}">
-					<span>{{status}}</span>
-				</div>
-			{{/if}}
-		</div>
+		<form>
+			<label for="uploadSound">Upload a sound</label>
+			<input type="file" name="uploadSound" id="uploadSound" accept="audio/*" />
+			<button type="button" class="upload">upload</button>
+			<div class="progress" role="alert">
+				{{#if status}}
+					<div class="status {{statusClass}}">
+						<span>{{status}}</span>
+					</div>
+				{{/if}}
+			</div>
+		</form>
 	</div>
 </template>
