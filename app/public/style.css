@@ -177,6 +177,14 @@ dd + dt {
 	outline: none;
 }
 
+[aria-label="main menu"] a.active {
+  background: #377F41;
+}
+
+[aria-label="main menu"] a.active:hover, [aria-label="main menu"] a.active:focus {
+  box-shadow: inset 0 0 0 0.25em #111;
+}
+
 span[aria-hidden] {
 	line-height: 0;
 }
@@ -909,7 +917,7 @@ ARCHIVE PAGES
 }
 
 .theme-list a:not(:hover) {
-  border: 0;
+  border: 0 !important;
 }
 
 .theme-list > li {
@@ -966,7 +974,6 @@ MESSAGES
 
 [role="alert"] {
   background: #EEEF68;
-  color: #f9f9f9;
 }
 
 [role="alert"] li, [role="status"] li {
@@ -976,11 +983,6 @@ MESSAGES
 .message {
   background: #EEEF68;
   padding: 1.5em;
-  color: #f9f9f9;
-}
-
-.message a {
-  color: #f9f9f9;
 }
 
 .alert-bubble {

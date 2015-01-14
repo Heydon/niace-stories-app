@@ -59,7 +59,13 @@ Template.storiesList.helpers({
  */
 Template.themes.helpers({
 	themes: function() {
-		return Themes.find();
+		var themes = Themes.find().fetch();
+		var byWeight = themes.slice(0);
+		byWeight.sort(function(a,b) {
+		    return a.weight - b.weight;
+		});
+
+		return byWeight;
 	}
 });
 

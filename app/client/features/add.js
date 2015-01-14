@@ -26,31 +26,5 @@ Template.add.events({
 				}
 			});
 		}
-	},
-	// generate a random name from an array
-	'click .random': function(e) {
-		e.preventDefault();
-		var names = [
-			'Ali', 
-			'Albi', 
-			'Alex', 
-			'George', 
-			'Fan',
-			'Freddie', 
-			'Frankie', 
-			'Narin', 
-			'Jordan', 
-			'Sasha', 
-			'Robin', 
-			'Ronnie', 
-			'Sam', 
-			'Charlie',
-			'Reese',
-			'Taylor',
-			'Sid'
-		];
-
-		var name = names[_.random( 0, names.length -1 )];
-		$('#name').val(name);
 	}
 });

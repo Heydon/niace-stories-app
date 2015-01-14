@@ -9,7 +9,7 @@ Meteor.methods({
 		var errors = [];
 
 		if( !story.name ) {
-			errors.push('Please choose a name');
+			story.name = 'Anonymous';
 		}
 
 		if( !story.story ) {

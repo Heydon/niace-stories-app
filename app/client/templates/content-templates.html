@@ -130,21 +130,11 @@
 	<h1>Add your story</h1>
 	{{> alertBubbles}}
 	<form id="add" tabindex="-1">
-		<label for="story">Your inspiring story</label>
+		<label for="story">Write your story here</label>
 		<textarea id="story" cols="8" rows="5"></textarea>
-		<div class="grid-2-columns middle">
-			<div>
-				<label for="name">Name</label>
-				<p>Use the &#x201c;generate a name&#x201d; button to put a name to your story or type a fake name. You must protect your identity! <span aria-hidden>&#x2192;</span></p>
-			</div>
-			<div>
-				<button class="random" aria-controls="name">Generate a name</button>
-			</div>
-		</div>
-		<input id="name" type="text" aria-live="polite" role="status" placeholder="Type or hit 'generate a name'" />
-		<!--<label for="recording">Recording</label>
-		<p>Have you tried recording your story? You could use your phone's voice recorder then upload the file below.</p>
-		<input type="file" name="recording" id="recording" />-->
+		<label for="name">Name</label>
+		<p><small>Enter just your first name here or leave blank. If you leave blank, the name for your story will be &#x201c;Anonymous&#x201d;</small></p>
+		<input id="name" type="text" aria-live="polite" role="status" placeholder="Eg. Charlie" />
 		<input type="text" style="display: none" aria-hidden="true" id="check" value="" />
 		<div role="alert">
 			{{> errors}}
