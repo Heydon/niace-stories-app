@@ -301,6 +301,7 @@ a[href="/random"] img, .pick-another img {
 
 .pick-another {
   margin-top: 1.5em;
+  width: 100%;
 }
 
 nav a[href="/add"], nav a[href="/me"] {
