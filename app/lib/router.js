@@ -7,13 +7,9 @@ Router.configure({
 		setTimeout(function () {
 			$('main').removeAttr('class');
 		}, 1000);
-		if( !animating ) {
-			animating = true;
-			$('body').animate({scrollTop:0}, '600', function() {
-				animating = false;
-			});
-		}
-		$('main').focus();
+		$('html').animate({scrollTop:0}, '600', function() {
+			$('#main').focus();
+		});
 		//
 		this.next();
 	}

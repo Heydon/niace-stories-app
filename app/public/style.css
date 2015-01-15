@@ -172,6 +172,11 @@ dd + dt {
   border-radius: 0.125em;
 }
 
+[aria-label="main menu"] li:first-child a, 
+[aria-label="main menu"] li:last-child a {
+  padding: 1em 0.5em;
+}
+
 [aria-label="main menu"] a:hover, [aria-label="main menu"] a:focus {
 	box-shadow: inset 0 0 0 0.25em #377F41;
 	outline: none;
@@ -288,10 +293,14 @@ span[aria-hidden] {
 	background: #377F41;
 }
 
-a[href="/random"] img {
+a[href="/random"] img, .pick-another img {
 	height: 2.5em;
 	vertical-align: middle;
 	margin-right: 0.5em;
+}
+
+.pick-another {
+  margin-top: 1.5em;
 }
 
 nav a[href="/add"], nav a[href="/me"] {
@@ -498,11 +507,15 @@ ANIMATIONS
   animation:         wibble 0.25s 2;
 }
 
-[href="/random"]:active img {
+[href="/random"]:active img, .pick-another:active img {
 	-webkit-animation: spin 0.25s 2;
 	animation: spin 0.33s 2;
 }
 
+button::-moz-focus-inner { 
+  border: 0;
+  padding: 0;
+}
 
 /**************************************************************
 
@@ -520,7 +533,6 @@ form, .next-steps, .more-inspiration {
 
 form, .next-steps {
   border-bottom: 0;
-  margin-top: 4em;
 }
 
 form:last-child, .next-steps:last-child {
@@ -530,19 +542,6 @@ form:last-child, .next-steps:last-child {
 form + .next-steps, .more-inspiration {
 	margin-top: 0;
 	border-top: 2px dashed #111;
-}
-
-form:before {
-  content: '';
-  display: block;
-  margin: 0 auto;
-  background: url(/up_arrow.png) no-repeat center center;
-  background-size: 100% auto;
-  width: 3em;
-  height: 4em;
-  position: relative;
-  text-align: center;
-  margin-top: -4.5em;
 }
 
 input, textarea, select {
@@ -559,7 +558,7 @@ input:focus, textarea:focus, select:focus {
 }
 
 input, textarea {
-  box-shadow: inset 0.2em 0.2em 0 #ddd;
+  box-shadow: inset 0.2em 0.2em 0 #cdcdcd;
 }
 
 select {
@@ -722,13 +721,13 @@ label [type="checkbox"] + span {
 }
 
 label [type="checkbox"] + span:hover {
-  color: #480;
+  color: #377f41;
 }
 
 label [type="checkbox"] + span:before {
   content: '';
   background: #f9f9f9;
-  border: 0.125em solid #f9f9f9;
+  border: 0.25em solid #f9f9f9;
   box-shadow: 0 0 0 0.125em #111, inset 5px 5px 0 #ddd;
   display: inline-block;
   height: 0.9em;
@@ -739,8 +738,8 @@ label [type="checkbox"] + span:before {
 label [type="checkbox"] + span:before {
   content: '';
   background: #f9f9f9;
-  border: 0.125em solid #f9f9f9;
-  box-shadow: 0 0 0 0.125em #111;
+  border: 0.25em solid #f9f9f9;
+  box-shadow: 0 0 0 0.25em #111;
   display: inline-block;
   margin-right: 0.5em;
   width: 0.66em;
@@ -750,8 +749,8 @@ label [type="checkbox"] + span:before {
 
 label [type="checkbox"]:checked + span:before {
   content: '\2714';
-  line-height: 0.9;
-  box-shadow: 0 0 0 0.125em #480;
+  line-height: 0.75;
+  box-shadow: 0 0 0 0.25em #377f41;
 }
 
 label [type="checkbox"]:focus + span:before {

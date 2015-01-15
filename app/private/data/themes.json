@@ -8,7 +8,7 @@
       "student loans",
       "bills"
     ],
-    "description": "Learning how to handle money is a big step towards achieving independence.",
+    "description": "Learning how to manage your money is a big step towards living independently.",
     "weight": 4
   },
   {
@@ -19,7 +19,7 @@
       "values",
       "sexuality"
     ],
-    "description": "It helps to know who you are before you can decide what you want to do!",
+    "description": "It helps to know who you are before you can decide what type of learning or work you want to do.",
     "weight": 7
   },
   {
@@ -32,7 +32,7 @@
       "higher education",
       "university"
     ],
-    "description": "There are lots of choices when it comes to education. Read people's experiences.",
+    "description": "There are lots of ways to learn and a big choice of what you might learn.",
     "weight": 1
   },
   {
@@ -47,7 +47,7 @@
       "support workers",
       "teachers"
     ],
-    "description": "Whether we're talking family or romance, relationships are a big part of our lives.",
+    "description": "Having good relationships is important in life, in learning and at work.",
     "weight": 6
   },
   {
@@ -60,7 +60,7 @@
       "mental health",
       "substance abuse"
     ],
-    "description": "It's hard to get on when you're not feeling it physically. Mental health is also important.",
+    "description": "Learning and work can help improve your physical and mental health, find out how.",
     "weight": 5
   },
   {
@@ -72,7 +72,7 @@
       "independence",
       "refuge"
     ],
-    "description": "Making a home is a big part of your pathway and life in general. How have other people made it work?",
+    "description": "Finding the right home for you can keep you safe and well.",
     "weight": 3
   },
   {
@@ -85,7 +85,7 @@
       "apprenticeships",
       "volunteering"
     ],
-    "description": "Learning to apply your skills and being successful in the job market is not a small challenge. Perhaps others have some wisdom to share.",
+    "description": "Learning skills for work and finding the right job for you.",
     "weight": 2
   }
 ]

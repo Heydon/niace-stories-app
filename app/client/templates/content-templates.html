@@ -116,13 +116,10 @@
 			{{> message}}
 		</div>
 		<label>
-			<input type="radio" value="true" class="vh" name="inspiring" {{checked}}>
+			<input type="checkbox" value="true" class="vh" name="inspiring" {{checked}}>
 			<span>Yes! Keep it in <strong>My Favourites</strong> to read again later</span>
 		</label>
-		<label>
-			<input type="radio" value="false" class="vh" name="inspiring" {{notChecked}}>
-			<span>No, I'll keep looking for more stories</span>
-		</label>
+		<button class="pick-another"><img src="/dice.png" alt="" aria-hidden/> Pick Me Another Story</button>
 	</form>
 </template>
 
@@ -133,8 +130,8 @@
 		<label for="story">Write your story here</label>
 		<textarea id="story" cols="8" rows="5"></textarea>
 		<label for="name">Name</label>
-		<p><small>Enter just your first name here or leave blank. If you leave blank, the name for your story will be &#x201c;Anonymous&#x201d;</small></p>
-		<input id="name" type="text" aria-live="polite" role="status" placeholder="Eg. Charlie" />
+		<p><small>Enter just your first name here or leave blank. If you leave blank, the name for your story will be &#x201c;Anonymous&#x201d;.</small></p>
+		<input id="name" type="text" aria-live="polite" role="status" placeholder="Type or hit 'generate a name'" />
 		<input type="text" style="display: none" aria-hidden="true" id="check" value="" />
 		<div role="alert">
 			{{> errors}}
