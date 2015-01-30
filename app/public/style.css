@@ -468,24 +468,20 @@ ANIMATIONS
 ***************************************************************/
 
 @-webkit-keyframes wibble {
-  0%   { transform: rotate(2deg); }
-  50%  { transform: rotate(-2deg); }
-  100% { transform: rotate(0); }
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
 }
 @-moz-keyframes wibble {
-  0%   { transform: rotate(2deg); }
-  50%  { transform: rotate(-2deg); }
-  100% { transform: rotate(0); }
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
 }
 @-o-keyframes wibble {
-  0%   { transform: rotate(2deg); }
-  50%  { transform: rotate(-2deg); }
-  100% { transform: rotate(0); }
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
 }
 @keyframes wibble {
-  0%   { transform: rotate(2deg); }
-  50%  { transform: rotate(-2deg); }
-  100% { transform: rotate(0); }
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
 }
 
 @-moz-keyframes spin {
@@ -502,10 +498,10 @@ ANIMATIONS
 }
 
 .loaded {
-  -webkit-animation: wibble 0.25s 2; /* Safari 4+ */
-  -moz-animation:    wibble 0.25s 2; /* Fx 5+ */
-  -o-animation:      wibble 0.25s 2; /* Opera 12+ */
-  animation:         wibble 0.25s 2;
+  -webkit-animation: wibble 0.5s 1; /* Safari 4+ */
+  -moz-animation:    wibble 0.5s 1; /* Fx 5+ */
+  -o-animation:      wibble 0.5s 1; /* Opera 12+ */
+  animation:         wibble 0.5s 1;
 }
 
 [href="/random"]:active img, .pick-another:active img {
@@ -916,7 +912,7 @@ ARCHIVE PAGES
   margin-left: 0;
 }
 
-.theme-list a:not(:hover) {
+.theme-list li li a:not(:hover) {
   border: 0 !important;
 }
 
