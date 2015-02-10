@@ -17,7 +17,8 @@
     "keywords": [
       "background",
       "values",
-      "sexuality"
+      "sexuality",
+      "parenting"
     ],
     "description": "It helps to know who you are before you can decide what type of learning or work you want to do.",
     "weight": 7
@@ -29,8 +30,10 @@
       "courses",
       "school",
       "volunteering",
-      "higher education",
-      "university"
+      "further education",
+      "university",
+      "life skills",
+      "workplace"
     ],
     "description": "There are lots of ways to learn and a big choice of what you might learn.",
     "weight": 1
