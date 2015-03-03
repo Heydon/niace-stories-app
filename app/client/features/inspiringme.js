@@ -39,6 +39,9 @@ Template.inspiringRadios.events({
 			Session.set('message', 'Story removed from <a href="/me">My Favourites</a>');
 		}
 
+	},
+	'click .pick-another' : function() {
+		Router.go('random');
 	}
 });
 

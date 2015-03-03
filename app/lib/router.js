@@ -7,7 +7,7 @@ Router.configure({
 		setTimeout(function () {
 			$('main').removeAttr('class');
 		}, 1000);
-		$('html').animate({scrollTop:0}, '600', function() {
+		$('html').animate({scrollTop:0}, '250', function() {
 			$('#main').focus();
 		});
 		//
@@ -65,6 +65,15 @@ Router.map(function() {
 	});
 	this.route('/deleteLocal/:_id/:name', {
 		name: 'deleteLocal',
+		data: function() {
+			return {
+				toDelete : this.params._id,
+				name : this.params.name
+			};
+		}
+	});
+	this.route('/deleteStory/:_id/:name', {
+		name: 'deleteStory',
 		data: function() {
 			return {
 				toDelete : this.params._id,

@@ -38,7 +38,7 @@
 					</div>
 					{{#if loggedIn}}
 						<p>
-							<a href="{{ pathFor 'manageItem' }}">Edit this story</a>
+							<a href="{{ pathFor 'manageItem' }}">Edit this story</a> <span aria-hidden="true">|</span> <a href="{{ pathFor 'deleteStory' }}">Delete this story</a>
 						</p>
 					{{/if}}
 					{{> listStoryKeywords}}
@@ -119,7 +119,7 @@
 			<input type="checkbox" value="true" class="vh" name="inspiring" {{checked}}>
 			<span>Yes! Keep it in <strong>My Favourites</strong> to read again later</span>
 		</label>
-		<button class="pick-another"><img src="/dice.png" alt="" aria-hidden/> Pick Me Another Story</button>
+		<button class="pick-another"><img src="/dice.png" alt="" aria-hidden="true" /> Pick Me Another Story</button>
 	</form>
 </template>
 
@@ -146,6 +146,9 @@
 </template>
 
 <template name="manage">
+	<div role="alert">
+		{{> message}}
+	</div>
 	<div class="manager-list">
 		{{> storiesList}}
 	</div>
@@ -280,6 +283,12 @@
 <template name="deleteLocal">
 	<h1>Delete story</h1>
 	<p>Are you sure you want to delete {{this.name}}'s story from your <strong>Inspiring Me</strong> collection?</p>
+	<p class="center"><button class="delete">Confirm</button> <button class="cancel">Cancel</button></p>
+</template>
+
+<template name="deleteStory">
+	<h1>Delete story</h1>
+	<p>Are you sure you want to delete {{this.name}}'s story permanently?</p>
 	<p class="center"><button class="delete">Confirm</button> <button class="cancel">Cancel</button></p>
 </template>
 

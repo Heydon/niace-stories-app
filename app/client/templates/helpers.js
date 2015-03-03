@@ -48,7 +48,7 @@ Template.storiesList.helpers({
 	name: function() {
 		var template = Template.instance();
 		Meteor.defer(function() {
-			template.$('.truncated').trunk8({ lines: 5});
+			template.$('.truncated').trunk8({ lines: 5, tooltip: false});
 		});
 		return this.name;
 	}

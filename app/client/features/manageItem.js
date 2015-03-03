@@ -98,3 +98,15 @@ Template.manageItem.helpers({
 		return par._id;
 	}
 });
+
+Template.deleteStory.events({
+	'click .delete' : function() {
+		console.log(this.toDelete);
+		Stories.remove(this.toDelete);
+		Router.go('manage');
+		Session.set('message', this.name +'\'s story deleted.');
+	},
+	'click .cancel' : function() {
+		Router.go('manage');
+	}
+});
