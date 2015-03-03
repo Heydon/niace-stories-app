@@ -1,7 +1,7 @@
 <template name="manageAlerts">
 	{{> message}}
 	<h1>Tutorial boxes</h1>
-	<p>These tutorial boxes are used to introduce users to the app. They will appear at the top of pages which match the paths listed. <strong>Note:</strong> They will not appear if you are logged in!</p>
+	<p>These tutorial boxes are used to introduce users to the app. Tutorial boxes appear at the top of pages and can be dismissed by pressing the &#x201c;x&#x201d; button. <strong>Note:</strong> They will not appear if you are logged in!</p>
 	<p><a class="button-shaped" href="{{pathFor 'manageAlert' _id=''}}">Add new tutorial box</a></p>
 	<ul class="alerts-list">
 		{{#each alerts}}
@@ -9,12 +9,6 @@
 				<h2>
 					{{untitled}}{{title}} (<a href="{{ pathFor 'manageAlert' }}">edit</a>)
 				</h2>
-				<p><strong>Showing on these paths:</strong></p>
-				<ul>
-					{{#each paths}}
-						<li>{{this}}</li>
-					{{/each}}
-				</ul>
 			</li>
 		{{/each}}
 	</ul>
