@@ -6,6 +6,9 @@
   "directories": {
     "test": "test"
   },
+  "engines": {
+    "node": "0.10.x"
+  },
   "scripts": {
     "start": "cd app && meteor",
     "genStoryFixtures": "npm run start > /dev/null; mongo 127.0.0.1:3001/meteor --quiet --eval \"printjson(db.themes.find().toArray())\" | ./scripts/fillout.js 150 > app/private/data/stories.json",
