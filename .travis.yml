@@ -25,7 +25,7 @@ before_deploy:
 deploy:
   provider: heroku
   app: inspire-me-dev
-  strategy: anvil
+  strategy: api
   skip_cleanup: true
   api_key:
     secure: vMSuLcI2rzDVWBxsb7FcsVYBtIO13iLhnn7rWIG09Rd5dRG0hFJljpmi8FPKrL1ynF9RNn7vVEBIb1LZb+e/+Dn93gaeceIgXb9FbTQHALJju0lzyQ/FgsgKf8CU3tEnWiAu9rHKc+idR7pH7As/A+zQeoxiC2WuE8br+a36NTw=
