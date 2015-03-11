@@ -6,13 +6,13 @@ function alertsIn() {
 
 Template.alertBubbles.helpers({
 	alerts: function() {
-		if( Meteor.user() ) {
-			return [];
-		}
+		console.log('change');
 		return Alerts.find({
 			_id: {
-				'$in': alertsIn(),
 				'$nin': ReactiveStore.get('viewedAlerts') || []
+			},
+			paths: {
+				'$in': alertsIn()
 			}
 		});
 	}
@@ -22,7 +22,7 @@ Template.alertBubbles.events({
 	'click .alert-bubble button': function( evt ) {
 		var seen = ReactiveStore.get('viewedAlerts') || [];
 		var $el = $( evt.currentTarget );
-
+console.log('di the clik');
 		seen.push( $el.data('alertId') );
 
 		ReactiveStore.set('viewedAlerts', seen);
