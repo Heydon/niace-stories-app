@@ -9,7 +9,6 @@ Router.configure({
 				$('main').removeAttr('class');
 			}, 1000);
 			$('[role="banner"]').focus();
-			console.log('asd');
 			// VERY TEMPORARY: REMOVE FOR PRODUCTION
 			ReactiveStore.set('viewedAlerts', []);
 		}
