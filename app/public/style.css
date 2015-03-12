@@ -1140,6 +1140,7 @@ MESSAGES
 
 	[aria-label="main menu"] a {
 		border: 0 !important;
+    margin: 0.5em 1em;
 	}
 
   nav a[href="/me"], nav a[href="/add"] {

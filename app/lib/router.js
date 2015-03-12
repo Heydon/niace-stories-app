@@ -8,9 +8,7 @@ Router.configure({
 			setTimeout(function () {
 				$('main').removeAttr('class');
 			}, 1000);
-			$('html').animate({scrollTop:0}, '250', function() {
-				$('#main').focus();
-			});
+			$('[role="banner"]').focus();
 			console.log('asd');
 			// VERY TEMPORARY: REMOVE FOR PRODUCTION
 			ReactiveStore.set('viewedAlerts', []);

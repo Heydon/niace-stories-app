@@ -53,7 +53,7 @@ Template.manageItem.events({
 					Session.set( 'errors', errors.reason );
 				} else {
 					Session.set( 'errors', null );
-					Router.go('edited');
+					Session.set('message', 'Story saved! <a href="/manage">Back to stories list</a>');
 				}
 			});
 		}
