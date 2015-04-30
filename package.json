@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "jshint": "^2.5.5",
-    "laika": "^0.3.10",
+    "laika": "^0.3.9",
     "phantomjs": "^1.9.10",
     "mongoose": "^3.8.16",
     "fibers": "1.0.2"

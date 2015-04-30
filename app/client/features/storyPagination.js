@@ -36,6 +36,6 @@ Template.storyPagination.helpers({
 		return !(getCurrentPage() === 0 && !arePages.call( this ));
 	},
 	pageUrl: function() {
-		return Router.current().route.url();
+		return window.location.href.replace(/\?.*$/, '');
 	}
 });

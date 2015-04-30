@@ -198,7 +198,7 @@ var requireLogin = function() {
 };
 
 Router.onBeforeAction(requireLogin, {
-	only: ['manage', 'manageItem', 'allStories', 'manageAlerts', 'manageGlossary', 'manageGlossaryTerm', 'manageAlerts', 'manageAlert']
+	only: ['manage', 'manageItem', 'allStories', 'manageAlerts', 'manageGlossary', 'manageGlossaryTerm', 'manageAlerts', 'manageAlert', 'register']
 });
 
 if( Meteor.isClient ) {
