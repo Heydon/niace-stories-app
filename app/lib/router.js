@@ -34,6 +34,7 @@ Router.map(function() {
 	this.route('/thanks');
 	this.route('/edited');
 	this.route('/themes');
+	this.route('/video');
 	this.route('/', function() {
 		this.render('themes');
 	}, {
