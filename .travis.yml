@@ -4,10 +4,11 @@ node_js:
 branches:
   only:
   - master
+  - develop
 services:
-  - mongodb
-env: 
-  - LAIKA_OPTIONS="-t 5000"
+- mongodb
+env:
+- LAIKA_OPTIONS="-t 5000"
 before_install:
 - curl https://install.meteor.com/ | sh
 install:
@@ -15,20 +16,21 @@ install:
 script:
 - echo Running tests and hinting
 - npm run jshint
-#- npm test //////// laika is broken in it's current version so skip this for now
 before_deploy:
-- 'bash -c "cd app && meteor build --directory ../deploy"'
+- bash -c "cd app && meteor build --directory ../deploy"
 - rm -rf app
 - rm -rf node_modules
-- 'bash -c "cd deploy/bundle/programs/server && npm install"'
+- bash -c "cd deploy/bundle/programs/server && npm install"
 - npm install --production
 deploy:
   provider: heroku
-  app: inspire-me-dev
+  app:
+    develop: inspire-me-dev
+    master: inspire-me-live
   strategy: api
   skip_cleanup: true
   api_key:
-    secure: vMSuLcI2rzDVWBxsb7FcsVYBtIO13iLhnn7rWIG09Rd5dRG0hFJljpmi8FPKrL1ynF9RNn7vVEBIb1LZb+e/+Dn93gaeceIgXb9FbTQHALJju0lzyQ/FgsgKf8CU3tEnWiAu9rHKc+idR7pH7As/A+zQeoxiC2WuE8br+a36NTw=
+    secure: RBNskLVHmvviRQZd9qiDGfkSdwsq9/Q/+ns2z+ilXa0gcSnDcYUvx7Ynh/eZcSZm2NIpkz5C3MmdG8pTwOtyl25N+g5eqD0jlWsmwIE4TtQ+3bJk0paNxi8Uh3ulL6ddi6KQgtI5DLbJnkzT26WI+Oj2tT3U3B/5NtMsd+3gmkQ=
 notifications:
   email:
     recipients:

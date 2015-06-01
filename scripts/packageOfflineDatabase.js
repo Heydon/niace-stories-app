@@ -69,7 +69,7 @@ if( process.env.MONGOHQ_URL ) {
 					if( debug ) {
 						template.push('/**');
 						template.push(' * constructing client import for ' + dataType);
-						template.push(' */')
+						template.push(' */');
 					}
 					docs.forEach(function( documentData ) {
 						template.push('if(!' + dataType + '.findOne("' + documentData._id + '")){');

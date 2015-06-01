@@ -26,6 +26,11 @@ cd app
 meteor
 ```
 
+### exporting database ready to be consumed by offline app
+```bash
+MONGOHQ_URL=mongodb://username:password@host:port/dbname ./scripts/packageOfflineDatabase.js
+```
+
 ### Clean database and re-import fixtured stories
 #### ***This will wipe the database of stories and themes***
 
