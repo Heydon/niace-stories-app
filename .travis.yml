@@ -4,6 +4,7 @@ node_js:
 branches:
   only:
   - master
+  - develop
 services:
   - mongodb
 env: 
@@ -24,7 +25,9 @@ before_deploy:
 - npm install --production
 deploy:
   provider: heroku
-  app: inspire-me-dev
+  app: 
+    develop: inspire-me-dev
+    master: inspire-me-live
   strategy: api
   skip_cleanup: true
   api_key:
