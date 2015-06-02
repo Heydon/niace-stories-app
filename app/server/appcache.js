@@ -1,6 +1,7 @@
 Meteor.AppCache.config({
 	onlineOnly: [
-		'/logo_small.png*',
-		'/colours.png*'
+		'/logo_small.png',
+		'/colours.png',
+		'/public/playtime-webfont.*'
 	]
 });
