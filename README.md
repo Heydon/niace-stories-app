@@ -7,6 +7,13 @@ The alpha application for NIACE, running on Meteor.
 
 http://inspire-me-dev.herokuapp.com/
 
+# Live site(s)
+
+These both point to the same heroku instance
+
+- http://inspire-me-live.herokuapp.com/
+- http://inspire-me.org.uk
+
 # Travis Status
 [![Travis status](https://travis-ci.org/Heydon/niace-stories-app.svg)](https://travis-ci.org/Heydon/niace-stories-app)
 
@@ -15,6 +22,18 @@ http://inspire-me-dev.herokuapp.com/
 - Clone Repo
 - Install [meteor](https://www.meteor.com/)
 - Run meteor
+
+### workflow
+
+The branches of the repo are monitored by Travis-CI, the develop branch will deploy to [the dev site](http://inspire-me-dev.herokuapp.com/) and the master branch will deploy to [_the live site_](http://inspire-me.org.uk). Please keep this in mind.
+
+1. make sure your develop and master branches are up-to-date and checkout into develop
+2. branch off develop with a helpful branch name and commit changes
+3. push branch to remote and create a pull request
+4. employ peer code review, (if the size of the team allows)
+5. merge to develop and when it's deployed; test on [the dev site](http://inspire-me-dev.herokuapp.com/)
+6. when happy merge develop into master, using a PR or from the command line.
+7. if travis is happy it will be deployed to [_the live site_](http://inspire-me.org.uk)
 
 ### Commands ( with testing and such )
 ```bash
