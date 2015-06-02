@@ -2,7 +2,7 @@ var animating = false;
 Router.configure({
 	layoutTemplate: 'layout',
 	loadingTemplate: 'loading',
-	onRun: function() {
+	onBeforeAction: function() {
 		if( Meteor.isClient ) {
 			$('main').attr('class', 'loaded');
 			setTimeout(function () {
