@@ -35,7 +35,14 @@ Template.storyPagination.helpers({
 	paged: function() {
 		return !(getCurrentPage() === 0 && !arePages.call( this ));
 	},
-	pageUrl: function() {
-		return window.location.href.replace(/\?.*$/, '');
+	pageUrl: function(targetPage) {
+		var route = Router.current().route;
+		var params = Router.current().params;
+		var query = $.extend({}, params.query, {
+			page: targetPage
+		});
+		return route.path(params, {
+			query: query
+		});
 	}
 });
