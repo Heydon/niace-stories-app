@@ -9,8 +9,6 @@ Router.configure({
 				$('main').removeAttr('class');
 			}, 1000);
 			$('[role="banner"]').focus();
-			// VERY TEMPORARY: REMOVE FOR PRODUCTION
-			ReactiveStore.set('viewedAlerts', []);
 		}
 		this.next();
 	}
