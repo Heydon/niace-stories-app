@@ -1146,6 +1146,10 @@ MESSAGES
 
 @media all and (max-width: 450px) {
 
+  .inspiring-me-themes .count {
+    display: block;
+  }
+
   p.strapline {
     line-height: 1;
     margin-bottom: 1em;
