@@ -3,7 +3,7 @@
 App.info({
 	id: 'uk.org.inspire-me',
 	name: 'Inspire Me',
-	description: 'Inspiring stories for care leaves by care leavers',
+	description: 'Inspiring stories for care leavers by care leavers',
 	author: '',
 	email: 'contact@example.com',
 	website: 'http://example.com',
