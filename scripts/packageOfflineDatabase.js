@@ -58,7 +58,9 @@ if( process.env.MONGOHQ_URL ) {
 	MongoClient.connect(process.env.MONGOHQ_URL, function(err, db) {
 		if( err ) throw err;
 
-		meta.forEach(function( conf, i ) {
+		var completed = 0;
+
+		meta.forEach(function( conf ) {
 			var dataType = conf.name.replace(/^[a-z]/, function( ch ) {
 				return ch.toUpperCase();
 			});
@@ -76,7 +78,7 @@ if( process.env.MONGOHQ_URL ) {
 						template.push( constructInsertStatement( documentData, dataType ) );
 						template.push('}');
 					});
-					if( i + 1 === meta.length ) {
+					if( ++completed === meta.length ) {
 						console.log( finish() );
 						process.exit();
 					}
