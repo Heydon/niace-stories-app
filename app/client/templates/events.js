@@ -31,3 +31,12 @@ Template.banner.events({
 		hideSubmenu($('[aria-label="submenu"]'));
 	}
 });
+
+Template.layout.events({
+	'click a': function(evt) {
+		var anc = evt.currentTarget;
+		if(anc.hostname !== window.location.hostname) {
+			anc.target = '_blank';
+		}
+	}
+});

@@ -167,6 +167,7 @@ dd + dt {
 	vertical-align: middle;
 }
 
+.fat-anchor,
 [aria-label="main menu"] a {
 	display: block;
 	background: #111;
@@ -310,6 +311,12 @@ a[href="/random"] img, .pick-another img {
 .pick-another {
   margin-top: 1.5em;
   width: 100%;
+  background: #377F41;
+  border-radius: 0;
+}
+
+.pick-another:hover, .pick-another:focus {
+  background: #111;
 }
 
 nav a[href="/add"], nav a[href="/me"] {
@@ -1138,6 +1145,10 @@ MESSAGES
 }
 
 @media all and (max-width: 450px) {
+
+  .inspiring-me-themes .count {
+    display: block;
+  }
 
   p.strapline {
     line-height: 1;

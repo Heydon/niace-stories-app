@@ -2,15 +2,13 @@ var animating = false;
 Router.configure({
 	layoutTemplate: 'layout',
 	loadingTemplate: 'loading',
-	onRun: function() {
+	onBeforeAction: function() {
 		if( Meteor.isClient ) {
 			$('main').attr('class', 'loaded');
 			setTimeout(function () {
 				$('main').removeAttr('class');
 			}, 1000);
 			$('[role="banner"]').focus();
-			// VERY TEMPORARY: REMOVE FOR PRODUCTION
-			ReactiveStore.set('viewedAlerts', []);
 		}
 		this.next();
 	}
