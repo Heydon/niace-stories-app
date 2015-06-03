@@ -4,9 +4,9 @@ App.info({
 	id: 'uk.org.inspire-me',
 	name: 'Inspire Me',
 	description: 'Inspiring stories for care leavers by care leavers',
-	author: '',
-	email: 'contact@example.com',
-	website: 'http://example.com',
+	author: 'NIACE',
+	email: 'kevin.campbellwright@niace.org.uk',
+	website: 'http://www.niace.org.uk',
 	version: '0.0.1'
 });
 
