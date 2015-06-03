@@ -10,39 +10,40 @@ App.info({
 	version: '0.0.1'
 });
 
-// Set up resources such as icons and launch screens.
 App.icons({
-	// iphone: '',
-	// iphone_2x: '',
-	// iphone_3x: '',
-	// ipad: '',
-	// ipad_2x: '',
-	android_ldpi: 'mobile-app-resources/android_icon.ldpi.png',
-	android_mdpi: 'mobile-app-resources/android_icon.mdpi.png',
-	android_hdpi: 'mobile-app-resources/android_icon.hdpi.png',
-	android_xhdpi: 'mobile-app-resources/android_icon.xhdpi.png'
+	// iOS
+	'iphone': 'resources/icons/icon-60x60.png',
+	'iphone_2x': 'resources/icons/icon-60x60@2x.png',
+	'ipad': 'resources/icons/icon-72x72.png',
+	'ipad_2x': 'resources/icons/icon-72x72@2x.png',
+
+	// Android
+	'android_ldpi': 'resources/icons/icon-36x36.png',
+	'android_mdpi': 'resources/icons/icon-48x48.png',
+	'android_hdpi': 'resources/icons/icon-72x72.png',
+	'android_xhdpi': 'resources/icons/icon-96x96.png'
 });
 
 App.launchScreens({
-	// iphone: '',
-	// iphone_2x: '',
-	// iphone5: '',
-	// iphone6: '',
-	// iphone6p_portrait: '',
-	// iphone6p_landscape: '',
-	// ipad_portrait: '',
-	// ipad_portrait_2x: '',
-	// ipad_landscape: '',
-	// ipad_landscape_2x: '',
-	android_ldpi_portrait: 'mobile-app-resources/android_launch_screen.portrait.ldpi.png',
-	android_ldpi_landscape: 'mobile-app-resources/android_launch_screen.landscape.ldpi.png',
-	android_mdpi_portrait: 'mobile-app-resources/android_launch_screen.portrait.mdpi.png',
-	android_mdpi_landscape: 'mobile-app-resources/android_launch_screen.landscape.mdpi.png',
-	android_hdpi_portrait: 'mobile-app-resources/android_launch_screen.portrait.hdpi.png',
-	android_hdpi_landscape: 'mobile-app-resources/android_launch_screen.landscape.hdpi.png',
-	android_xhdpi_portrait: 'mobile-app-resources/android_launch_screen.portrait.xhdpi.png',
-	android_xhdpi_landscape: 'mobile-app-resources/android_launch_screen.landscape.xhdpi.png'
+	// iOS
+	'iphone': 'resources/splash/splash-320x480.png',
+	'iphone_2x': 'resources/splash/splash-320x480@2x.png',
+	'iphone5': 'resources/splash/splash-320x568@2x.png',
+	'ipad_portrait': 'resources/splash/splash-768x1024.png',
+	'ipad_portrait_2x': 'resources/splash/splash-768x1024@2x.png',
+	'ipad_landscape': 'resources/splash/splash-1024x768.png',
+	'ipad_landscape_2x': 'resources/splash/splash-1024x768@2x.png',
+
+	// Android
+	'android_ldpi_portrait': 'resources/splash/splash-200x320.png',
+	'android_ldpi_landscape': 'resources/splash/splash-320x200.png',
+	'android_mdpi_portrait': 'resources/splash/splash-320x480.png',
+	'android_mdpi_landscape': 'resources/splash/splash-480x320.png',
+	'android_hdpi_portrait': 'resources/splash/splash-480x800.png',
+	'android_hdpi_landscape': 'resources/splash/splash-800x480.png',
+	'android_xhdpi_portrait': 'resources/splash/splash-720x1280.png',
+	'android_xhdpi_landscape': 'resources/splash/splash-1280x720.png'
 });
 
-// Set PhoneGap/Cordova preferences
-// App.setPreference('BackgroundColor', '0xff0000ff');
+App.setPreference('StatusBarOverlaysWebView', 'false');
+App.setPreference('StatusBarBackgroundColor', '#000000');
