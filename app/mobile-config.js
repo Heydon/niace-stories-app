@@ -7,7 +7,7 @@ App.info({
 	author: 'NIACE',
 	email: 'kevin.campbellwright@niace.org.uk',
 	website: 'http://www.niace.org.uk',
-	version: '0.0.1'
+	version: '1.0.0'
 });
 
 App.icons({
