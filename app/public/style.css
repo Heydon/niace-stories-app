@@ -96,6 +96,11 @@ a:hover, a:focus {
 
 footer a {
 	border: 0;
+  color: #fff;
+}
+
+[role="contentinfo"] p:first-child a {
+  border: 0 !important;
 }
 
 img {
@@ -481,19 +486,19 @@ ANIMATIONS
 
 ***************************************************************/
 
-@-webkit-keyframes wibble {
+@-webkit-keyframes fade {
   0%   { opacity: 0; }
   100% { opacity: 1; }
 }
-@-moz-keyframes wibble {
+@-moz-keyframes fade {
   0%   { opacity: 0; }
   100% { opacity: 1; }
 }
-@-o-keyframes wibble {
+@-o-keyframes fade {
   0%   { opacity: 0; }
   100% { opacity: 1; }
 }
-@keyframes wibble {
+@keyframes fade {
   0%   { opacity: 0; }
   100% { opacity: 1; }
 }
@@ -512,10 +517,10 @@ ANIMATIONS
 }
 
 .loaded {
-  -webkit-animation: wibble 0.5s 1; /* Safari 4+ */
-  -moz-animation:    wibble 0.5s 1; /* Fx 5+ */
-  -o-animation:      wibble 0.5s 1; /* Opera 12+ */
-  animation:         wibble 0.5s 1;
+  -webkit-animation: fade 0.5s 1; /* Safari 4+ */
+  -moz-animation:    fade 0.5s 1; /* Fx 5+ */
+  -o-animation:      fade 0.5s 1; /* Opera 12+ */
+  animation:         fade 0.5s 1;
 }
 
 [href="/random"]:active img, .pick-another:active img {
