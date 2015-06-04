@@ -33,6 +33,7 @@ Router.map(function() {
 	this.route('/edited');
 	this.route('/themes');
 	this.route('/video');
+	this.route('/privacy');
 	this.route('/', function() {
 		this.render('themes');
 	}, {
