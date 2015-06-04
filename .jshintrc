@@ -36,6 +36,7 @@
 		"saveInspiringStory": true,
 		"removeInspiringStory": true,
 		"setTimeout": true,
-		"Config": true
+		"Config": true,
+		"App": true
 	} 
 }

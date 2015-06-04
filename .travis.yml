@@ -17,10 +17,10 @@ script:
 - echo Running tests and hinting
 - npm run jshint
 before_deploy:
-- bash -c "cd app && meteor build --directory ../deploy"
+- npm run buildForDeploy
 - rm -rf app
 - rm -rf node_modules
-- bash -c "cd deploy/bundle/programs/server && npm install"
+- npm run buildProdDeps
 - npm install --production
 deploy:
   provider: heroku

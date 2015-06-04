@@ -35,6 +35,19 @@ The branches of the repo are monitored by Travis-CI, the develop branch will dep
 6. when happy merge develop into master, using a PR or from the command line.
 7. if travis is happy it will be deployed to [_the live site_](http://inspire-me.org.uk)
 
+### app workflow
+(requires xcode on a mac)
+The app _should_ update itself each time it's ran, to [get the code from the live site](https://github.com/meteor/meteor/wiki/Meteor-Cordova-Phonegap-integration#hot-code-push). If a Cordova build is required [maybe to update the stories for offline](#exporting-database-ready-to-be-consumed-by-offline-app) then follow these steps.
+
+1. make sure your branches are up to date
+2. get into master and the version you would like to release at
+3. match the version strings in package.json and app/mobile-config.js
+4. [export current database for offline](#exporting-database-ready-to-be-consumed-by-offline-app)
+5. run ```$ npm run buildForDeploy ``` 
+6. [align the android apk in deploy/android/unaligned.apk](https://github.com/meteor/meteor/wiki/How-to-submit-your-Android-app-to-Play-Store)
+7. open the ios xcode project found in deploy/ios/ and build relevant files
+8. upload both the IOS ipa and android apk to their relevant store pages
+
 ### Commands ( with testing and such )
 ```bash
 curl https://install.meteor.com/ | sh
@@ -46,8 +59,9 @@ meteor
 ```
 
 ### exporting database ready to be consumed by offline app
+do this just before a mobile app build to publish the currently publicly available stories for offline use
 ```bash
-MONGOHQ_URL=mongodb://username:password@host:port/dbname ./scripts/packageOfflineDatabase.js
+MONGOHQ_URL=mongodb://username:password@host:port/dbname ./scripts/packageOfflineDatabase.js > app/client/offline.js
 ```
 
 ### Clean database and re-import fixtured stories
