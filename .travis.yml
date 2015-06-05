@@ -7,8 +7,6 @@ branches:
   - develop
 services:
 - mongodb
-env:
-- LAIKA_OPTIONS="-t 5000"
 before_install:
 - curl https://install.meteor.com/ | sh
 install:
@@ -17,6 +15,7 @@ script:
 - echo Running tests and hinting
 - npm run jshint
 before_deploy:
+- ./scripts/packageOfflineDatabse.js > app/client/offline.js
 - npm run buildForDeploy
 - rm -rf app
 - rm -rf node_modules
