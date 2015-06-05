@@ -14,7 +14,7 @@
     "genStoryFixtures": "npm run start > /dev/null; mongo 127.0.0.1:3001/meteor --quiet --eval \"printjson(db.themes.find().toArray())\" | ./scripts/fillout.js 150 > app/private/data/stories.json",
     "test": "cd app && laika",
     "jshint": "jshint ./",
-    "buildForDeploy": "cd app && meteor build --directory ../deploy --server http://inspire-me-live.herokuapp.com --mobile-settings settings.json",
+    "buildForDeploy": "cd app && meteor build --directory ../deploy --server http://inspire-me-dev.herokuapp.com --mobile-settings settings.json",
     "buildProdDeps": "cd deploy/bundle/programs/server && npm install",
     "signAndroid": "jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore niace.keystore ./deploy/android/unaligned.apk inspire-me",
     "alignAndroid": "~/.meteor/android_bundle/android-sdk/build-tools/20.0.0/zipalign -v 4 ./deploy/android/unaligned.apk inspire-me.apk"

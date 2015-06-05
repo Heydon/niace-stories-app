@@ -62,7 +62,7 @@ meteor
 ### exporting database ready to be consumed by offline app
 do this just before a mobile app build to publish the currently publicly available stories for offline use
 ```bash
-MONGOHQ_URL=mongodb://username:password@host:port/dbname ./scripts/packageOfflineDatabase.js > app/client/offline.js
+MONGOHQ_URL=mongodb://username:password@host:port/dbname ./scripts/packageOfflineDatabase.js > app/public/offline.js
 ```
 
 ### Clean database and re-import fixtured stories
