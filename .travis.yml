@@ -15,7 +15,7 @@ script:
 - echo Running tests and hinting
 - npm run jshint
 before_deploy:
-- ./scripts/packageOfflineDatabse.js > app/client/offline.js
+- ./scripts/packageOfflineDatabase.js > app/client/offline.js
 - npm run buildForDeploy
 - rm -rf app
 - rm -rf node_modules
